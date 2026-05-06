@@ -7,12 +7,14 @@ import FavoritesModule from '../../favorites/components/FavoritesModule';
 import HistoryModule from '../../history/components/HistoryModule';
 import AnalyticsModule from '../../analytics/components/AnalyticsModule';
 
+// Definimos qué "props" (propiedades) va a recibir este componente desde App.tsx
 interface DashboardScreenProps {
-  onLogout: () => void;
-  onOpenDocuments: () => void;
+  onLogout: () => void; // Función a ejecutar cuando el usuario haga clic en "Cerrar sesión"
+  onOpenDocuments: () => void; // Función a ejecutar cuando se quiera subir un nuevo documento
 }
 
 export default function DashboardScreen({ onLogout, onOpenDocuments }: DashboardScreenProps) {
+  // Estado para controlar qué módulo de la barra lateral (sidebar) está activo. Por defecto inicia en 'chat'
   const [activeMenu, setActiveMenu] = useState('chat');
 
   const recentDocuments = [
@@ -34,22 +36,24 @@ export default function DashboardScreen({ onLogout, onOpenDocuments }: Dashboard
     }
   };
 
+  // Esta función decide qué vista o componente mostrar en la zona principal
+  // basándose en el estado 'activeMenu' (qué botón seleccionó el usuario)
   const renderModule = () => {
     switch (activeMenu) {
       case 'chat':
-        return <ChatModule />;
+        return <ChatModule />; // Muestra la pantalla del Chat
       case 'search':
-        return <DocumentSearchModule />;
+        return <DocumentSearchModule />; // Muestra la pantalla de Documentos
       case 'protocols':
-        return <ProtocolsModule />;
+        return <ProtocolsModule />; // Muestra la pantalla de Protocolos
       case 'favorites':
-        return <FavoritesModule />;
+        return <FavoritesModule />; // Muestra la pantalla de Favoritos
       case 'history':
-        return <HistoryModule />;
+        return <HistoryModule />; // Muestra el Historial
       case 'analytics':
-        return <AnalyticsModule />;
+        return <AnalyticsModule />; // Muestra las Analíticas
       default:
-        return <ChatModule />;
+        return <ChatModule />; // Por defecto siempre muestra el chat por seguridad
     }
   };
 
@@ -231,8 +235,9 @@ export default function DashboardScreen({ onLogout, onOpenDocuments }: Dashboard
         </div>
       </aside>
 
-      {/* Main Content Area */}
+      {/* Main Content Area - Área de Contenido Principal */}
       <main className="flex-1 flex flex-col bg-white">
+        {/* Aquí es donde se inyecta dinámicamente la pantalla seleccionada */}
         {renderModule()}
       </main>
     </div>
