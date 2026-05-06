@@ -5,6 +5,12 @@ interface LoginScreenProps {
   onLogin: () => void;
 }
 
+/**
+ * Pantalla de Inicio de Sesión (LoginScreen)
+ * 
+ * Componente que maneja el formulario de ingreso de los usuarios.
+ * Recibe 'onLogin' que es la función que avisa a App.tsx que el usuario se autenticó.
+ */
 export default function LoginScreen({ onLogin }: LoginScreenProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

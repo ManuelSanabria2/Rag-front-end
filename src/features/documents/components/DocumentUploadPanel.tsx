@@ -5,6 +5,12 @@ interface DocumentUploadPanelProps {
   onClose: () => void;
 }
 
+/**
+ * Panel Flotante de Subida de Documentos (DocumentUploadPanel)
+ * 
+ * Componente modal para que los usuarios puedan cargar nuevos archivos (PDF, DOCX)
+ * Recibe 'onClose' como Prop para poder cerrarse a sí mismo.
+ */
 export default function DocumentUploadPanel({ onClose }: DocumentUploadPanelProps) {
   const [title, setTitle] = useState('');
   const [area, setArea] = useState('');

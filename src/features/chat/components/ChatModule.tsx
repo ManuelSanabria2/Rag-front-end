@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import { User, Send, AlertCircle, FileText } from 'lucide-react';
 
+/**
+ * Módulo de Chat con IA (ChatModule)
+ * 
+ * Renderiza la interfaz conversacional con la IA asistente.
+ * Contiene el área de mensajes y el input para enviar nuevas consultas.
+ */
 export default function ChatModule() {
   const [message, setMessage] = useState('');
 
