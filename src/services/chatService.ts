@@ -1,31 +1,37 @@
 /**
- * chatService.ts — Servicio de conexión con la API del LLM
+ * chatService.ts — Conexión con el API RAG del Hospital San Rafael
  *
- * Este archivo centraliza toda la comunicación con el backend de IA.
- * Para conectar tu LLM, solo necesitas cambiar la constante API_URL
- * y, si es necesario, ajustar los headers o el body del request.
+ * Endpoint: POST /api/v1/conversations/
  *
- * INSTRUCCIONES PARA CONECTAR TU API:
- * 1. Cambia API_URL por la URL real de tu backend/LLM.
- * 2. Si tu API necesita un token o API key, agrégalo en los headers.
- * 3. Si el formato del body o la respuesta es diferente, ajusta
- *    las funciones sendMessage() y la extracción del campo de respuesta.
+ * El backend (FastAPI + LangChain) gestiona el historial de conversación
+ * de forma interna, identificando cada sesión por el campo `phone_number`.
+ * Por eso no necesitamos reenviar el historial desde el frontend.
+ *
+ * En desarrollo el proxy de Vite redirige /api → http://localhost:8000,
+ * evitando problemas de CORS. En producción configura VITE_API_BASE_URL.
  */
 
+/**
+ * URL base del API RAG.
+ * - Sin VITE_API_BASE_URL → usa proxy de Vite (desarrollo, sin CORS)
+ * - Con VITE_API_BASE_URL=https://tu-servidor.com → apunta a producción
+ */
+const API_URL = import.meta.env.VITE_API_BASE_URL
+  ? `${import.meta.env.VITE_API_BASE_URL}/api/v1/conversations/`
+  : '/api/v1/conversations/';
 
-// CONFIGURACIÓN — Cambia estos valores para conectar tu API
-
-/** URL base de tu API del LLM. Cambia esto por tu endpoint real :DDD . */
-const API_URL = 'http://localhost:8000/api/chat';
-
-/** Headers de la petición. Agrega aquí tu API key si es necesario. */
-const DEFAULT_HEADERS: Record<string, string> = {
-  'Content-Type': 'application/json',
-  // 'Authorization': 'Bearer TU_API_KEY_AQUI',   // Descomenta si necesitas auth 
-};
+/**
+ * Identificador único de sesión por pestaña del navegador.
+ * Actúa como el `phone_number` que el backend usa para mantener el
+ * historial de conversación en su SingletonStore.
+ */
+const SESSION_ID: string =
+  typeof crypto !== 'undefined' && crypto.randomUUID
+    ? crypto.randomUUID()
+    : `session-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
 // ============================================================
-// TIPOS — Estructura de los mensajes del chat
+// TIPOS
 // ============================================================
 
 /** Representa un mensaje en la conversación */
@@ -34,112 +40,78 @@ export interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
   timestamp: Date;
-  /** Si la respuesta incluye fuentes/referencias del RAG, se guardan aquí */
+  /** Fuentes consultadas por el RAG (cuando las devuelve la API) */
   sources?: ChatSource[];
   /** Indica si hubo un error al obtener esta respuesta */
   isError?: boolean;
 }
 
-/** Fuente consultada por el RAG (opcional, depende de tu API) */
+/** Fuente documental consultada por el RAG */
 export interface ChatSource {
   document: string;
   page?: number;
   confidence?: number;
 }
 
+/** Forma exacta de la respuesta de OutputResponse del backend */
+interface RagApiResponse {
+  phone_number: string;
+  query: string;
+  response: string;
+  status_code: string; // "1000" = respondido con contexto | "1001" = sin información
+}
+
 // ============================================================
-// FUNCIÓN PRINCIPAL — Enviar mensaje al LLM
+// FUNCIÓN PRINCIPAL
 // ============================================================
 
 /**
- * Envía un mensaje al LLM y devuelve la respuesta.
+ * Envía una pregunta al servicio RAG y devuelve la respuesta del asistente.
  *
- * @param userMessage - El texto que escribió el usuario
- * @param conversationHistory - Historial previo de la conversación (opcional)
- * @returns La respuesta del LLM como texto + fuentes opcionales
- *
- * NOTA: Ajusta el body y la lectura de la respuesta según tu API.
- * Ejemplos comunes de formato de body:
- *
- *   OpenAI-compatible:  { messages: [{ role: "user", content: "..." }] }
- *   LangChain:          { input: "...", chat_history: [...] }
- *   Custom RAG:         { query: "...", context: [...] }
+ * El backend administra el historial de la conversación internamente usando
+ * SESSION_ID como identificador, así que `conversationHistory` se mantiene
+ * en la firma por compatibilidad con ChatModule pero no se envía al servidor.
  */
 export async function sendMessage(
   userMessage: string,
-  conversationHistory: ChatMessage[] = []
+  _conversationHistory: ChatMessage[] = []
 ): Promise<{ content: string; sources?: ChatSource[] }> {
 
-  // Construimos el historial en formato que la mayoría de APIs aceptan
-  const history = conversationHistory.map((msg) => ({
-    role: msg.role,
-    content: msg.content,
-  }));
-
-  // Cuerpo de la petición — AJUSTA SEGÚN TU API
+  // Cuerpo que espera el modelo Query del backend
   const body = {
-    message: userMessage,
-    history: history,
-    // query: userMessage,          // Alternativa si tu API usa "query"
-    // chat_history: history,       // Alternativa si tu API usa "chat_history"
+    question: userMessage,
+    phone_number: SESSION_ID,
+    source: 'local',
   };
 
+  let response: Response;
   try {
-    const response = await fetch(API_URL, {
+    response = await fetch(API_URL, {
       method: 'POST',
-      headers: DEFAULT_HEADERS,
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
-
-    // Si la respuesta HTTP no es exitosa, lanzamos error
-    if (!response.ok) {
-      const errorText = await response.text().catch(() => 'Error desconocido');
-      throw new Error(`Error del servidor (${response.status}): ${errorText}`);
-    }
-
-    const data = await response.json();
-
-    // ============================================================
-    // EXTRACCIÓN DE LA RESPUESTA — Ajusta según el formato de tu API
-    // ============================================================
-    // Intentamos leer el contenido de varios campos comunes.
-    // Tu API puede devolver: { response: "..." }, { answer: "..." },
-    // { message: "..." }, { choices: [{ message: { content: "..." } }] }, etc.
-    const content =
-      data.response ||
-      data.answer ||
-      data.message ||
-      data.content ||
-      data.text ||
-      data.choices?.[0]?.message?.content ||
-      data.result ||
-      JSON.stringify(data);
-
-    // Si tu API devuelve fuentes del RAG, extráelas aquí
-    const sources: ChatSource[] | undefined = data.sources?.map(
-      (s: { document?: string; page?: number; confidence?: number; source?: string }) => ({
-        document: s.document || s.source || 'Documento',
-        page: s.page,
-        confidence: s.confidence,
-      })
+  } catch {
+    throw new Error(
+      'No se pudo conectar con el servicio RAG. Verifica que el servidor esté corriendo en http://localhost:8000'
     );
-
-    return { content, sources };
-
-  } catch (error) {
-    // Si es un error de red (API no disponible), damos un mensaje claro
-    if (error instanceof TypeError && error.message.includes('fetch')) {
-      throw new Error(
-        'No se pudo conectar con el servidor. Verifica que la API esté corriendo en: ' + API_URL
-      );
-    }
-    throw error;
   }
+
+  if (!response.ok) {
+    const errorText = await response.text().catch(() => 'Error desconocido');
+    throw new Error(`Error del servidor (${response.status}): ${errorText}`);
+  }
+
+  const data: RagApiResponse = await response.json();
+
+  // status_code "1001" significa que el backend no encontró información
+  // en los documentos indexados. La respuesta ya incluye un mensaje
+  // explicativo generado por el LLM, así que la mostramos tal cual.
+  return { content: data.response };
 }
 
 /**
- * Genera un ID único para cada mensaje.
- * Usa crypto.randomUUID si está disponible, sino un fallback simple.
+ * Genera un ID único para cada mensaje del chat.
  */
 export function generateMessageId(): string {
   if (typeof crypto !== 'undefined' && crypto.randomUUID) {
