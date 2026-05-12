@@ -12,17 +12,16 @@
  *    las funciones sendMessage() y la extracción del campo de respuesta.
  */
 
-// ============================================================
-// CONFIGURACIÓN — Cambia estos valores para conectar tu API
-// ============================================================
 
-/** URL base de tu API del LLM. Cambia esto por tu endpoint real. */
+// CONFIGURACIÓN — Cambia estos valores para conectar tu API
+
+/** URL base de tu API del LLM. Cambia esto por tu endpoint real :DDD . */
 const API_URL = 'http://localhost:8000/api/chat';
 
 /** Headers de la petición. Agrega aquí tu API key si es necesario. */
 const DEFAULT_HEADERS: Record<string, string> = {
   'Content-Type': 'application/json',
-  // 'Authorization': 'Bearer TU_API_KEY_AQUI',   // Descomenta si necesitas auth
+  // 'Authorization': 'Bearer TU_API_KEY_AQUI',   // Descomenta si necesitas auth 
 };
 
 // ============================================================
