@@ -162,30 +162,27 @@ export default function ChatModule() {
   return (
     <div className="flex-1 flex flex-col">
       {/* ===== HEADER ===== */}
-      <header className="px-8 py-5 border-b bg-white" style={{ borderColor: 'rgba(0, 0, 0, 0.1)' }}>
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '20px', fontWeight: '600', color: '#2B3777' }}>
-              Sistema RAG Hospitalario · Clāris
-            </h1>
-          </div>
-          <div className="flex items-center gap-4">
-            {/* Contador de mensajes */}
+      <header className="px-4 sm:px-6 lg:px-8 py-4 lg:py-5 border-b bg-white flex-shrink-0" style={{ borderColor: 'rgba(0, 0, 0, 0.1)' }}>
+        <div className="flex items-center justify-between gap-3">
+          <h1 className="truncate" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '17px', fontWeight: '600', color: '#2B3777' }}>
+            <span className="hidden sm:inline">Sistema RAG Hospitalario · </span>Clāris
+          </h1>
+          <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
             {messages.length > 0 && (
               <span
-                style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontSize: '13px',
-                  color: '#717182',
-                }}
+                className="hidden sm:inline"
+                style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '13px', color: '#717182' }}
               >
                 {messages.length} mensaje{messages.length !== 1 ? 's' : ''}
               </span>
             )}
-            <div className="flex items-center gap-2 px-3 py-2 rounded-lg" style={{ backgroundColor: '#F7F7F7' }}>
-              <FileText size={16} style={{ color: '#717182' }} />
-              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '14px', color: '#717182' }}>
+            <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2 rounded-lg" style={{ backgroundColor: '#F7F7F7' }}>
+              <FileText size={15} style={{ color: '#717182' }} />
+              <span className="hidden sm:inline" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '13px', color: '#717182' }}>
                 3 documentos indexados
+              </span>
+              <span className="sm:hidden" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '12px', color: '#717182' }}>
+                3 docs
               </span>
             </div>
           </div>
@@ -193,8 +190,8 @@ export default function ChatModule() {
       </header>
 
       {/* ===== ÁREA DE MENSAJES ===== */}
-      <div className="flex-1 overflow-y-auto p-8">
-        <div className="max-w-4xl mx-auto space-y-6">
+      <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+        <div className="max-w-4xl mx-auto space-y-5 sm:space-y-6">
 
           {/* Estado vacío: se muestra cuando no hay mensajes todavía */}
           {messages.length === 0 && !isLoading && (
@@ -450,18 +447,18 @@ export default function ChatModule() {
       </div>
 
       {/* ===== INPUT DE MENSAJE ===== */}
-      <div className="p-6 border-t bg-white" style={{ borderColor: 'rgba(0, 0, 0, 0.1)' }}>
+      <div className="p-3 sm:p-4 lg:p-6 border-t bg-white flex-shrink-0" style={{ borderColor: 'rgba(0, 0, 0, 0.1)' }}>
         <div className="max-w-4xl mx-auto">
-          <div className="flex gap-3">
+          <div className="flex gap-2 sm:gap-3">
             <input
               ref={inputRef}
               type="text"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder={isLoading ? 'Esperando respuesta...' : 'Escribe tu consulta clínica aquí...'}
+              placeholder={isLoading ? 'Esperando...' : 'Escribe tu consulta clínica...'}
               disabled={isLoading}
-              className="flex-1 px-5 py-4 rounded-lg border focus:outline-none focus:ring-2 focus:ring-offset-0 transition-all"
+              className="flex-1 px-3 sm:px-5 py-3 sm:py-4 rounded-lg border focus:outline-none focus:ring-2 focus:ring-offset-0 transition-all min-w-0"
               style={{
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: '15px',
@@ -473,7 +470,7 @@ export default function ChatModule() {
             <button
               onClick={handleSend}
               disabled={isLoading || !inputText.trim()}
-              className="px-6 py-4 rounded-lg flex items-center gap-2 transition-all shadow-sm"
+              className="px-3 sm:px-6 py-3 sm:py-4 rounded-lg flex items-center gap-1.5 sm:gap-2 transition-all shadow-sm flex-shrink-0"
               style={{
                 backgroundColor: isLoading || !inputText.trim() ? '#A0D4D2' : '#00B8B3',
                 color: '#FFFFFF',
@@ -484,7 +481,7 @@ export default function ChatModule() {
               }}
             >
               {isLoading ? <Loader2 size={20} className="animate-spin" /> : <Send size={20} />}
-              {isLoading ? 'Enviando...' : 'Enviar'}
+              <span className="hidden sm:inline">{isLoading ? 'Enviando...' : 'Enviar'}</span>
             </button>
           </div>
         </div>
