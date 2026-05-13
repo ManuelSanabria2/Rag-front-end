@@ -47,11 +47,11 @@ export default function DocumentUploadPanel({ onClose }: DocumentUploadPanelProp
         style={{ backgroundColor: '#F7F7F7' }}
       >
         {/* Header */}
-        <div className="sticky top-0 bg-white px-8 py-6 border-b flex items-center justify-between" style={{ borderColor: 'rgba(0, 0, 0, 0.1)' }}>
+        <div className="sticky top-0 bg-white px-4 sm:px-8 py-4 sm:py-6 border-b flex items-center justify-between gap-4" style={{ borderColor: 'rgba(0, 0, 0, 0.1)' }}>
           <h2
+            className="text-xl sm:text-3xl"
             style={{
               fontFamily: "'Cormorant Garamond', serif",
-              fontSize: '32px',
               fontWeight: '600',
               color: '#2B3777'
             }}
@@ -73,14 +73,14 @@ export default function DocumentUploadPanel({ onClose }: DocumentUploadPanelProp
           </button>
         </div>
 
-        <div className="p-8">
+        <div className="p-4 sm:p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Dropzone */}
             <div
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
-              className="bg-white rounded-lg p-12 border-2 border-dashed transition-all cursor-pointer"
+              className="bg-white rounded-lg p-6 sm:p-12 border-2 border-dashed transition-all cursor-pointer"
               style={{
                 borderColor: isDragging ? '#00B8B3' : '#2B3777',
                 backgroundColor: isDragging ? 'rgba(0, 184, 179, 0.05)' : '#FFFFFF'
@@ -169,7 +169,7 @@ export default function DocumentUploadPanel({ onClose }: DocumentUploadPanelProp
               </div>
 
               {/* Area and Version */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Area */}
                 <div>
                   <label className="flex items-center gap-2 mb-2">

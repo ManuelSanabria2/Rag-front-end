@@ -21,10 +21,10 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#3B2377' }}>
-      <div className="w-full max-w-md px-6">
+    <div className="min-h-screen flex items-center justify-center px-4 py-8" style={{ backgroundColor: '#3B2377' }}>
+      <div className="w-full max-w-md">
         {/* Card Container */}
-        <div className="bg-white rounded-xl p-8 shadow-2xl">
+        <div className="bg-white rounded-xl p-6 sm:p-8 shadow-2xl">
           {/* Logo and Title */}
           <div className="text-center mb-8">
             {/* Logo Icon */}
