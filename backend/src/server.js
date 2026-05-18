@@ -1,14 +1,33 @@
 import express from "express";
 import cors from "cors";
-import fetch from "node-fetch";
 import dotenv from "dotenv";
+import helmet from "helmet";
+import cookieParser from "cookie-parser";
+import fetch from "node-fetch";
+
+import authRoutes from "./routes/authRoutes.js";
 
 dotenv.config();
 
 const app = express();
 
-app.use(cors());
+// Seguridad
+app.use(helmet());
+
+// CORS
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true,
+}));
+
+// Middlewares
 app.use(express.json());
+app.use(cookieParser());
+
+// Ruta raíz
+app.get("/", (req, res) => {
+  res.send("Backend funcionando correctamente");
+});
 
 app.post("/api/verify-recaptcha", async (req, res) => {
   try {
@@ -50,6 +69,7 @@ app.post("/api/verify-recaptcha", async (req, res) => {
     });
   } catch (error) {
     console.error(error);
+
     res.status(500).json({
       success: false,
       message: "Error del servidor",
@@ -57,40 +77,10 @@ app.post("/api/verify-recaptcha", async (req, res) => {
   }
 });
 
-app.post("/login", async (req, res) => {
-  try {
-    const { email, password } = req.body;
+// Rutas auth
+app.use("/", authRoutes);
 
-    // Usuario de prueba
-    const USER = {
-      email: "doctor@sanrafael.med",
-      password: "123456",
-    };
-
-    if (
-      email === USER.email &&
-      password === USER.password
-    ) {
-      return res.json({
-        success: true,
-        message: "Login exitoso",
-      });
-    }
-
-    return res.status(401).json({
-      success: false,
-      message: "Correo o contraseña incorrectos",
-    });
-
-  } catch (error) {
-    console.error(error);
-
-    return res.status(500).json({
-      success: false,
-      message: "Error del servidor",
-    });
-  }
-});
+// Servidor
 app.listen(3001, () => {
   console.log("Backend corriendo en http://localhost:3001");
 });
