@@ -86,6 +86,19 @@ export default function DashboardScreen({ onLogout, onOpenDocuments }: Dashboard
         style={{ backgroundColor: '#3B2377', color: '#FFFFFF' }}
       >
         {/* Logo Section */}
+        <div className="flex items-center gap-3 p-4">
+  
+
+  <div>
+    <h1 className="text-white text-xl font-bold">
+      Claris
+    </h1>
+
+    <p className="text-xs text-gray-300">
+      Asistencia Clínica Inteligente
+    </p>
+  </div>
+</div>
         <div className="p-5 lg:p-6 border-b" style={{ borderColor: 'rgba(255, 255, 255, 0.1)' }}>
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-3">
