@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
+import { /*useRef,*/ useState } from 'react';
 import { LogIn } from 'lucide-react';
-import ReCAPTCHA from 'react-google-recaptcha';
+// import ReCAPTCHA from 'react-google-recaptcha';
 
 interface LoginScreenProps {
   onLogin: () => void;
@@ -11,43 +11,38 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
-
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  // const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  // const recaptchaRef = useRef<ReCAPTCHA>(null);
   const API_URL = 'http://localhost:3001';
 
-  const resetRecaptcha = () => {
-    recaptchaRef.current?.reset();
-    setRecaptchaToken(null);
-  };
+  // const resetRecaptcha = () => {
+  //   recaptchaRef.current?.reset();
+  //   setRecaptchaToken(null);
+  // };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
-    if (!recaptchaToken) {
-      setError('Debes completar el reCAPTCHA.');
-      return;
-    }
+    // if (!recaptchaToken) {
+    //   setError('Debes completar el reCAPTCHA.');
+    //   return;
+    // }
 
     setIsLoading(true);
 
     try {
-      const captchaResponse = await fetch(`${API_URL}/api/verify-recaptcha`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ token: recaptchaToken }),
-      });
-
-      const captchaData = await captchaResponse.json();
-
-      if (!captchaResponse.ok || !captchaData.success) {
-        setError(captchaData.message || 'reCAPTCHA incorrecto.');
-        resetRecaptcha();
-        return;
-      }
+      // const captchaResponse = await fetch(`${API_URL}/api/verify-recaptcha`, {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ token: recaptchaToken }),
+      // });
+      // const captchaData = await captchaResponse.json();
+      // if (!captchaResponse.ok || !captchaData.success) {
+      //   setError(captchaData.message || 'reCAPTCHA incorrecto.');
+      //   resetRecaptcha();
+      //   return;
+      // }
 
       const loginResponse = await fetch(`${API_URL}/login`, {
         method: 'POST',
@@ -64,14 +59,14 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
 
       if (!loginResponse.ok || !loginData.success) {
         setError(loginData.message || 'Credenciales incorrectas.');
-        resetRecaptcha();
+        // resetRecaptcha();
         return;
       }
 
       onLogin();
     } catch {
       setError('No se pudo conectar al servidor.');
-      resetRecaptcha();
+      // resetRecaptcha();
     } finally {
       setIsLoading(false);
     }
@@ -141,6 +136,7 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
               />
             </div>
 
+            {/* CAPTCHA temporalmente desactivado
             <div>
               <label className="block mb-2 text-sm font-medium">
                 Verificación reCAPTCHA
@@ -156,6 +152,7 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
                 />
               </div>
             </div>
+            */}
 
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-600 rounded-lg px-4 py-3 text-sm">

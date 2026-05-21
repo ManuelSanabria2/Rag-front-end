@@ -10,9 +10,10 @@ import {
   User,
   LogOut,
   CheckCircle2,
-  AlertCircle,
+  FileText,
   Menu,
-  X
+  X,
+  Trash2
 } from 'lucide-react';
 
 import ChatModule from '../../chat/components/ChatModule';
@@ -21,63 +22,33 @@ import ProtocolsModule from '../../protocols/components/ProtocolsModule';
 import FavoritesModule from '../../favorites/components/FavoritesModule';
 import HistoryModule from '../../history/components/HistoryModule';
 import AnalyticsModule from '../../analytics/components/AnalyticsModule';
+import ClearCacheModule from '../../cache/components/ClearCacheModule';
+import { useDocuments } from '../../../hooks/useDocuments';
+import { getDocumentViewUrl } from '../../../services/chatService';
 
 interface DashboardScreenProps {
   onLogout: () => void;
   onOpenDocuments: () => void;
+  onOpenAnalytics?: () => void;
+  docsRefreshTrigger?: number;
 }
 
 export default function DashboardScreen({
   onLogout,
-  onOpenDocuments
+  onOpenDocuments,
+  docsRefreshTrigger,
 }: DashboardScreenProps) {
   const [activeMenu, setActiveMenu] = useState('chat');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const recentDocuments = [
-    {
-      name: 'protocolo-uci-2024.pdf',
-      status: 'verified',
-      badge: 'purple'
-    },
-    {
-      name: 'guia-antibioticos.pdf',
-      status: 'verified',
-      badge: 'lime'
-    },
-    {
-      name: 'manual-pediatria.pdf',
-      status: 'processing',
-      badge: 'gray'
-    }
-  ];
+  const { documents, loading: docsLoading } = useDocuments(docsRefreshTrigger);
 
-  const getBadgeStyles = (badge: string) => {
-    switch (badge) {
-      case 'purple':
-        return {
-          backgroundColor: 'rgba(59, 35, 119, 0.1)',
-          color: '#3B2377',
-          border: '1px solid rgba(59, 35, 119, 0.2)'
-        };
+  // Los 3 más recientes para la barra lateral (ya vienen ordenados por fecha desc)
+  const recentDocuments = documents.slice(0, 3);
 
-      case 'lime':
-        return {
-          backgroundColor: 'rgba(168, 207, 68, 0.15)',
-          color: '#6B8E23',
-          border: '1px solid rgba(168, 207, 68, 0.3)'
-        };
-
-      case 'gray':
-        return {
-          backgroundColor: 'rgba(0, 0, 0, 0.05)',
-          color: '#717182',
-          border: '1px solid rgba(0, 0, 0, 0.1)'
-        };
-
-      default:
-        return {};
-    }
+  const formatFileSize = (bytes: number) => {
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
   };
 
   const handleMenuSelect = (menu: string) => {
@@ -91,7 +62,7 @@ export default function DashboardScreen({
         return <ChatModule />;
 
       case 'search':
-        return <DocumentSearchModule />;
+        return <DocumentSearchModule documents={documents} loading={docsLoading} />;
 
       case 'protocols':
         return <ProtocolsModule />;
@@ -104,6 +75,9 @@ export default function DashboardScreen({
 
       case 'analytics':
         return <AnalyticsModule />;
+
+      case 'cache':
+        return <ClearCacheModule />;
 
       default:
         return <ChatModule />;
@@ -140,6 +114,11 @@ export default function DashboardScreen({
       key: 'analytics',
       icon: <BarChart3 size={20} />,
       label: 'Análisis y reportes'
+    },
+    {
+      key: 'cache',
+      icon: <Trash2 size={20} />,
+      label: 'Gestión de caché'
     }
   ];
 
@@ -268,55 +247,46 @@ export default function DashboardScreen({
           {/* Panel de Documentos Recientes */}
           <div
             className="mt-6 pt-6 border-t"
-            style={{
-              borderColor: 'rgba(255, 255, 255, 0.1)'
-            }}
+            style={{ borderColor: 'rgba(255, 255, 255, 0.1)' }}
           >
             <h3 className="px-4 mb-3 text-[12px] font-semibold text-white/60 tracking-wider uppercase">
               Documentos Recientes
             </h3>
 
             <div className="space-y-2">
-              {recentDocuments.map((doc, index) => (
-                <div
-                  key={index}
-                  className="px-4 py-3 rounded-lg bg-white/5"
-                >
-                  <div className="flex items-start gap-2 mb-2">
-                    {doc.status === 'verified' ? (
-                      <CheckCircle2
-                        size={16}
-                        style={{
-                          color: '#A8CF44',
-                          flexShrink: 0,
-                          marginTop: '1px'
-                        }}
-                      />
-                    ) : (
-                      <AlertCircle
-                        size={16}
-                        style={{
-                          color: '#717182',
-                          flexShrink: 0,
-                          marginTop: '1px'
-                        }}
-                      />
-                    )}
+              {docsLoading && (
+                <p className="px-4 text-[12px] text-white/40">Cargando...</p>
+              )}
 
-                    <p className="text-[13px] leading-tight break-all">
-                      {doc.name}
+              {!docsLoading && recentDocuments.length === 0 && (
+                <p className="px-4 text-[12px] text-white/40">
+                  No hay documentos indexados
+                </p>
+              )}
+
+              {!docsLoading && recentDocuments.map((doc) => (
+                <button
+                  key={doc.filename}
+                  onClick={() => window.open(getDocumentViewUrl(doc.filename), '_blank')}
+                  className="w-full px-4 py-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors text-left"
+                >
+                  <div className="flex items-start gap-2 mb-1.5">
+                    <FileText
+                      size={14}
+                      style={{ color: '#A8CF44', flexShrink: 0, marginTop: '2px' }}
+                    />
+                    <p className="text-[12px] leading-tight break-all text-white/90">
+                      {doc.filename}
                     </p>
                   </div>
-
-                  <span
-                    className="inline-block px-2 py-1 rounded text-[11px] font-medium"
-                    style={getBadgeStyles(doc.badge)}
-                  >
-                    {doc.status === 'verified'
-                      ? 'Verificado'
-                      : 'Procesando'}
-                  </span>
-                </div>
+                  <div className="flex items-center gap-2 pl-5">
+                    <CheckCircle2 size={10} style={{ color: '#A8CF44' }} />
+                    <span className="text-[10px] text-white/50">Indexado</span>
+                    <span className="text-[10px] text-white/30 ml-auto">
+                      {formatFileSize(doc.size)}
+                    </span>
+                  </div>
+                </button>
               ))}
             </div>
 

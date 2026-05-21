@@ -8,7 +8,7 @@ export function createToken(user) {
     },
     process.env.JWT_SECRET,
     {
-      expiresIn: "15m",
+      expiresIn: "1m",
     }
   );
 }

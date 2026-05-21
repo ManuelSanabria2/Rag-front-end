@@ -9,6 +9,7 @@ type Screen = 'login' | 'dashboard' | 'documents' | 'analytics';
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('login');
   const [showDocumentUpload, setShowDocumentUpload] = useState(false);
+  const [docsRefreshTrigger, setDocsRefreshTrigger] = useState(0);
 
   const handleLogin = () => {
     setCurrentScreen('dashboard');
@@ -62,10 +63,14 @@ export default function App() {
         onLogout={handleLogout}
         onOpenDocuments={handleOpenDocuments}
         onOpenAnalytics={handleOpenAnalytics}
+        docsRefreshTrigger={docsRefreshTrigger}
       />
 
       {showDocumentUpload && (
-        <DocumentUploadPanel onClose={handleCloseDocuments} />
+        <DocumentUploadPanel
+          onClose={handleCloseDocuments}
+          onUploaded={() => setDocsRefreshTrigger((t) => t + 1)}
+        />
       )}
     </>
   );

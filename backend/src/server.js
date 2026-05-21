@@ -4,10 +4,13 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import fetch from "node-fetch";
+import { fileURLToPath } from "url";
+import { dirname, resolve } from "path";
 
 import authRoutes from "./routes/authRoutes.js";
 
-dotenv.config();
+const __dirname = dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: resolve(__dirname, "../.env") });
 
 const app = express();
 
