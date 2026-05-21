@@ -1,5 +1,7 @@
+// src/features/documents/components/DocumentUploadPanel.tsx
+
 import { useRef, useState } from 'react';
-import { Upload, X, FileText, Tag, Hash, Award, CheckCircle2, XCircle, Loader2, Trash2 } from 'lucide-react';
+import { Upload, X, FileText, Tag, CheckCircle2, XCircle, Loader2, Trash2 } from 'lucide-react';
 import { uploadDocuments } from '../../../services/chatService';
 
 interface DocumentUploadPanelProps {
@@ -11,10 +13,8 @@ type UploadStatus = 'idle' | 'uploading' | 'success' | 'error';
 
 export default function DocumentUploadPanel({ onClose, onUploaded }: DocumentUploadPanelProps) {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const [area, setArea] = useState('');
-  const [version, setVersion] = useState('');
+  const [tipoDocumento, setTipoDocumento] = useState(''); // Nueva etiqueta para tipo/categoría
   const [keywords, setKeywords] = useState('');
-  const [confidence, setConfidence] = useState(0.85);
   const [isDragging, setIsDragging] = useState(false);
   const [uploadStatus, setUploadStatus] = useState<UploadStatus>('idle');
   const [statusMessage, setStatusMessage] = useState('');
@@ -70,12 +70,18 @@ export default function DocumentUploadPanel({ onClose, onUploaded }: DocumentUpl
       setStatusMessage('Debes seleccionar al menos un archivo PDF.');
       return;
     }
+    if (!tipoDocumento) {
+      setUploadStatus('error');
+      setStatusMessage('Debes seleccionar un tipo de documento.');
+      return;
+    }
 
     setUploadStatus('uploading');
     setStatusMessage('');
 
     try {
-      const result = await uploadDocuments(selectedFiles);
+      // Nota: Enviamos el tipoDocumento y las palabras clave como metadatos al servicio si lo requiere
+      const result = await uploadDocuments(selectedFiles, { categoria: tipoDocumento, keywords });
       setUploadStatus('success');
       setStatusMessage(result.message);
       setProcessedFiles(result.files ?? []);
@@ -141,7 +147,7 @@ export default function DocumentUploadPanel({ onClose, onUploaded }: DocumentUpl
                   <Upload size={36} style={{ color: '#2B3777' }} />
                 </div>
                 <h3 className="mb-2" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '18px', fontWeight: '600', color: '#050A0E' }}>
-                  Arrastre y suelte su protocolo
+                  Arrastre y suelte su documento
                 </h3>
                 <p className="mb-4" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '14px', color: '#717182' }}>
                   Solo archivos PDF · Tamaño máximo 50 MB por archivo
@@ -192,47 +198,27 @@ export default function DocumentUploadPanel({ onClose, onUploaded }: DocumentUpl
 
             {/* Form Fields */}
             <div className="bg-white rounded-lg p-6 space-y-5">
-              {/* Area and Version */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="flex items-center gap-2 mb-2">
-                    <Tag size={18} style={{ color: '#717182' }} />
-                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '14px', fontWeight: '600', color: '#050A0E' }}>
-                      Área Médica
-                    </span>
-                  </label>
-                  <select
-                    value={area}
-                    onChange={(e) => setArea(e.target.value)}
-                    className="w-full px-4 py-3 rounded-lg border focus:outline-none transition-all"
-                    style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '15px', borderColor: 'rgba(0, 0, 0, 0.1)' }}
-                  >
-                    <option value="">Seleccionar área</option>
-                    <option value="uci">UCI - Unidad de Cuidados Intensivos</option>
-                    <option value="cardiologia">Cardiología</option>
-                    <option value="pediatria">Pediatría</option>
-                    <option value="medicina-interna">Medicina Interna</option>
-                    <option value="cirugia">Cirugía General</option>
-                    <option value="neurologia">Neurología</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="flex items-center gap-2 mb-2">
-                    <Hash size={18} style={{ color: '#717182' }} />
-                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '14px', fontWeight: '600', color: '#050A0E' }}>
-                      Versión
-                    </span>
-                  </label>
-                  <input
-                    type="text"
-                    value={version}
-                    onChange={(e) => setVersion(e.target.value)}
-                    placeholder="Ej: v2024.1"
-                    className="w-full px-4 py-3 rounded-lg border focus:outline-none transition-all"
-                    style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '15px', borderColor: 'rgba(0, 0, 0, 0.1)' }}
-                  />
-                </div>
+              
+              {/* Selector de Tipo de Documento */}
+              <div>
+                <label className="flex items-center gap-2 mb-2">
+                  <Tag size={18} style={{ color: '#717182' }} />
+                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '14px', fontWeight: '600', color: '#050A0E' }}>
+                    Tipo de Documento
+                  </span>
+                </label>
+                <select
+                  value={tipoDocumento}
+                  onChange={(e) => setTipoDocumento(e.target.value)}
+                  className="w-full px-4 py-3 rounded-lg border focus:outline-none transition-all"
+                  style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '15px', borderColor: 'rgba(0, 0, 0, 0.1)' }}
+                  required
+                >
+                  <option value="">Seleccionar tipo</option>
+                  <option value="protocolo">Protocolo</option>
+                  <option value="guia">Guía</option>
+                  <option value="manual">Manual</option>
+                </select>
               </div>
 
               {/* Keywords */}
@@ -254,42 +240,6 @@ export default function DocumentUploadPanel({ onClose, onUploaded }: DocumentUpl
                 <p className="mt-2" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '13px', color: '#717182' }}>
                   Separar con comas. Mejora la precisión de búsqueda RAG.
                 </p>
-              </div>
-
-              {/* Confidence Level */}
-              <div>
-                <label className="flex items-center gap-2 mb-3">
-                  <Award size={18} style={{ color: '#717182' }} />
-                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '14px', fontWeight: '600', color: '#050A0E' }}>
-                    Nivel de Confianza Clínica
-                  </span>
-                  <span
-                    className="ml-auto px-3 py-1 rounded-full"
-                    style={{
-                      backgroundColor: confidence >= 0.8 ? 'rgba(168, 207, 68, 0.15)' : 'rgba(0, 0, 0, 0.05)',
-                      color: confidence >= 0.8 ? '#6B8E23' : '#717182',
-                      fontFamily: "'JetBrains Mono', monospace",
-                      fontSize: '13px',
-                      fontWeight: '600'
-                    }}
-                  >
-                    {confidence.toFixed(2)}
-                  </span>
-                </label>
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.01"
-                  value={confidence}
-                  onChange={(e) => setConfidence(parseFloat(e.target.value))}
-                  className="w-full"
-                  style={{ accentColor: '#00B8B3' }}
-                />
-                <div className="flex justify-between mt-2">
-                  <span style={{ fontSize: '12px', color: '#717182' }}>Baja (0.0)</span>
-                  <span style={{ fontSize: '12px', color: '#717182' }}>Alta (1.0)</span>
-                </div>
               </div>
             </div>
 
