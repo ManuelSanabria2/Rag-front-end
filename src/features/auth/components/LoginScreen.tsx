@@ -1,9 +1,10 @@
-import { /*useRef,*/ useState } from 'react';
+import { useState } from 'react';
 import { LogIn } from 'lucide-react';
 // import ReCAPTCHA from 'react-google-recaptcha';
+import type { UserRole } from '../../../App';
 
 interface LoginScreenProps {
-  onLogin: () => void;
+  onLogin: (role: UserRole) => void;
 }
 
 export default function LoginScreen({ onLogin }: LoginScreenProps) {
@@ -34,6 +35,7 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
     try {
       // const captchaResponse = await fetch(`${API_URL}/api/verify-recaptcha`, {
       //   method: 'POST',
+      //   credentials: 'include',
       //   headers: { 'Content-Type': 'application/json' },
       //   body: JSON.stringify({ token: recaptchaToken }),
       // });
@@ -46,13 +48,11 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
 
       const loginResponse = await fetch(`${API_URL}/login`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
+        body: JSON.stringify({ email, password }),
       });
 
       const loginData = await loginResponse.json();
@@ -63,7 +63,8 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
         return;
       }
 
-      onLogin();
+      const roleFromBackend = loginData.user?.role as UserRole | undefined;
+      onLogin(roleFromBackend || 'doctor');
     } catch {
       setError('No se pudo conectar al servidor.');
       // resetRecaptcha();
@@ -108,7 +109,6 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
               <label htmlFor="email" className="block mb-2 text-sm font-medium">
                 Correo electrónico
               </label>
-
               <input
                 id="email"
                 type="email"
@@ -124,7 +124,6 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
               <label htmlFor="password" className="block mb-2 text-sm font-medium">
                 Contraseña
               </label>
-
               <input
                 id="password"
                 type="password"
@@ -141,7 +140,6 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
               <label className="block mb-2 text-sm font-medium">
                 Verificación reCAPTCHA
               </label>
-
               <div className="flex justify-center">
                 <ReCAPTCHA
                   ref={recaptchaRef}
@@ -164,12 +162,7 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
               type="submit"
               disabled={isLoading}
               className="w-full py-3.5 rounded-lg flex items-center justify-center gap-2 disabled:opacity-70"
-              style={{
-                backgroundColor: '#00B8B3',
-                color: '#FFFFFF',
-                fontSize: '16px',
-                fontWeight: '600',
-              }}
+              style={{ backgroundColor: '#00B8B3', color: '#FFFFFF', fontSize: '16px', fontWeight: '600' }}
             >
               <LogIn size={20} />
               {isLoading ? 'Validando...' : 'Iniciar Sesión'}

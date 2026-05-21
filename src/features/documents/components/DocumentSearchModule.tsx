@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from "react";
 import {
   Search,
   FileText,
@@ -7,9 +7,18 @@ import {
   CheckCircle,
   SlidersHorizontal,
   Loader2,
-} from 'lucide-react';
-import type { RagDocument } from '../../../services/chatService';
-import { getDocumentViewUrl } from '../../../services/chatService';
+  Trash2,
+  RotateCcw,
+} from "lucide-react";
+
+import type { RagDocument } from "../../../services/chatService";
+import { getDocumentViewUrl } from "../../../services/chatService";
+import {
+  getRecentSearches,
+  createRecentSearch,
+  deleteRecentSearch,
+  type RecentSearch,
+} from "../../../services/documentSearchService";
 
 // ─── Props ────────────────────────────────────────────────────
 interface DocumentSearchModuleProps {
@@ -19,19 +28,17 @@ interface DocumentSearchModuleProps {
 
 // ─── Helpers ──────────────────────────────────────────────────
 
-/** Deriva una categoría desde el nombre del archivo. */
 function getCategoria(filename: string): string {
   const name = filename.toLowerCase();
-  if (name.includes('protocolo')) return 'protocolo';
-  if (name.includes('guia') || name.includes('guía')) return 'guia';
-  if (name.includes('manual')) return 'manual';
-  return 'documento';
+  if (name.includes("protocolo")) return "protocolo";
+  if (name.includes("guia") || name.includes("guía")) return "guia";
+  if (name.includes("manual")) return "manual";
+  return "documento";
 }
 
-/** Formatea un timestamp Unix (segundos) a fecha legible. */
 function formatDate(ts: number): string {
-  return new Date(ts * 1000).toLocaleDateString('es-CO', {
-    day: '2-digit', month: 'short', year: 'numeric',
+  return new Date(ts * 1000).toLocaleDateString("es-CO", {
+    day: "2-digit", month: "short", year: "numeric",
   });
 }
 
@@ -42,11 +49,11 @@ function formatSize(bytes: number): string {
 
 // ─── Filtros ──────────────────────────────────────────────────
 const FILTROS = [
-  { valor: 'todos',     label: 'Todos'      },
-  { valor: 'protocolo', label: 'Protocolos' },
-  { valor: 'guia',      label: 'Guías'      },
-  { valor: 'manual',    label: 'Manuales'   },
-  { valor: 'documento', label: 'Otros'      },
+  { valor: "todos",     label: "Todos"      },
+  { valor: "protocolo", label: "Protocolos" },
+  { valor: "guia",      label: "Guías"      },
+  { valor: "manual",    label: "Manuales"   },
+  { valor: "documento", label: "Otros"      },
 ];
 
 // ─────────────────────────────────────────────────────────────
@@ -56,40 +63,97 @@ export default function DocumentSearchModule({
   documents = [],
   loading = false,
 }: DocumentSearchModuleProps) {
-  const [busqueda, setBusqueda] = useState('');
-  const [filtro, setFiltro] = useState('todos');
+  const [busqueda, setBusqueda] = useState("");
+  const [filtro, setFiltro] = useState("todos");
   const [sortDesc, setSortDesc] = useState(true);
+  const [recentSearches, setRecentSearches] = useState<RecentSearch[]>([]);
+  const [error, setError] = useState("");
 
-  const resultado = documents
-    .filter((d) => d.filename.toLowerCase().includes(busqueda.toLowerCase()))
-    .filter((d) => filtro === 'todos' || getCategoria(d.filename) === filtro)
-    .slice()
-    .sort((a, b) => sortDesc ? b.modified - a.modified : a.modified - b.modified);
+  const resultado = useMemo(() => {
+    return documents
+      .filter((d) => d.filename.toLowerCase().includes(busqueda.toLowerCase()))
+      .filter((d) => filtro === "todos" || getCategoria(d.filename) === filtro)
+      .slice()
+      .sort((a, b) => sortDesc ? b.modified - a.modified : a.modified - b.modified);
+  }, [documents, busqueda, filtro, sortDesc]);
+
+  useEffect(() => {
+    async function loadRecentSearches() {
+      try {
+        const searches = await getRecentSearches();
+        setRecentSearches(searches);
+      } catch (err) {
+        console.error(err);
+        setError("No se pudieron cargar las búsquedas recientes.");
+      }
+    }
+    loadRecentSearches();
+  }, []);
+
+  const guardarBusqueda = async () => {
+    const cleanQuery = busqueda.trim();
+    if (!cleanQuery) return;
+    try {
+      const newSearch = await createRecentSearch({
+        query: cleanQuery,
+        filters: filtro === "todos" ? [] : [filtro],
+        resultsCount: resultado.length,
+      });
+      setRecentSearches((prev) => [
+        newSearch,
+        ...prev.filter((item) => item.query !== newSearch.query).slice(0, 9),
+      ]);
+    } catch (err) {
+      console.error(err);
+      setError("No se pudo guardar la búsqueda reciente.");
+    }
+  };
+
+  const repetirBusqueda = (search: RecentSearch) => {
+    setBusqueda(search.query);
+    setFiltro(search.filters[0] || "todos");
+  };
+
+  const eliminarBusqueda = async (id: string) => {
+    try {
+      await deleteRecentSearch(id);
+      setRecentSearches((prev) => prev.filter((item) => item.id !== id));
+    } catch (err) {
+      console.error(err);
+      setError("No se pudo eliminar la búsqueda reciente.");
+    }
+  };
 
   return (
     <main className="min-h-screen bg-[#F8FAFC] p-8">
-      <div className="max-w-7xl mx-auto">
+      <div className="mx-auto max-w-7xl">
 
         {/* Encabezado */}
-        <section className="bg-white border border-[#E5E7EB] rounded-2xl p-6 mb-6 shadow-sm">
+        <section className="mb-6 rounded-2xl border border-[#E5E7EB] bg-white p-6 shadow-sm">
           <div className="flex items-center justify-between gap-4">
             <div>
               <p className="text-sm font-medium text-[#2563EB]">Hospital San Rafael</p>
-              <h1 className="text-2xl font-bold text-[#111827] mt-1">Búsqueda de documentos</h1>
-              <p className="text-sm text-[#6B7280] mt-1">
+              <h1 className="mt-1 text-2xl font-bold text-[#111827]">Búsqueda de documentos</h1>
+              <p className="mt-1 text-sm text-[#6B7280]">
                 Encuentra protocolos, guías y manuales clínicos indexados en el sistema RAG.
               </p>
             </div>
             <div className="flex items-center gap-2 text-sm text-[#6B7280]">
               <FileText size={16} />
-              {loading ? '...' : `${resultado.length} documento${resultado.length !== 1 ? 's' : ''}`}
+              {loading ? "..." : `${resultado.length} documento${resultado.length !== 1 ? "s" : ""}`}
             </div>
           </div>
         </section>
 
+        {error && (
+          <div className="mb-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+            {error}
+          </div>
+        )}
+
         {/* Barra de búsqueda y filtros */}
-        <section className="bg-white border border-[#E5E7EB] rounded-2xl p-5 mb-6 shadow-sm">
-          <div className="flex gap-3 mb-4">
+        <section className="mb-6 rounded-2xl border border-[#E5E7EB] bg-white p-5 shadow-sm">
+          <div className="mb-4 flex gap-3">
             <div className="relative flex-1">
               <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9CA3AF]" />
               <input
@@ -97,27 +161,35 @@ export default function DocumentSearchModule({
                 placeholder="Buscar por nombre de archivo..."
                 value={busqueda}
                 onChange={(e) => setBusqueda(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 border border-[#E5E7EB] rounded-xl text-sm text-[#111827] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:border-transparent"
+                onKeyDown={(e) => { if (e.key === "Enter") guardarBusqueda(); }}
+                className="w-full rounded-xl border border-[#E5E7EB] py-2.5 pl-10 pr-4 text-sm text-[#111827] placeholder-[#9CA3AF] focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#2563EB]"
               />
             </div>
             <button
+              onClick={guardarBusqueda}
+              className="flex items-center gap-2 rounded-xl bg-[#2563EB] px-4 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#1D4ED8]"
+            >
+              <Search size={16} />
+              Buscar
+            </button>
+            <button
               onClick={() => setSortDesc((v) => !v)}
-              className="flex items-center gap-2 px-4 py-2.5 border border-[#E5E7EB] rounded-xl text-sm text-[#374151] hover:bg-[#F8FAFC] transition-all"
+              className="flex items-center gap-2 rounded-xl border border-[#E5E7EB] px-4 py-2.5 text-sm text-[#374151] transition-all hover:bg-[#F8FAFC]"
             >
               <SlidersHorizontal size={16} />
-              {sortDesc ? 'Más recientes' : 'Más antiguos'}
+              {sortDesc ? "Más recientes" : "Más antiguos"}
             </button>
           </div>
 
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex flex-wrap gap-2">
             {FILTROS.map((f) => (
               <button
                 key={f.valor}
                 onClick={() => setFiltro(f.valor)}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-all ${
+                className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-all ${
                   filtro === f.valor
-                    ? 'bg-[#EFF6FF] border-[#2563EB] text-[#2563EB]'
-                    : 'bg-white border-[#E5E7EB] text-[#6B7280] hover:border-[#2563EB] hover:text-[#2563EB]'
+                    ? "border-[#2563EB] bg-[#EFF6FF] text-[#2563EB]"
+                    : "border-[#E5E7EB] bg-white text-[#6B7280] hover:border-[#2563EB] hover:text-[#2563EB]"
                 }`}
               >
                 {f.label}
@@ -126,23 +198,62 @@ export default function DocumentSearchModule({
           </div>
         </section>
 
+        {/* Búsquedas recientes */}
+        {recentSearches.length > 0 && (
+          <section className="mb-6 rounded-2xl border border-[#E5E7EB] bg-white p-5 shadow-sm">
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="font-semibold text-[#111827]">Búsquedas recientes</h2>
+              <span className="text-sm text-[#6B7280]">
+                {recentSearches.length} registro{recentSearches.length !== 1 ? "s" : ""}
+              </span>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {recentSearches.map((item) => (
+                <div
+                  key={item.id}
+                  className="flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-[#F8FAFC] px-3 py-2 text-sm"
+                >
+                  <button
+                    onClick={() => repetirBusqueda(item)}
+                    className="flex items-center gap-2 text-[#374151] hover:text-[#2563EB]"
+                    title="Repetir búsqueda"
+                  >
+                    <RotateCcw size={14} />
+                    <span>{item.query}</span>
+                    <span className="text-xs text-[#9CA3AF]">
+                      {item.resultsCount} resultado{item.resultsCount !== 1 ? "s" : ""}
+                    </span>
+                  </button>
+                  <button
+                    onClick={() => eliminarBusqueda(item.id)}
+                    className="text-[#9CA3AF] transition hover:text-[#991B1B]"
+                    title="Eliminar búsqueda"
+                  >
+                    <Trash2 size={14} />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* Resultados */}
         {loading ? (
-          <div className="bg-white border border-[#E5E7EB] rounded-2xl p-12 shadow-sm flex flex-col items-center gap-3">
+          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-12 shadow-sm flex flex-col items-center gap-3">
             <Loader2 size={32} className="animate-spin text-[#2563EB]" />
             <p className="text-[#6B7280] text-sm">Cargando documentos...</p>
           </div>
         ) : resultado.length === 0 ? (
-          <div className="bg-white border border-[#E5E7EB] rounded-2xl p-12 shadow-sm text-center">
-            <Search size={40} className="mx-auto text-[#D1D5DB] mb-3" />
-            <p className="text-[#6B7280] text-sm">
+          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-12 text-center shadow-sm">
+            <Search size={40} className="mx-auto mb-3 text-[#D1D5DB]" />
+            <p className="text-sm text-[#6B7280]">
               {documents.length === 0
                 ? 'No hay documentos indexados en el sistema RAG. Carga un PDF desde "Cargar Nuevo Protocolo".'
-                : 'No se encontraron documentos con ese criterio.'}
+                : "No se encontraron documentos con ese criterio."}
             </p>
           </div>
         ) : (
-          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          <section className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {resultado.map((doc) => (
               <DocumentoCard key={doc.filename} doc={doc} />
             ))}
@@ -158,11 +269,11 @@ export default function DocumentSearchModule({
 function DocumentoCard({ doc }: { doc: RagDocument }) {
   const viewUrl = getDocumentViewUrl(doc.filename);
 
-  const handleOpen = () => window.open(viewUrl, '_blank', 'noopener,noreferrer');
+  const handleOpen = () => window.open(viewUrl, "_blank", "noopener,noreferrer");
 
   const handleDownload = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = viewUrl;
     a.download = doc.filename;
     a.click();
@@ -171,31 +282,31 @@ function DocumentoCard({ doc }: { doc: RagDocument }) {
   return (
     <div
       onClick={handleOpen}
-      className="bg-white border border-[#E5E7EB] rounded-2xl p-5 shadow-sm hover:border-[#2563EB] hover:shadow-md transition-all cursor-pointer"
+      className="cursor-pointer rounded-2xl border border-[#E5E7EB] bg-white p-5 shadow-sm transition-all hover:border-[#2563EB] hover:shadow-md"
     >
-      <div className="flex items-start gap-3 mb-3">
-        <div className="w-10 h-10 rounded-xl bg-[#EFF6FF] flex items-center justify-center flex-shrink-0">
+      <div className="mb-3 flex items-start gap-3">
+        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-[#EFF6FF]">
           <FileText size={20} className="text-[#2563EB]" />
         </div>
         <div className="min-w-0">
-          <p className="text-sm font-semibold text-[#111827] truncate" title={doc.filename}>
+          <p className="truncate text-sm font-semibold text-[#111827]" title={doc.filename}>
             {doc.filename}
           </p>
-          <p className="text-xs text-[#6B7280] mt-0.5 capitalize">
+          <p className="mt-0.5 text-xs capitalize text-[#6B7280]">
             {getCategoria(doc.filename)}
           </p>
         </div>
       </div>
 
       <div className="mb-4">
-        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-[#DCFCE7] text-[#166534]">
+        <span className="inline-flex items-center gap-1 rounded-full bg-[#DCFCE7] px-2.5 py-1 text-xs font-medium text-[#166534]">
           <CheckCircle size={12} />
           Indexado
         </span>
       </div>
 
-      <div className="flex items-center justify-between pt-3 border-t border-[#E5E7EB]">
-        <div className="text-xs text-[#9CA3AF] space-y-0.5">
+      <div className="flex items-center justify-between border-t border-[#E5E7EB] pt-3">
+        <div className="space-y-0.5 text-xs text-[#9CA3AF]">
           <p>{formatDate(doc.modified)}</p>
           <p>{formatSize(doc.size)}</p>
         </div>
@@ -203,14 +314,14 @@ function DocumentoCard({ doc }: { doc: RagDocument }) {
           <button
             onClick={handleDownload}
             title="Descargar"
-            className="w-7 h-7 rounded-lg border border-[#E5E7EB] flex items-center justify-center hover:bg-[#F8FAFC] transition-all"
+            className="flex h-7 w-7 items-center justify-center rounded-lg border border-[#E5E7EB] transition-all hover:bg-[#F8FAFC]"
           >
             <Download size={14} className="text-[#9CA3AF]" />
           </button>
           <button
             onClick={(e) => { e.stopPropagation(); handleOpen(); }}
             title="Ver documento"
-            className="w-7 h-7 rounded-lg border border-[#E5E7EB] flex items-center justify-center hover:bg-[#EFF6FF] transition-all"
+            className="flex h-7 w-7 items-center justify-center rounded-lg border border-[#E5E7EB] transition-all hover:bg-[#EFF6FF]"
           >
             <Eye size={14} className="text-[#2563EB]" />
           </button>

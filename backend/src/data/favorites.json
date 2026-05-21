@@ -1,0 +1,18 @@
+[
+  {
+    "id": "fav-1",
+    "userEmail": "doctor@sanrafael.med",
+    "titulo": "Manejo inicial de sepsis en adultos",
+    "descripcion": "Resumen clínico con recomendaciones de antibiótico temprano, cristaloides y monitoreo hemodinámico según protocolo institucional.",
+    "tipo": "consulta",
+    "servicio": "Medicina Interna",
+    "fuente": "protocolo-uci-2024.pdf",
+    "etiquetas": [
+      "sepsis",
+      "uci",
+      "antibióticos"
+    ],
+    "fecha": "20 may 2026",
+    "createdAt": "2026-05-20T19:55:00.000Z"
+  }
+]

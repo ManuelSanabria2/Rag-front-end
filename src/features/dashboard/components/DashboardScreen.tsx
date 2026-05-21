@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { UserRole } from "../../../App";
 import {
   MessageSquare,
   Search,
@@ -27,6 +28,7 @@ import { useDocuments } from '../../../hooks/useDocuments';
 import { getDocumentViewUrl } from '../../../services/chatService';
 
 interface DashboardScreenProps {
+  role: UserRole;
   onLogout: () => void;
   onOpenDocuments: () => void;
   onOpenAnalytics?: () => void;
@@ -34,6 +36,7 @@ interface DashboardScreenProps {
 }
 
 export default function DashboardScreen({
+  role,
   onLogout,
   onOpenDocuments,
   docsRefreshTrigger,
@@ -74,6 +77,7 @@ export default function DashboardScreen({
         return <HistoryModule />;
 
       case 'analytics':
+        if (role !== 'admin') return <ChatModule />;
         return <AnalyticsModule />;
 
       case 'cache':
@@ -88,38 +92,45 @@ export default function DashboardScreen({
     {
       key: 'chat',
       icon: <MessageSquare size={20} />,
-      label: 'Chat con IA'
+      label: 'Chat con IA',
+      allowedRoles: ['admin', 'doctor'] as UserRole[],
     },
     {
       key: 'search',
       icon: <Search size={20} />,
-      label: 'Búsqueda de documentos'
+      label: 'Búsqueda de documentos',
+      allowedRoles: ['admin', 'doctor'] as UserRole[],
     },
     {
       key: 'protocols',
       icon: <BookOpen size={20} />,
-      label: 'Protocolos y guías'
+      label: 'Protocolos y guías',
+      allowedRoles: ['admin', 'doctor'] as UserRole[],
     },
     {
       key: 'favorites',
       icon: <Star size={20} />,
-      label: 'Favoritos'
+      label: 'Favoritos',
+      allowedRoles: ['admin', 'doctor'] as UserRole[],
     },
     {
       key: 'history',
       icon: <Clock size={20} />,
-      label: 'Historial de consultas'
+      label: 'Historial de consultas',
+      allowedRoles: ['admin', 'doctor'] as UserRole[],
     },
     {
       key: 'analytics',
       icon: <BarChart3 size={20} />,
-      label: 'Análisis y reportes'
+      label: 'Análisis y reportes',
+      allowedRoles: ['admin'] as UserRole[],
     },
     {
       key: 'cache',
       icon: <Trash2 size={20} />,
-      label: 'Gestión de caché'
-    }
+      label: 'Gestión de caché',
+      allowedRoles: ['admin'] as UserRole[],
+    },
   ];
 
   return (
@@ -138,52 +149,22 @@ export default function DashboardScreen({
       {/* Sidebar */}
       <aside
         className={`w-72 lg:w-80 flex-shrink-0 flex flex-col fixed lg:relative left-0 top-0 h-full z-40 lg:z-auto transition-transform duration-300 ease-in-out ${
-          sidebarOpen
-            ? 'translate-x-0'
-            : '-translate-x-full lg:translate-x-0'
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
-        style={{
-          backgroundColor: '#3B2377',
-          color: '#FFFFFF'
-        }}
+        style={{ backgroundColor: '#3B2377', color: '#FFFFFF' }}
       >
         {/* Logo Section */}
         <div
           className="p-5 lg:p-6 border-b"
-          style={{
-            borderColor: 'rgba(255, 255, 255, 0.1)'
-          }}
+          style={{ borderColor: 'rgba(255, 255, 255, 0.1)' }}
         >
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-3">
-              <svg
-                viewBox="0 0 40 40"
-                className="w-9 h-9 lg:w-10 lg:h-10 flex-shrink-0"
-              >
-                <circle
-                  cx="20"
-                  cy="20"
-                  r="16"
-                  fill="none"
-                  stroke="#00B8B3"
-                  strokeWidth="2.5"
-                />
-
-                <path
-                  d="M20 10 L20 30 M10 20 L30 20"
-                  stroke="#00B8B3"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                />
+              <svg viewBox="0 0 40 40" className="w-9 h-9 lg:w-10 lg:h-10 flex-shrink-0">
+                <circle cx="20" cy="20" r="16" fill="none" stroke="#00B8B3" strokeWidth="2.5" />
+                <path d="M20 10 L20 30 M10 20 L30 20" stroke="#00B8B3" strokeWidth="3" strokeLinecap="round" />
               </svg>
-
-              <h2
-                style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: '26px',
-                  lineHeight: '1.1'
-                }}
-              >
+              <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '26px', lineHeight: '1.1' }}>
                 <span style={{ color: '#00B8B3' }}>Clā</span>
                 <span>ris</span>
               </h2>
@@ -193,23 +174,14 @@ export default function DashboardScreen({
             <button
               onClick={() => setSidebarOpen(false)}
               className="lg:hidden p-1.5 rounded-lg hover:bg-white/10 transition-colors"
-              style={{
-                color: 'rgba(255, 255, 255, 0.7)'
-              }}
+              style={{ color: 'rgba(255, 255, 255, 0.7)' }}
               aria-label="Cerrar menú"
             >
               <X size={20} />
             </button>
           </div>
 
-          <p
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: '12px',
-              color: 'rgba(255, 255, 255, 0.7)',
-              lineHeight: '1.4'
-            }}
-          >
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '12px', color: 'rgba(255, 255, 255, 0.7)', lineHeight: '1.4' }}>
             Asistencia Clínica Inteligente
             <br />
             Hospital San Rafael
@@ -219,29 +191,25 @@ export default function DashboardScreen({
         {/* Menu Items */}
         <nav className="flex-1 p-4 overflow-y-auto">
           <div className="space-y-1">
-            {menuItems.map(({ key, icon, label }) => (
-              <button
-                key={key}
-                onClick={() => handleMenuSelect(key)}
-                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-left"
-                style={{
-                  backgroundColor:
-                    activeMenu === key
-                      ? 'rgba(255, 255, 255, 0.1)'
-                      : 'transparent',
-
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontSize: '15px',
-                  fontWeight:
-                    activeMenu === key ? '600' : '400',
-
-                  color: '#FFFFFF'
-                }}
-              >
-                {icon}
-                {label}
-              </button>
-            ))}
+            {menuItems
+              .filter((item) => item.allowedRoles.includes(role))
+              .map(({ key, icon, label }) => (
+                <button
+                  key={key}
+                  onClick={() => handleMenuSelect(key)}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-left"
+                  style={{
+                    backgroundColor: activeMenu === key ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontSize: '15px',
+                    fontWeight: activeMenu === key ? '600' : '400',
+                    color: '#FFFFFF',
+                  }}
+                >
+                  {icon}
+                  {label}
+                </button>
+              ))}
           </div>
 
           {/* Panel de Documentos Recientes */}
@@ -271,10 +239,7 @@ export default function DashboardScreen({
                   className="w-full px-4 py-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors text-left"
                 >
                   <div className="flex items-start gap-2 mb-1.5">
-                    <FileText
-                      size={14}
-                      style={{ color: '#A8CF44', flexShrink: 0, marginTop: '2px' }}
-                    />
+                    <FileText size={14} style={{ color: '#A8CF44', flexShrink: 0, marginTop: '2px' }} />
                     <p className="text-[12px] leading-tight break-all text-white/90">
                       {doc.filename}
                     </p>
@@ -290,13 +255,15 @@ export default function DashboardScreen({
               ))}
             </div>
 
-            <button
-              onClick={onOpenDocuments}
-              className="w-full mt-4 flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-[#2B3777] hover:bg-[#1f2858] transition-all text-white text-sm font-semibold"
-            >
-              <Upload size={18} />
-              Cargar Nuevo Protocolo
-            </button>
+            {role === 'admin' && (
+              <button
+                onClick={onOpenDocuments}
+                className="w-full mt-4 flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-[#2B3777] hover:bg-[#1f2858] transition-all text-white text-sm font-semibold"
+              >
+                <Upload size={18} />
+                Cargar Nuevo Protocolo
+              </button>
+            )}
           </div>
         </nav>
 
@@ -305,23 +272,17 @@ export default function DashboardScreen({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3 min-w-0">
               <div className="w-10 h-10 rounded-full flex items-center justify-center bg-[#00B8B3]/20 flex-shrink-0">
-                <User
-                  size={20}
-                  style={{ color: '#00B8B3' }}
-                />
+                <User size={20} style={{ color: '#00B8B3' }} />
               </div>
-
               <div className="min-w-0">
                 <p className="text-sm font-semibold truncate">
-                  Dr. Juan Sandoval
+                  {role === 'admin' ? 'Admin Hospital' : 'Dr. Juan Sandoval'}
                 </p>
-
                 <p className="text-xs text-white/70 truncate">
-                  Medicina Interna
+                  {role === 'admin' ? 'Administrador' : 'Medicina Interna'}
                 </p>
               </div>
             </div>
-
             <button
               onClick={onLogout}
               className="p-2 hover:bg-white/10 rounded-lg transition-all flex-shrink-0"
@@ -338,10 +299,7 @@ export default function DashboardScreen({
         {/* Mobile top bar */}
         <div
           className="lg:hidden flex items-center gap-3 px-4 py-3 border-b flex-shrink-0"
-          style={{
-            backgroundColor: '#3B2377',
-            borderColor: 'rgba(255, 255, 255, 0.1)'
-          }}
+          style={{ backgroundColor: '#3B2377', borderColor: 'rgba(255, 255, 255, 0.1)' }}
         >
           <button
             onClick={() => setSidebarOpen(true)}
@@ -352,39 +310,12 @@ export default function DashboardScreen({
           </button>
 
           <div className="flex items-center gap-2">
-            <svg
-              viewBox="0 0 40 40"
-              className="w-7 h-7 flex-shrink-0"
-            >
-              <circle
-                cx="20"
-                cy="20"
-                r="16"
-                fill="none"
-                stroke="#00B8B3"
-                strokeWidth="2.5"
-              />
-
-              <path
-                d="M20 10 L20 30 M10 20 L30 20"
-                stroke="#00B8B3"
-                strokeWidth="3"
-                strokeLinecap="round"
-              />
+            <svg viewBox="0 0 40 40" className="w-7 h-7 flex-shrink-0">
+              <circle cx="20" cy="20" r="16" fill="none" stroke="#00B8B3" strokeWidth="2.5" />
+              <path d="M20 10 L20 30 M10 20 L30 20" stroke="#00B8B3" strokeWidth="3" strokeLinecap="round" />
             </svg>
-
-            <h2
-              style={{
-                fontFamily:
-                  "'Cormorant Garamond', serif",
-                fontSize: '22px',
-                color: '#FFFFFF'
-              }}
-            >
-              <span style={{ color: '#00B8B3' }}>
-                Clā
-              </span>
-              ris
+            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '22px', color: '#FFFFFF' }}>
+              <span style={{ color: '#00B8B3' }}>Clā</span>ris
             </h2>
           </div>
         </div>
