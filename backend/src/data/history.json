@@ -1,0 +1,17 @@
+[
+    
+  {
+    "id": "1",
+    "userEmail": "doctor@sanrafael.med",
+    "pregunta": "¿Cuál es el manejo inicial de sepsis?",
+    "respuestaResumen": "Se recomienda antibiótico temprano y cristaloides intravenosos.",
+    "tipo": "clínica",
+    "estado": "verificada",
+    "fuentes": ["protocolo-uci-2024.pdf"],
+    "usuario": "Dr. Juan Sandoval",
+    "servicio": "Medicina Interna",
+    "fecha": "20 may 2026",
+    "hora": "7:40 p.m.",
+    "createdAt": "2026-05-20T19:40:00.000Z"
+  }
+]

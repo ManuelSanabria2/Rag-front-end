@@ -1,9 +1,12 @@
+// src/features/auth/components/LoginScreen.tsx
+
 import { useRef, useState } from 'react';
 import { LogIn } from 'lucide-react';
 import ReCAPTCHA from 'react-google-recaptcha';
+import type { UserRole } from '../../../App';
 
 interface LoginScreenProps {
-  onLogin: () => void;
+  onLogin: (role: UserRole) => void;
 }
 
 export default function LoginScreen({ onLogin }: LoginScreenProps) {
@@ -35,6 +38,7 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
     try {
       const captchaResponse = await fetch(`${API_URL}/api/verify-recaptcha`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -51,6 +55,7 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
 
       const loginResponse = await fetch(`${API_URL}/login`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -68,7 +73,9 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
         return;
       }
 
-      onLogin();
+      const roleFromBackend = loginData.user?.role as UserRole | undefined;
+
+      onLogin(roleFromBackend || 'doctor');
     } catch {
       setError('No se pudo conectar al servidor.');
       resetRecaptcha();
@@ -88,18 +95,43 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
             <div className="mb-4 flex justify-center">
               <div className="relative w-16 h-16">
                 <svg viewBox="0 0 64 64" className="w-full h-full">
-                  <circle cx="32" cy="32" r="28" fill="none" stroke="#00B8B3" strokeWidth="3" />
-                  <path d="M32 16 L32 48 M16 32 L48 32" stroke="#00B8B3" strokeWidth="4" strokeLinecap="round" />
+                  <circle
+                    cx="32"
+                    cy="32"
+                    r="28"
+                    fill="none"
+                    stroke="#00B8B3"
+                    strokeWidth="3"
+                  />
+                  <path
+                    d="M32 16 L32 48 M16 32 L48 32"
+                    stroke="#00B8B3"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                  />
                 </svg>
               </div>
             </div>
 
-            <h1 className="mb-2" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '48px' }}>
+            <h1
+              className="mb-2"
+              style={{
+                fontFamily: "'Cormorant Garamond', serif",
+                fontSize: '48px',
+              }}
+            >
               <span style={{ color: '#00B8B3' }}>Clā</span>
               <span style={{ color: '#3B2377' }}>ris</span>
             </h1>
 
-            <div className="mb-2" style={{ fontSize: '14px', fontWeight: '600', color: '#2B3777' }}>
+            <div
+              className="mb-2"
+              style={{
+                fontSize: '14px',
+                fontWeight: '600',
+                color: '#2B3777',
+              }}
+            >
               HOSPITAL SAN RAFAEL
             </div>
 
@@ -126,7 +158,10 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
             </div>
 
             <div>
-              <label htmlFor="password" className="block mb-2 text-sm font-medium">
+              <label
+                htmlFor="password"
+                className="block mb-2 text-sm font-medium"
+              >
                 Contraseña
               </label>
 
@@ -179,7 +214,11 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
             </button>
 
             <div className="text-center pt-2">
-              <a href="#" className="hover:underline" style={{ fontSize: '14px', color: '#2B3777' }}>
+              <a
+                href="#"
+                className="hover:underline"
+                style={{ fontSize: '14px', color: '#2B3777' }}
+              >
                 Olvidé mi contraseña
               </a>
             </div>

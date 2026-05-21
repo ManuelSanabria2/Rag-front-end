@@ -4,6 +4,9 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import fetch from "node-fetch";
+import historyRoutes from "./routes/historyRoutes.js";
+import favoriteRoutes from "./routes/favoriteRoutes.js";
+import documentSearchRoutes from "./routes/documentSearchRoutes.js";
 
 import authRoutes from "./routes/authRoutes.js";
 
@@ -84,3 +87,7 @@ app.use("/", authRoutes);
 app.listen(3001, () => {
   console.log("Backend corriendo en http://localhost:3001");
 });
+
+app.use("/api/history", historyRoutes);
+app.use("/api/favorites", favoriteRoutes);
+app.use("/api/document-searches", documentSearchRoutes);
