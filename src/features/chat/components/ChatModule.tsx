@@ -38,7 +38,11 @@ import {
  * - Manejo de errores con opción de reintentar
  * - Muestra fuentes del RAG si la API las devuelve
  */
-export default function ChatModule() {
+interface ChatModuleProps {
+  docsCount?: number;
+}
+
+export default function ChatModule({ docsCount }: ChatModuleProps) {
   // Estado: texto que el usuario está escribiendo en el input
   const [inputText, setInputText] = useState('');
 
@@ -125,8 +129,16 @@ export default function ChatModule() {
         );
       });
 
-      // 3. Crear mensaje del asistente
-      
+      // 3. Crear mensaje del asistente y agregarlo al historial
+      const assistantMsg: ChatMessage = {
+        id: generateMessageId(),
+        role: 'assistant',
+        content: response.content,
+        timestamp: new Date(),
+        sources: response.sources,
+      };
+
+      setMessages((prev) => [...prev, assistantMsg]);
 
     } catch (error) {
       trackAnalyticsEvent(
@@ -318,7 +330,7 @@ export default function ChatModule() {
                   color: '#717182',
                 }}
               >
-                3 documentos indexados
+                {docsCount ?? 0} documento{(docsCount ?? 0) !== 1 ? 's' : ''} indexado{(docsCount ?? 0) !== 1 ? 's' : ''}
               </span>
 
               <span
@@ -329,7 +341,7 @@ export default function ChatModule() {
                   color: '#717182',
                 }}
               >
-                3 docs
+                {docsCount ?? 0} docs
               </span>
             </div>
           </div>

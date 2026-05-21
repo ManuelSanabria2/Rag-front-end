@@ -1,0 +1,170 @@
+[
+  {
+    "id": "cc7e62c5-516b-4bb9-9641-9672afd997a0",
+    "userEmail": "doctor@sanrafael.med",
+    "query": "¿Se recomienda trombólisis en pacientes mayores de 80 años con ACV <4.5 h?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "21 de may de 2026",
+    "hora": "02:05 p. m.",
+    "createdAt": "2026-05-21T19:05:19.044Z"
+  },
+  {
+    "id": "8a797daa-cfb4-447a-811f-ab8998d16851",
+    "userEmail": "doctor@sanrafael.med",
+    "query": "¿Se puede dar trombólisis a pacientes que usan anticoagulantes orales directos (NOAC) en las últimas 48 h?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "21 de may de 2026",
+    "hora": "02:04 p. m.",
+    "createdAt": "2026-05-21T19:04:08.463Z"
+  },
+  {
+    "id": "69a8fcc3-b79c-465b-9a27-386993dea0de",
+    "userEmail": "doctor@sanrafael.med",
+    "query": "¿Se debe administrar trombólisis intravenosa si el paciente tiene hipertensión conocida antes del ACV?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "21 de may de 2026",
+    "hora": "02:00 p. m.",
+    "createdAt": "2026-05-21T19:00:31.962Z"
+  },
+  {
+    "id": "bc28d947-b655-48e2-8959-4e1df99642dd",
+    "userEmail": "admin@sanrafael.med",
+    "query": "¿Se recomienda trombólisis intravenosa con alteplasa en pacientes con ACV agudo de <4.5 h de evolución?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "21 de may de 2026",
+    "hora": "01:58 p. m.",
+    "createdAt": "2026-05-21T18:58:06.569Z"
+  },
+  {
+    "id": "97b09330-791c-4fa8-8d17-7c17afbc636d",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Que recomienda la evidencia para pacientes con ACV agudo < 4.5hras qye usaron NOAC en las ultimas 48h?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "21 de may de 2026",
+    "hora": "01:55 p. m.",
+    "createdAt": "2026-05-21T18:55:48.213Z"
+  },
+  {
+    "id": "c2f63c5c-4128-43ef-ae42-a6988794b08f",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Dame un listaod de todo los documentos que tienes cargados",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "21 de may de 2026",
+    "hora": "01:52 p. m.",
+    "createdAt": "2026-05-21T18:52:11.967Z"
+  },
+  {
+    "id": "381100dc-3d1c-4b20-8c36-e4abf4b32ca8",
+    "userEmail": "admin@sanrafael.med",
+    "query": "tienes algo de información de intravenosa?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "21 de may de 2026",
+    "hora": "01:50 p. m.",
+    "createdAt": "2026-05-21T18:50:34.563Z"
+  },
+  {
+    "id": "2d6848a7-c905-45d2-a964-264d9306cd79",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Que documentos tienes cargados en tu memoria?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "21 de may de 2026",
+    "hora": "01:49 p. m.",
+    "createdAt": "2026-05-21T18:49:50.193Z"
+  },
+  {
+    "id": "74d07132-dde5-427e-acd8-6d8904baa522",
+    "userEmail": "admin@sanrafael.med",
+    "query": "de que tienes información?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "21 de may de 2026",
+    "hora": "01:34 p. m.",
+    "createdAt": "2026-05-21T18:34:37.182Z"
+  },
+  {
+    "id": "823e1293-4d8c-4770-9df3-69e4ee27ff86",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Hola",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "21 de may de 2026",
+    "hora": "01:30 p. m.",
+    "createdAt": "2026-05-21T18:30:18.650Z"
+  },
+  {
+    "id": "97fdc5fa-4711-46eb-a59e-24ff0c8982ae",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Hola",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "21 de may de 2026",
+    "hora": "01:28 p. m.",
+    "createdAt": "2026-05-21T18:28:44.226Z"
+  },
+  {
+    "id": "9cbe07aa-f0ac-45e6-8541-76f4569c5be3",
+    "userEmail": "admin@sanrafael.med",
+    "query": "hola",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "21 de may de 2026",
+    "hora": "01:27 p. m.",
+    "createdAt": "2026-05-21T18:27:06.563Z"
+  },
+  {
+    "id": "848a759c-04be-4207-a64a-0465332d248d",
+    "userEmail": "admin@sanrafael.med",
+    "query": "hola",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "21 de may de 2026",
+    "hora": "12:44 p. m.",
+    "createdAt": "2026-05-21T17:44:18.125Z"
+  },
+  {
+    "id": "0a66564d-fc5a-4d3a-8e21-ff51ea33199e",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Hola",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "21 de may de 2026",
+    "hora": "12:36 p. m.",
+    "createdAt": "2026-05-21T17:36:19.741Z"
+  }
+]
