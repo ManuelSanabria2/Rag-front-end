@@ -1,11 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 import { User, Send, AlertCircle, FileText, Loader2, Bot, RefreshCw } from 'lucide-react';
+import { trackAnalyticsEvent } from '../../../services/analyticsService';
 import {
   sendMessage,
   generateMessageId,
   type ChatMessage,
   type ChatSource,
 } from '../../../services/chatService';
+
 
 /**
  * Módulo de Chat con IA (ChatModule)
@@ -61,10 +63,38 @@ export default function ChatModule() {
     setMessages((prev) => [...prev, userMsg]);
     setInputText('');
     setIsLoading(true);
+    trackAnalyticsEvent(
+  "chat_message_sent",
+  "Consulta enviada al chat IA",
+  {
+    question: trimmed,
+    messagesBeforeSend: messages.length,
+  }
+);
 
     try {
       // 2. Enviar al LLM a través del servicio (incluye historial previo)
       const response = await sendMessage(trimmed, [...messages, userMsg]);
+      trackAnalyticsEvent(
+  "chat_response_received",
+  "Respuesta generada por Clāris IA",
+  {
+    sourcesCount: response.sources?.length ?? 0,
+    answerLength: response.content.length,
+  }
+);
+//esto lo puso sandoval para el analytics, trackea cada fuente que se use en el RAG
+response.sources?.forEach((source) => {
+  trackAnalyticsEvent(
+    "rag_source_used",
+    "Fuente RAG consultada",
+    {
+      document: source.document,
+      page: source.page,
+      confidence: source.confidence,
+    }
+  );
+});
 
       // 3. Crear el mensaje de respuesta del asistente
       const assistantMsg: ChatMessage = {
@@ -75,8 +105,18 @@ export default function ChatModule() {
         sources: response.sources,
       };
 
+      //esto lo puso sandoval para el analytics, trackea cada fuente que se use en el RAG
       setMessages((prev) => [...prev, assistantMsg]);
-    } catch (error) {
+    } catch (error) {trackAnalyticsEvent(
+  "chat_error",
+  "Error al consultar Clāris IA",
+  {
+    message:
+      error instanceof Error
+        ? error.message
+        : "Error desconocido",
+  }
+);
       // 4. Si hay error, agregamos un mensaje de error al chat
       const errorMsg: ChatMessage = {
         id: generateMessageId(),

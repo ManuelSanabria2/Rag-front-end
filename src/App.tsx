@@ -2,49 +2,71 @@ import { useState } from 'react';
 import LoginScreen from './features/auth/components/LoginScreen';
 import DashboardScreen from './features/dashboard/components/DashboardScreen';
 import DocumentUploadPanel from './features/documents/components/DocumentUploadPanel';
+import AnalyticsModule from './features/analytics/components/AnalyticsModule';
 
-// Definimos los nombres de las pantallas principales disponibles en la aplicación
-type Screen = 'login' | 'dashboard' | 'documents';
+type Screen = 'login' | 'dashboard' | 'documents' | 'analytics';
 
 export default function App() {
-  // Estado: 'currentScreen' guarda la pantalla en la que estamos actualmente
   const [currentScreen, setCurrentScreen] = useState<Screen>('login');
-  
-  // Estado: 'showDocumentUpload' controla si se muestra el panel modal para subir documentos
   const [showDocumentUpload, setShowDocumentUpload] = useState(false);
 
-  // Función que se ejecuta cuando el usuario inicia sesión correctamente
   const handleLogin = () => {
     setCurrentScreen('dashboard');
   };
 
-  // Función que se ejecuta cuando el usuario cierra sesión
   const handleLogout = () => {
     setCurrentScreen('login');
+    setShowDocumentUpload(false);
   };
 
-  // Muestra la ventana flotante (modal) de carga de documentos
   const handleOpenDocuments = () => {
     setShowDocumentUpload(true);
   };
 
-  // Oculta la ventana flotante (modal) de carga de documentos
   const handleCloseDocuments = () => {
     setShowDocumentUpload(false);
   };
 
-  // Control de Rutas Básico: Si la pantalla actual es 'login', solo mostramos el LoginScreen
+  const handleBackDashboard = () => {
+    setCurrentScreen('dashboard');
+  };
+
+  const handleOpenAnalytics = () => {
+    setCurrentScreen('analytics');
+  };
+
   if (currentScreen === 'login') {
     return <LoginScreen onLogin={handleLogin} />;
   }
 
-  // Si no estamos en login, mostramos el Dashboard principal.
-  // El fragmento <> ... </> permite renderizar el dashboard y, opcionalmente, el panel flotante
+  if (currentScreen === 'analytics') {
+    return (
+      <>
+        <div className="p-4 bg-white border-b border-gray-200">
+          <button
+            onClick={handleBackDashboard}
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg"
+          >
+            Volver al dashboard
+          </button>
+        </div>
+
+        <AnalyticsModule />
+      </>
+    );
+  }
+
   return (
     <>
-      <DashboardScreen onLogout={handleLogout} onOpenDocuments={handleOpenDocuments} />
-      {/* Si showDocumentUpload es true, renderizamos el panel. Si es false, no se renderiza. */}
-      {showDocumentUpload && <DocumentUploadPanel onClose={handleCloseDocuments} />}
+      <DashboardScreen
+        onLogout={handleLogout}
+        onOpenDocuments={handleOpenDocuments}
+        onOpenAnalytics={handleOpenAnalytics}
+      />
+
+      {showDocumentUpload && (
+        <DocumentUploadPanel onClose={handleCloseDocuments} />
+      )}
     </>
   );
 }
