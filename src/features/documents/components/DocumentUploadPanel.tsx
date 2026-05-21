@@ -1,43 +1,96 @@
-import { useState } from 'react';
-import { Upload, X, FileText, Tag, Hash, Award } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { Upload, X, FileText, Tag, Hash, Award, CheckCircle2, XCircle, Loader2, Trash2 } from 'lucide-react';
+import { uploadDocuments } from '../../../services/chatService';
 
 interface DocumentUploadPanelProps {
   onClose: () => void;
+  onUploaded?: () => void;
 }
 
-/**
- * Panel Flotante de Subida de Documentos (DocumentUploadPanel)
- * 
- * Componente modal para que los usuarios puedan cargar nuevos archivos (PDF, DOCX)
- * Recibe 'onClose' como Prop para poder cerrarse a sí mismo.
- */
-export default function DocumentUploadPanel({ onClose }: DocumentUploadPanelProps) {
-  const [title, setTitle] = useState('');
+type UploadStatus = 'idle' | 'uploading' | 'success' | 'error';
+
+export default function DocumentUploadPanel({ onClose, onUploaded }: DocumentUploadPanelProps) {
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [area, setArea] = useState('');
   const [version, setVersion] = useState('');
   const [keywords, setKeywords] = useState('');
   const [confidence, setConfidence] = useState(0.85);
   const [isDragging, setIsDragging] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState<UploadStatus>('idle');
+  const [statusMessage, setStatusMessage] = useState('');
+  const [processedFiles, setProcessedFiles] = useState<string[]>([]);
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const addFiles = (incoming: FileList | File[]) => {
+    const pdfs = Array.from(incoming).filter((f) => f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf'));
+    const rejected = Array.from(incoming).length - pdfs.length;
+    if (rejected > 0) {
+      setStatusMessage(`${rejected} archivo(s) ignorado(s): solo se aceptan PDFs.`);
+      setUploadStatus('error');
+    }
+    if (pdfs.length > 0) {
+      setSelectedFiles((prev) => {
+        const names = new Set(prev.map((f) => f.name));
+        return [...prev, ...pdfs.filter((f) => !names.has(f.name))];
+      });
+      if (rejected === 0) {
+        setUploadStatus('idle');
+        setStatusMessage('');
+      }
+    }
+  };
+
+  const removeFile = (name: string) => {
+    setSelectedFiles((prev) => prev.filter((f) => f.name !== name));
+  };
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(true);
   };
 
-  const handleDragLeave = () => {
-    setIsDragging(false);
-  };
+  const handleDragLeave = () => setIsDragging(false);
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(false);
-    console.log('Files dropped:', e.dataTransfer.files);
+    addFiles(e.dataTransfer.files);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) addFiles(e.target.files);
+    e.target.value = '';
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Indexing document:', { title, area, version, keywords, confidence });
-    onClose();
+    if (selectedFiles.length === 0) {
+      setUploadStatus('error');
+      setStatusMessage('Debes seleccionar al menos un archivo PDF.');
+      return;
+    }
+
+    setUploadStatus('uploading');
+    setStatusMessage('');
+
+    try {
+      const result = await uploadDocuments(selectedFiles);
+      setUploadStatus('success');
+      setStatusMessage(result.message);
+      setProcessedFiles(result.files ?? []);
+      setSelectedFiles([]);
+      onUploaded?.();
+    } catch (err) {
+      setUploadStatus('error');
+      setStatusMessage(err instanceof Error ? err.message : 'Error inesperado al subir los documentos.');
+    }
+  };
+
+  const formatSize = (bytes: number) => {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
   };
 
   return (
@@ -50,24 +103,16 @@ export default function DocumentUploadPanel({ onClose }: DocumentUploadPanelProp
         <div className="sticky top-0 bg-white px-4 sm:px-8 py-4 sm:py-6 border-b flex items-center justify-between gap-4" style={{ borderColor: 'rgba(0, 0, 0, 0.1)' }}>
           <h2
             className="text-xl sm:text-3xl"
-            style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontWeight: '600',
-              color: '#2B3777'
-            }}
+            style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: '600', color: '#2B3777' }}
           >
             Gestión de Fuentes Documentales RAG
           </h2>
           <button
             onClick={onClose}
             className="p-2 rounded-lg transition-all"
-            style={{ color: '#717182', backgroundColor: 'transparent' }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#f3f4f6';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'transparent';
-            }}
+            style={{ color: '#717182' }}
+            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#f3f4f6'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; }}
           >
             <X size={24} />
           </button>
@@ -75,11 +120,13 @@ export default function DocumentUploadPanel({ onClose }: DocumentUploadPanelProp
 
         <div className="p-4 sm:p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
+
             {/* Dropzone */}
             <div
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
+              onClick={() => fileInputRef.current?.click()}
               className="bg-white rounded-lg p-6 sm:p-12 border-2 border-dashed transition-all cursor-pointer"
               style={{
                 borderColor: isDragging ? '#00B8B3' : '#2B3777',
@@ -93,108 +140,72 @@ export default function DocumentUploadPanel({ onClose }: DocumentUploadPanelProp
                 >
                   <Upload size={36} style={{ color: '#2B3777' }} />
                 </div>
-                <h3
-                  className="mb-2"
-                  style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: '18px',
-                    fontWeight: '600',
-                    color: '#050A0E'
-                  }}
-                >
+                <h3 className="mb-2" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '18px', fontWeight: '600', color: '#050A0E' }}>
                   Arrastre y suelte su protocolo
                 </h3>
-                <p
-                  className="mb-4"
-                  style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: '14px',
-                    color: '#717182'
-                  }}
-                >
-                  Soporta archivos PDF y DOCX · Tamaño máximo 50MB
+                <p className="mb-4" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '14px', color: '#717182' }}>
+                  Solo archivos PDF · Tamaño máximo 50 MB por archivo
                 </p>
-                <button
-                  type="button"
-                  className="px-6 py-3 rounded-lg transition-all"
-                  style={{
-                    backgroundColor: '#2B3777',
-                    color: '#FFFFFF',
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: '15px',
-                    fontWeight: '600'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = '#1f2858';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = '#2B3777';
-                  }}
+                <span
+                  className="px-6 py-3 rounded-lg"
+                  style={{ backgroundColor: '#2B3777', color: '#FFFFFF', fontFamily: "'DM Sans', sans-serif", fontSize: '15px', fontWeight: '600' }}
                 >
                   Buscar archivo
-                </button>
+                </span>
               </div>
             </div>
 
+            {/* Hidden file input */}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".pdf,application/pdf"
+              multiple
+              className="hidden"
+              onChange={handleFileInputChange}
+            />
+
+            {/* Selected files list */}
+            {selectedFiles.length > 0 && (
+              <div className="bg-white rounded-lg p-4 space-y-2" style={{ border: '1px solid #E8E8F0' }}>
+                <p className="text-sm font-semibold mb-3" style={{ color: '#2B3777' }}>
+                  {selectedFiles.length} archivo(s) seleccionado(s)
+                </p>
+                {selectedFiles.map((file) => (
+                  <div key={file.name} className="flex items-center justify-between gap-3 px-3 py-2 rounded-lg" style={{ backgroundColor: '#F7F7F7' }}>
+                    <div className="flex items-center gap-2 min-w-0">
+                      <FileText size={16} style={{ color: '#2B3777', flexShrink: 0 }} />
+                      <span className="text-sm truncate" style={{ color: '#050A0E' }}>{file.name}</span>
+                      <span className="text-xs flex-shrink-0" style={{ color: '#717182' }}>{formatSize(file.size)}</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={(e) => { e.stopPropagation(); removeFile(file.name); }}
+                      className="p-1 rounded hover:bg-red-50 transition-colors flex-shrink-0"
+                    >
+                      <Trash2 size={14} style={{ color: '#B91C1C' }} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+
             {/* Form Fields */}
             <div className="bg-white rounded-lg p-6 space-y-5">
-              {/* Title */}
-              <div>
-                <label className="flex items-center gap-2 mb-2">
-                  <FileText size={18} style={{ color: '#717182' }} />
-                  <span
-                    style={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontSize: '14px',
-                      fontWeight: '600',
-                      color: '#050A0E'
-                    }}
-                  >
-                    Título de Documento
-                  </span>
-                </label>
-                <input
-                  type="text"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  placeholder="Ej: Protocolo de Manejo de Analgésicos UCI 2024"
-                  className="w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-offset-0 transition-all"
-                  style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: '15px',
-                    borderColor: 'rgba(0, 0, 0, 0.1)'
-                  }}
-                  required
-                />
-              </div>
-
               {/* Area and Version */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {/* Area */}
                 <div>
                   <label className="flex items-center gap-2 mb-2">
                     <Tag size={18} style={{ color: '#717182' }} />
-                    <span
-                      style={{
-                        fontFamily: "'DM Sans', sans-serif",
-                        fontSize: '14px',
-                        fontWeight: '600',
-                        color: '#050A0E'
-                      }}
-                    >
+                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '14px', fontWeight: '600', color: '#050A0E' }}>
                       Área Médica
                     </span>
                   </label>
                   <select
                     value={area}
                     onChange={(e) => setArea(e.target.value)}
-                    className="w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-offset-0 transition-all"
-                    style={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontSize: '15px',
-                      borderColor: 'rgba(0, 0, 0, 0.1)'
-                    }}
-                    required
+                    className="w-full px-4 py-3 rounded-lg border focus:outline-none transition-all"
+                    style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '15px', borderColor: 'rgba(0, 0, 0, 0.1)' }}
                   >
                     <option value="">Seleccionar área</option>
                     <option value="uci">UCI - Unidad de Cuidados Intensivos</option>
@@ -206,18 +217,10 @@ export default function DocumentUploadPanel({ onClose }: DocumentUploadPanelProp
                   </select>
                 </div>
 
-                {/* Version */}
                 <div>
                   <label className="flex items-center gap-2 mb-2">
                     <Hash size={18} style={{ color: '#717182' }} />
-                    <span
-                      style={{
-                        fontFamily: "'DM Sans', sans-serif",
-                        fontSize: '14px',
-                        fontWeight: '600',
-                        color: '#050A0E'
-                      }}
-                    >
+                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '14px', fontWeight: '600', color: '#050A0E' }}>
                       Versión
                     </span>
                   </label>
@@ -226,13 +229,8 @@ export default function DocumentUploadPanel({ onClose }: DocumentUploadPanelProp
                     value={version}
                     onChange={(e) => setVersion(e.target.value)}
                     placeholder="Ej: v2024.1"
-                    className="w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-offset-0 transition-all"
-                    style={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontSize: '15px',
-                      borderColor: 'rgba(0, 0, 0, 0.1)'
-                    }}
-                    required
+                    className="w-full px-4 py-3 rounded-lg border focus:outline-none transition-all"
+                    style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '15px', borderColor: 'rgba(0, 0, 0, 0.1)' }}
                   />
                 </div>
               </div>
@@ -241,14 +239,7 @@ export default function DocumentUploadPanel({ onClose }: DocumentUploadPanelProp
               <div>
                 <label className="flex items-center gap-2 mb-2">
                   <Tag size={18} style={{ color: '#717182' }} />
-                  <span
-                    style={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontSize: '14px',
-                      fontWeight: '600',
-                      color: '#050A0E'
-                    }}
-                  >
+                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '14px', fontWeight: '600', color: '#050A0E' }}>
                     Palabras Clave de Indexación
                   </span>
                 </label>
@@ -257,22 +248,11 @@ export default function DocumentUploadPanel({ onClose }: DocumentUploadPanelProp
                   value={keywords}
                   onChange={(e) => setKeywords(e.target.value)}
                   placeholder="Ej: acetaminofén, paracetamol, analgésico, dosis, UCI"
-                  className="w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-offset-0 transition-all"
-                  style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: '15px',
-                    borderColor: 'rgba(0, 0, 0, 0.1)'
-                  }}
+                  className="w-full px-4 py-3 rounded-lg border focus:outline-none transition-all"
+                  style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '15px', borderColor: 'rgba(0, 0, 0, 0.1)' }}
                 />
-                <p
-                  className="mt-2"
-                  style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: '13px',
-                    color: '#717182'
-                  }}
-                >
-                  Separar con comas. Esto mejora la precisión de búsqueda RAG.
+                <p className="mt-2" style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '13px', color: '#717182' }}>
+                  Separar con comas. Mejora la precisión de búsqueda RAG.
                 </p>
               </div>
 
@@ -280,14 +260,7 @@ export default function DocumentUploadPanel({ onClose }: DocumentUploadPanelProp
               <div>
                 <label className="flex items-center gap-2 mb-3">
                   <Award size={18} style={{ color: '#717182' }} />
-                  <span
-                    style={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontSize: '14px',
-                      fontWeight: '600',
-                      color: '#050A0E'
-                    }}
-                  >
+                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '14px', fontWeight: '600', color: '#050A0E' }}>
                     Nivel de Confianza Clínica
                   </span>
                   <span
@@ -314,21 +287,44 @@ export default function DocumentUploadPanel({ onClose }: DocumentUploadPanelProp
                   style={{ accentColor: '#00B8B3' }}
                 />
                 <div className="flex justify-between mt-2">
-                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '12px', color: '#717182' }}>Baja (0.0)</span>
-                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '12px', color: '#717182' }}>Alta (1.0)</span>
+                  <span style={{ fontSize: '12px', color: '#717182' }}>Baja (0.0)</span>
+                  <span style={{ fontSize: '12px', color: '#717182' }}>Alta (1.0)</span>
                 </div>
-                <p
-                  className="mt-2"
-                  style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: '13px',
-                    color: '#717182'
-                  }}
-                >
-                  Este valor determina la prioridad del documento en las respuestas del sistema RAG.
-                </p>
               </div>
             </div>
+
+            {/* Status feedback */}
+            {uploadStatus === 'success' && (
+              <div
+                className="flex items-start gap-3 rounded-lg px-4 py-3 text-sm"
+                style={{ backgroundColor: 'rgba(168, 207, 68, 0.12)', border: '1px solid rgba(168, 207, 68, 0.4)', color: '#4A6B1A' }}
+              >
+                <CheckCircle2 size={18} className="flex-shrink-0 mt-0.5" style={{ color: '#6B9C2A' }} />
+                <div>
+                  <p className="font-semibold">{statusMessage}</p>
+                  {processedFiles.length > 0 && (
+                    <ul className="mt-1 list-disc list-inside space-y-0.5">
+                      {processedFiles.map((name) => (
+                        <li key={name} className="text-xs">{name}</li>
+                      ))}
+                    </ul>
+                  )}
+                  <p className="mt-1 text-xs" style={{ color: '#5a7a22' }}>
+                    La indexación continúa en segundo plano. Puede tardar varios minutos.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {uploadStatus === 'error' && (
+              <div
+                className="flex items-start gap-3 rounded-lg px-4 py-3 text-sm"
+                style={{ backgroundColor: 'rgba(220, 38, 38, 0.06)', border: '1px solid rgba(220, 38, 38, 0.25)', color: '#B91C1C' }}
+              >
+                <XCircle size={18} className="flex-shrink-0 mt-0.5" />
+                <span>{statusMessage}</span>
+              </div>
+            )}
 
             {/* Action Buttons */}
             <div className="flex gap-3">
@@ -336,46 +332,31 @@ export default function DocumentUploadPanel({ onClose }: DocumentUploadPanelProp
                 type="button"
                 onClick={onClose}
                 className="flex-1 px-6 py-4 rounded-lg transition-all border"
-                style={{
-                  backgroundColor: '#FFFFFF',
-                  borderColor: 'rgba(0, 0, 0, 0.1)',
-                  color: '#050A0E',
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontSize: '15px',
-                  fontWeight: '600'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#F7F7F7';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#FFFFFF';
-                }}
+                style={{ backgroundColor: '#FFFFFF', borderColor: 'rgba(0, 0, 0, 0.1)', color: '#050A0E', fontFamily: "'DM Sans', sans-serif", fontSize: '15px', fontWeight: '600' }}
+                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#F7F7F7'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#FFFFFF'; }}
               >
-                Cancelar
+                {uploadStatus === 'success' ? 'Cerrar' : 'Cancelar'}
               </button>
-              <button
-                type="submit"
-                className="flex-1 px-6 py-4 rounded-lg flex items-center justify-center gap-2 transition-all shadow-sm"
-                style={{
-                  backgroundColor: '#00B8B3',
-                  color: '#FFFFFF',
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontSize: '15px',
-                  fontWeight: '600'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#008A86';
-                  e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#00B8B3';
-                  e.currentTarget.style.boxShadow = '0 1px 2px 0 rgba(0, 0, 0, 0.05)';
-                }}
-              >
-                <Upload size={20} />
-                Indexar Documento
-              </button>
+
+              {uploadStatus !== 'success' && (
+                <button
+                  type="submit"
+                  disabled={uploadStatus === 'uploading' || selectedFiles.length === 0}
+                  className="flex-1 px-6 py-4 rounded-lg flex items-center justify-center gap-2 transition-all shadow-sm disabled:opacity-60 disabled:cursor-not-allowed"
+                  style={{ backgroundColor: '#00B8B3', color: '#FFFFFF', fontFamily: "'DM Sans', sans-serif", fontSize: '15px', fontWeight: '600' }}
+                  onMouseEnter={(e) => { if (uploadStatus !== 'uploading') e.currentTarget.style.backgroundColor = '#008A86'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#00B8B3'; }}
+                >
+                  {uploadStatus === 'uploading' ? (
+                    <><Loader2 size={20} className="animate-spin" /> Subiendo...</>
+                  ) : (
+                    <><Upload size={20} /> Indexar Documento{selectedFiles.length > 1 ? 's' : ''}</>
+                  )}
+                </button>
+              )}
             </div>
+
           </form>
         </div>
       </div>

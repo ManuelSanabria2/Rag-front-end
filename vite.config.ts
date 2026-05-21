@@ -35,6 +35,7 @@ export default defineConfig({
   assetsInclude: ['**/*.svg', '**/*.csv'],
 
   server: {
+    allowedHosts: ['rag-front-demo.loca.lt', '.loca.lt'],
     proxy: {
       // Redirige /api → http://localhost:8000 para evitar CORS en desarrollo
       '/api': {

@@ -1,8 +1,6 @@
-// src/features/auth/components/LoginScreen.tsx
-
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { LogIn } from 'lucide-react';
-import ReCAPTCHA from 'react-google-recaptcha';
+// import ReCAPTCHA from 'react-google-recaptcha';
 import type { UserRole } from '../../../App';
 
 interface LoginScreenProps {
@@ -14,44 +12,39 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
-
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  // const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  // const recaptchaRef = useRef<ReCAPTCHA>(null);
   const API_URL = 'http://localhost:3001';
 
-  const resetRecaptcha = () => {
-    recaptchaRef.current?.reset();
-    setRecaptchaToken(null);
-  };
+  // const resetRecaptcha = () => {
+  //   recaptchaRef.current?.reset();
+  //   setRecaptchaToken(null);
+  // };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
-    if (!recaptchaToken) {
-      setError('Debes completar el reCAPTCHA.');
-      return;
-    }
+    // if (!recaptchaToken) {
+    //   setError('Debes completar el reCAPTCHA.');
+    //   return;
+    // }
 
     setIsLoading(true);
 
     try {
-      const captchaResponse = await fetch(`${API_URL}/api/verify-recaptcha`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ token: recaptchaToken }),
-      });
-
-      const captchaData = await captchaResponse.json();
-
-      if (!captchaResponse.ok || !captchaData.success) {
-        setError(captchaData.message || 'reCAPTCHA incorrecto.');
-        resetRecaptcha();
-        return;
-      }
+      // const captchaResponse = await fetch(`${API_URL}/api/verify-recaptcha`, {
+      //   method: 'POST',
+      //   credentials: 'include',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ token: recaptchaToken }),
+      // });
+      // const captchaData = await captchaResponse.json();
+      // if (!captchaResponse.ok || !captchaData.success) {
+      //   setError(captchaData.message || 'reCAPTCHA incorrecto.');
+      //   resetRecaptcha();
+      //   return;
+      // }
 
       const loginResponse = await fetch(`${API_URL}/login`, {
         method: 'POST',
@@ -59,26 +52,22 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
+        body: JSON.stringify({ email, password }),
       });
 
       const loginData = await loginResponse.json();
 
       if (!loginResponse.ok || !loginData.success) {
         setError(loginData.message || 'Credenciales incorrectas.');
-        resetRecaptcha();
+        // resetRecaptcha();
         return;
       }
 
       const roleFromBackend = loginData.user?.role as UserRole | undefined;
-
       onLogin(roleFromBackend || 'doctor');
     } catch {
       setError('No se pudo conectar al servidor.');
-      resetRecaptcha();
+      // resetRecaptcha();
     } finally {
       setIsLoading(false);
     }
@@ -95,43 +84,18 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
             <div className="mb-4 flex justify-center">
               <div className="relative w-16 h-16">
                 <svg viewBox="0 0 64 64" className="w-full h-full">
-                  <circle
-                    cx="32"
-                    cy="32"
-                    r="28"
-                    fill="none"
-                    stroke="#00B8B3"
-                    strokeWidth="3"
-                  />
-                  <path
-                    d="M32 16 L32 48 M16 32 L48 32"
-                    stroke="#00B8B3"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                  />
+                  <circle cx="32" cy="32" r="28" fill="none" stroke="#00B8B3" strokeWidth="3" />
+                  <path d="M32 16 L32 48 M16 32 L48 32" stroke="#00B8B3" strokeWidth="4" strokeLinecap="round" />
                 </svg>
               </div>
             </div>
 
-            <h1
-              className="mb-2"
-              style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontSize: '48px',
-              }}
-            >
+            <h1 className="mb-2" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '48px' }}>
               <span style={{ color: '#00B8B3' }}>Clā</span>
               <span style={{ color: '#3B2377' }}>ris</span>
             </h1>
 
-            <div
-              className="mb-2"
-              style={{
-                fontSize: '14px',
-                fontWeight: '600',
-                color: '#2B3777',
-              }}
-            >
+            <div className="mb-2" style={{ fontSize: '14px', fontWeight: '600', color: '#2B3777' }}>
               HOSPITAL SAN RAFAEL
             </div>
 
@@ -145,7 +109,6 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
               <label htmlFor="email" className="block mb-2 text-sm font-medium">
                 Correo electrónico
               </label>
-
               <input
                 id="email"
                 type="email"
@@ -158,13 +121,9 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
             </div>
 
             <div>
-              <label
-                htmlFor="password"
-                className="block mb-2 text-sm font-medium"
-              >
+              <label htmlFor="password" className="block mb-2 text-sm font-medium">
                 Contraseña
               </label>
-
               <input
                 id="password"
                 type="password"
@@ -176,11 +135,11 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
               />
             </div>
 
+            {/* CAPTCHA temporalmente desactivado
             <div>
               <label className="block mb-2 text-sm font-medium">
                 Verificación reCAPTCHA
               </label>
-
               <div className="flex justify-center">
                 <ReCAPTCHA
                   ref={recaptchaRef}
@@ -191,6 +150,7 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
                 />
               </div>
             </div>
+            */}
 
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-600 rounded-lg px-4 py-3 text-sm">
@@ -202,23 +162,14 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
               type="submit"
               disabled={isLoading}
               className="w-full py-3.5 rounded-lg flex items-center justify-center gap-2 disabled:opacity-70"
-              style={{
-                backgroundColor: '#00B8B3',
-                color: '#FFFFFF',
-                fontSize: '16px',
-                fontWeight: '600',
-              }}
+              style={{ backgroundColor: '#00B8B3', color: '#FFFFFF', fontSize: '16px', fontWeight: '600' }}
             >
               <LogIn size={20} />
               {isLoading ? 'Validando...' : 'Iniciar Sesión'}
             </button>
 
             <div className="text-center pt-2">
-              <a
-                href="#"
-                className="hover:underline"
-                style={{ fontSize: '14px', color: '#2B3777' }}
-              >
+              <a href="#" className="hover:underline" style={{ fontSize: '14px', color: '#2B3777' }}>
                 Olvidé mi contraseña
               </a>
             </div>

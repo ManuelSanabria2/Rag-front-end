@@ -1,5 +1,3 @@
-// src/App.tsx
-
 import { useState } from "react";
 import LoginScreen from "./features/auth/components/LoginScreen";
 import DashboardScreen from "./features/dashboard/components/DashboardScreen";
@@ -13,6 +11,7 @@ export default function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>("login");
   const [showDocumentUpload, setShowDocumentUpload] = useState(false);
   const [role, setRole] = useState<UserRole>("doctor");
+  const [docsRefreshTrigger, setDocsRefreshTrigger] = useState(0);
 
   const handleLogin = (selectedRole: UserRole) => {
     setRole(selectedRole);
@@ -44,10 +43,14 @@ export default function App() {
         role={role}
         onLogout={handleLogout}
         onOpenDocuments={handleOpenDocuments}
+        docsRefreshTrigger={docsRefreshTrigger}
       />
 
       {showDocumentUpload && role === "admin" && (
-        <DocumentUploadPanel onClose={handleCloseDocuments} />
+        <DocumentUploadPanel
+          onClose={handleCloseDocuments}
+          onUploaded={() => setDocsRefreshTrigger((t) => t + 1)}
+        />
       )}
     </>
   );

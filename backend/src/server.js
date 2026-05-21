@@ -4,13 +4,16 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import fetch from "node-fetch";
+import { fileURLToPath } from "url";
+import { dirname, resolve } from "path";
 import historyRoutes from "./routes/historyRoutes.js";
 import favoriteRoutes from "./routes/favoriteRoutes.js";
 import documentSearchRoutes from "./routes/documentSearchRoutes.js";
 
 import authRoutes from "./routes/authRoutes.js";
 
-dotenv.config();
+const __dirname = dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: resolve(__dirname, "../.env") });
 
 const app = express();
 
@@ -80,14 +83,13 @@ app.post("/api/verify-recaptcha", async (req, res) => {
   }
 });
 
-// Rutas auth
+// Rutas
 app.use("/", authRoutes);
+app.use("/api/history", historyRoutes);
+app.use("/api/favorites", favoriteRoutes);
+app.use("/api/document-searches", documentSearchRoutes);
 
 // Servidor
 app.listen(3001, () => {
   console.log("Backend corriendo en http://localhost:3001");
 });
-
-app.use("/api/history", historyRoutes);
-app.use("/api/favorites", favoriteRoutes);
-app.use("/api/document-searches", documentSearchRoutes);
