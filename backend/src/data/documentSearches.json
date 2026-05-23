@@ -1,5 +1,77 @@
 [
   {
+    "id": "0cd231d5-0bd9-4bc6-b997-d6d366aab510",
+    "userEmail": "admin@sanrafael.med",
+    "query": "dame los documentos que tienes cargados en memoria",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "22 de may de 2026",
+    "hora": "07:20 p. m.",
+    "createdAt": "2026-05-23T00:20:13.915Z"
+  },
+  {
+    "id": "2f934981-f88a-4116-ba21-1f37741c2631",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Hola",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "22 de may de 2026",
+    "hora": "07:19 p. m.",
+    "createdAt": "2026-05-23T00:19:36.713Z"
+  },
+  {
+    "id": "e02dd111-357e-4a56-87b4-5427d4014578",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Se recomienda trmboolosis intravenosa con alteplasa en pacientes con ACV agudo de z4.5h de evolución?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "21 de may de 2026",
+    "hora": "02:34 p. m.",
+    "createdAt": "2026-05-21T19:34:23.929Z"
+  },
+  {
+    "id": "ffc8652d-7959-4c7d-b9ab-8c4adf384979",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Dame el listado de documentos que tienes en tu memoria",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "21 de may de 2026",
+    "hora": "02:32 p. m.",
+    "createdAt": "2026-05-21T19:32:22.900Z"
+  },
+  {
+    "id": "b0fcd699-0d7e-47a7-9ca9-cfc24fba15ed",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Dame el listado de documentos que tienes en tu memoria",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "21 de may de 2026",
+    "hora": "02:32 p. m.",
+    "createdAt": "2026-05-21T19:32:02.503Z"
+  },
+  {
+    "id": "2754ad52-0f6a-43cc-890c-c03f30d598f4",
+    "userEmail": "doctor@sanrafael.med",
+    "query": "¿Se debe usar trombólisis en pacientes con ACV menor, no discapacitante?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "21 de may de 2026",
+    "hora": "02:18 p. m.",
+    "createdAt": "2026-05-21T19:18:02.640Z"
+  },
+  {
     "id": "cc7e62c5-516b-4bb9-9641-9672afd997a0",
     "userEmail": "doctor@sanrafael.med",
     "query": "¿Se recomienda trombólisis en pacientes mayores de 80 años con ACV <4.5 h?",
