@@ -3,6 +3,7 @@
 import {
   getHistoryByUser,
   createHistoryItem,
+  updateHistoryItem,
   deleteHistoryItem,
 } from "../services/historyService.js";
 
@@ -40,6 +41,33 @@ export async function createHistory(req, res) {
     return res.status(500).json({
       success: false,
       message: "Error al guardar historial",
+    });
+  }
+}
+
+export async function updateHistory(req, res) {
+  try {
+    const email = req.user.email;
+    const { id } = req.params;
+    const item = await updateHistoryItem(email, id, req.body);
+
+    if (!item) {
+      return res.status(404).json({
+        success: false,
+        message: "Conversacion no encontrada",
+      });
+    }
+
+    return res.json({
+      success: true,
+      historyItem: item,
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Error al actualizar historial",
     });
   }
 }

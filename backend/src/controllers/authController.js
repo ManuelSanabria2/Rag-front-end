@@ -51,7 +51,7 @@ export async function login(req, res) {
       httpOnly: true,
       secure: false,
       sameSite: "strict",
-      maxAge: 15 * 60 * 1000,
+      maxAge: 8 * 60 * 60 * 1000,
     });
 
     return res.json({
