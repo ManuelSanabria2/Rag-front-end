@@ -33,7 +33,11 @@ import {
   type HistoryMessage,
 } from '../../../services/historyService';
 
-export default function ChatModule() {
+interface ChatModuleProps {
+  docsCount?: number;
+}
+
+export default function ChatModule({ docsCount }: ChatModuleProps) {
   const [inputText, setInputText] = useState('');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [conversations, setConversations] = useState<HistoryItem[]>([]);
@@ -254,7 +258,7 @@ export default function ChatModule() {
 
       setStreamingMessageId(null);
 
-      trackAnalyticsEvent('chat_response_received', 'Respuesta generada por Claris IA', {
+      trackAnalyticsEvent('chat_response_received', 'Respuesta generada por Clāris IA', {
         sourcesCount: 0,
         answerLength: accContent.length,
       });
@@ -265,14 +269,12 @@ export default function ChatModule() {
         resultsCount: 0,
       });
 
-      const finalAssistantMsg: ChatMessage = {
-        id: assistantMsgId,
-        role: 'assistant',
-        content: accContent,
-        timestamp: new Date(),
-      };
+      await persistConversation([
+        ...baseMessages,
+        userMsg,
+        { id: assistantMsgId, role: 'assistant', content: accContent, timestamp: new Date() },
+      ]);
 
-      await persistConversation([...baseMessages, userMsg, finalAssistantMsg]);
     } catch (error) {
       trackAnalyticsEvent('chat_error', 'Error al consultar Claris IA', {
         message: error instanceof Error ? error.message : 'Error desconocido',
@@ -424,7 +426,7 @@ export default function ChatModule() {
                   color: '#717182',
                 }}
               >
-                3 documentos indexados
+                {docsCount ?? 0} documento{(docsCount ?? 0) !== 1 ? 's' : ''} indexado{(docsCount ?? 0) !== 1 ? 's' : ''}
               </span>
               <span
                 className="sm:hidden"
@@ -434,7 +436,7 @@ export default function ChatModule() {
                   color: '#717182',
                 }}
               >
-                3 docs
+                {docsCount ?? 0} docs
               </span>
             </div>
           </div>

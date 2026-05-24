@@ -14,7 +14,9 @@ import {
   FileText,
   Menu,
   X,
-  Trash2
+  Trash2,
+  RotateCcw,
+  AlertTriangle,
 } from 'lucide-react';
 
 import ChatModule from '../../chat/components/ChatModule';
@@ -25,7 +27,7 @@ import HistoryModule from '../../history/components/HistoryModule';
 import AnalyticsModule from '../../analytics/components/AnalyticsModule';
 import ClearCacheModule from '../../cache/components/ClearCacheModule';
 import { useDocuments } from '../../../hooks/useDocuments';
-import { getDocumentViewUrl } from '../../../services/chatService';
+import { getDocumentViewUrl, deleteDocument } from '../../../services/chatService';
 
 interface DashboardScreenProps {
   role: UserRole;
@@ -43,8 +45,10 @@ export default function DashboardScreen({
 }: DashboardScreenProps) {
   const [activeMenu, setActiveMenu] = useState('chat');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [deletingDoc, setDeletingDoc] = useState<string | null>(null);
+  const [deleteError, setDeleteError] = useState('');
 
-  const { documents, loading: docsLoading } = useDocuments(docsRefreshTrigger);
+  const { documents, loading: docsLoading, refresh: refreshDocs } = useDocuments(docsRefreshTrigger);
 
   // Los 3 más recientes para la barra lateral (ya vienen ordenados por fecha desc)
   const recentDocuments = documents.slice(0, 3);
@@ -59,10 +63,23 @@ export default function DashboardScreen({
     setSidebarOpen(false);
   };
 
+  const handleDeleteDoc = async (filename: string) => {
+    setDeleteError('');
+    setDeletingDoc(filename);
+    try {
+      await deleteDocument(filename);
+      refreshDocs();
+    } catch (err) {
+      setDeleteError(err instanceof Error ? err.message : 'Error al eliminar el documento.');
+    } finally {
+      setDeletingDoc(null);
+    }
+  };
+
   const renderModule = () => {
     switch (activeMenu) {
       case 'chat':
-        return <ChatModule />;
+        return <ChatModule docsCount={documents.length} />;
 
       case 'search':
         return <DocumentSearchModule documents={documents} loading={docsLoading} />;
@@ -217,9 +234,26 @@ export default function DashboardScreen({
             className="mt-6 pt-6 border-t"
             style={{ borderColor: 'rgba(255, 255, 255, 0.1)' }}
           >
-            <h3 className="px-4 mb-3 text-[12px] font-semibold text-white/60 tracking-wider uppercase">
-              Documentos Recientes
-            </h3>
+            <div className="px-4 mb-3 flex items-center justify-between">
+              <h3 className="text-[12px] font-semibold text-white/60 tracking-wider uppercase">
+                Documentos Recientes
+              </h3>
+              <button
+                onClick={refreshDocs}
+                disabled={docsLoading}
+                title="Actualizar lista de documentos"
+                className="p-1 rounded hover:bg-white/10 transition-colors disabled:opacity-40"
+              >
+                <RotateCcw size={13} className={`text-white/50 ${docsLoading ? 'animate-spin' : ''}`} />
+              </button>
+            </div>
+
+            {deleteError && (
+              <div className="mx-4 mb-2 flex items-center gap-1.5 rounded-lg bg-red-500/20 px-3 py-2 text-[11px] text-red-300">
+                <AlertTriangle size={12} />
+                {deleteError}
+              </div>
+            )}
 
             <div className="space-y-2">
               {docsLoading && (
@@ -233,25 +267,45 @@ export default function DashboardScreen({
               )}
 
               {!docsLoading && recentDocuments.map((doc) => (
-                <button
+                <div
                   key={doc.filename}
-                  onClick={() => window.open(getDocumentViewUrl(doc.filename), '_blank')}
-                  className="w-full px-4 py-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors text-left"
+                  className="group px-4 py-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
                 >
-                  <div className="flex items-start gap-2 mb-1.5">
-                    <FileText size={14} style={{ color: '#A8CF44', flexShrink: 0, marginTop: '2px' }} />
-                    <p className="text-[12px] leading-tight break-all text-white/90">
-                      {doc.filename}
-                    </p>
+                  <div className="flex items-start gap-2">
+                    <button
+                      onClick={() => window.open(getDocumentViewUrl(doc.filename), '_blank')}
+                      className="flex-1 text-left min-w-0"
+                    >
+                      <div className="flex items-start gap-2 mb-1.5">
+                        <FileText size={14} style={{ color: '#A8CF44', flexShrink: 0, marginTop: '2px' }} />
+                        <p className="text-[12px] leading-tight break-all text-white/90">
+                          {doc.filename}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2 pl-5">
+                        <CheckCircle2 size={10} style={{ color: '#A8CF44' }} />
+                        <span className="text-[10px] text-white/50">Indexado</span>
+                        <span className="text-[10px] text-white/30 ml-auto">
+                          {formatFileSize(doc.size)}
+                        </span>
+                      </div>
+                    </button>
+
+                    {role === 'admin' && (
+                      <button
+                        onClick={() => handleDeleteDoc(doc.filename)}
+                        disabled={deletingDoc === doc.filename}
+                        title="Eliminar documento"
+                        className="flex-shrink-0 p-1 rounded opacity-0 group-hover:opacity-100 transition-all hover:bg-red-500/30 disabled:opacity-40"
+                      >
+                        {deletingDoc === doc.filename
+                          ? <RotateCcw size={13} className="text-white/50 animate-spin" />
+                          : <Trash2 size={13} className="text-red-400" />
+                        }
+                      </button>
+                    )}
                   </div>
-                  <div className="flex items-center gap-2 pl-5">
-                    <CheckCircle2 size={10} style={{ color: '#A8CF44' }} />
-                    <span className="text-[10px] text-white/50">Indexado</span>
-                    <span className="text-[10px] text-white/30 ml-auto">
-                      {formatFileSize(doc.size)}
-                    </span>
-                  </div>
-                </button>
+                </div>
               ))}
             </div>
 

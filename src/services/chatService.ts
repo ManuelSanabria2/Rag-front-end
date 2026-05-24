@@ -294,6 +294,45 @@ export async function uploadDocuments(files: File[]): Promise<UploadResult> {
   return data as UploadResult;
 }
 
+export interface IndexingStatus {
+  status: 'idle' | 'processing' | 'done' | 'error';
+  files: string[];
+  message: string;
+}
+
+/** Consulta el estado actual del proceso de indexación (embeddings). */
+export async function getIndexingStatus(): Promise<IndexingStatus> {
+  try {
+    const response = await fetch(`${DOCS_BASE_URL}/api/v1/rag/indexing_status/`);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return await response.json() as IndexingStatus;
+  } catch {
+    return { status: 'idle', files: [], message: '' };
+  }
+}
+
+/**
+ * Elimina un PDF del servicio RAG (disco + vector store).
+ */
+export async function deleteDocument(filename: string): Promise<void> {
+  let response: Response;
+  try {
+    response = await fetch(
+      `${DOCS_BASE_URL}/api/v1/rag/documents/${encodeURIComponent(filename)}`,
+      { method: 'DELETE' }
+    );
+  } catch {
+    throw new Error('No se pudo conectar con el servicio RAG.');
+  }
+
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error((data as { detail?: string }).detail || `Error al eliminar (${response.status})`);
+  }
+
+  invalidateDocumentsCache();
+}
+
 // ============================================================
 // CACHÉ
 // ============================================================
