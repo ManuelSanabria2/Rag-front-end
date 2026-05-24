@@ -1,5 +1,195 @@
 [
-    
+  {
+    "id": "4f4bf0f8-fc21-485d-81bf-9fb290acbdde",
+    "userEmail": "admin@sanrafael.med",
+    "title": "Dame cual es la lista de causas quirurgicas abdominales",
+    "messages": [
+      {
+        "id": "ef461eac-ac84-4097-9612-38a2b798c68f",
+        "role": "user",
+        "content": "Dame cual es la lista de causas quirurgicas abdominales",
+        "timestamp": "2026-05-24T19:09:57.695Z"
+      },
+      {
+        "id": "925bf689-63d9-4d20-913a-12ef5121df54",
+        "role": "assistant",
+        "content": "Lo siento, no tengo información sobre causas *quirúrgicas* abdominales en los documentos proporcionados. La información disponible se centra en causas no quirúrgicas y en el manejo general del dolor abdominal, incluyendo indicaciones para estudios de imagen y consideraciones para pacientes específicos (mujeres, adultos mayores).\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 6), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 7), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 8), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 9)",
+        "timestamp": "2026-05-24T19:11:04.233Z"
+      },
+      {
+        "id": "1c8d53a5-3332-480b-9d8f-a8e02ad1f049",
+        "role": "user",
+        "content": "¿Cuales  son las CAUSAS QUIRURGICAS DE DOLOR ABDOMINAL?",
+        "timestamp": "2026-05-24T19:11:36.580Z"
+      },
+      {
+        "id": "ea9182f5-b5bd-4078-8773-d015a9d96c1f",
+        "role": "assistant",
+        "content": "De acuerdo con la información proporcionada, las causas quirúrgicas de dolor abdominal incluyen: \n\n*   **Apendicitis:** Se asocia con inflamación, absceso periapendicular y una historia prolongada de la afección.\n*   **Obstrucción intestinal:** Puede ser causada por cicatrices quirúrgicas, hernias o malignidad. Inicialmente el dolor es ondulante y puede desarrollar estrangulamiento.\n*   **Úlcera péptica perforada:** Se manifiesta con inicio agudo, peritonismo y dolor que comienza en la parte superior del abdomen.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 1), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 7), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 8), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 9)",
+        "timestamp": "2026-05-24T19:11:36.610Z"
+      },
+      {
+        "id": "eeeaef90-f256-4cc7-9fbe-c99c407e57d2",
+        "role": "user",
+        "content": "cual fue mi primera pregunta?",
+        "timestamp": "2026-05-24T19:11:59.755Z"
+      },
+      {
+        "id": "57592eea-4ef0-46fd-ba00-c805d4ab4361",
+        "role": "assistant",
+        "content": "Tu primera pregunta fue: 'Dame cual es la lista de causas quirurgicas abdominales'\n\nReferencia: NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 12), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 18), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 29), protocoloPrueba.pdf (Pág. 17), protocoloPrueba.pdf (Pág. 8), protocoloPrueba.pdf (Pág. 9)",
+        "timestamp": "2026-05-24T19:13:24.350Z"
+      },
+      {
+        "id": "87ed4ef7-789d-44c4-9d20-7c2823b5a900",
+        "role": "user",
+        "content": "de que estabamos hablando?",
+        "timestamp": "2026-05-24T19:24:20.350Z"
+      },
+      {
+        "id": "872a4754-c719-4b1d-a4fd-3ed5faffece8",
+        "role": "assistant",
+        "content": "Como soy un asistente médico basado en documentos proporcionados, no tengo memoria de conversaciones previas. Por favor, proporciona el contexto o la pregunta para poder ayudarte.\n\nReferencia: NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 12), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 15), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 29), protocoloPrueba.pdf (Pág. 13), protocoloPrueba.pdf (Pág. 8)",
+        "timestamp": "2026-05-24T19:25:25.416Z"
+      }
+    ],
+    "pregunta": "Dame cual es la lista de causas quirurgicas abdominales",
+    "respuestaResumen": "Como soy un asistente médico basado en documentos proporcionados, no tengo memoria de conversaciones previas. Por favor, proporciona el contexto o la pregunta para poder ayudarte.\n\nReferencia: NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 12), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 15), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 29), protocoloPrueba.pdf (Pág. 13), protocoloPrueba.pdf (Pág. 8)",
+    "tipo": "clínica",
+    "estado": "verificada",
+    "fuentes": [],
+    "servicio": "Medicina Interna",
+    "usuario": "Usuario",
+    "fecha": "24 de may de 2026",
+    "hora": "02:25 p. m.",
+    "createdAt": "2026-05-24T19:09:38.874Z",
+    "updatedAt": "2026-05-24T19:25:25.423Z"
+  },
+  {
+    "id": "a181bf17-30eb-4758-86cb-5569ad327463",
+    "userEmail": "doctor@sanrafael.med",
+    "title": "Nueva conversacion",
+    "messages": [],
+    "pregunta": "Nueva conversacion",
+    "respuestaResumen": "Sin respuesta registrada",
+    "tipo": "clínica",
+    "estado": "verificada",
+    "fuentes": [],
+    "servicio": "Medicina Interna",
+    "usuario": "Usuario",
+    "fecha": "24 de may de 2026",
+    "hora": "02:07 p. m.",
+    "createdAt": "2026-05-24T19:07:08.468Z",
+    "updatedAt": "2026-05-24T19:07:08.468Z"
+  },
+  {
+    "id": "c5c95298-2e10-477f-84e1-c2fd8a3393ef",
+    "userEmail": "admin@sanrafael.med",
+    "title": "¿Guia de antibioticos?",
+    "messages": [
+      {
+        "id": "7af1d10d-3307-45bc-a5a7-57ba66f1f737",
+        "role": "user",
+        "content": "¿Guia de antibioticos?",
+        "timestamp": "2026-05-24T18:45:04.056Z"
+      },
+      {
+        "id": "9d60c953-7054-4582-87ee-030dcf287da5",
+        "role": "assistant",
+        "content": "No dispongo de información específica sobre guías de antibióticos en los documentos proporcionados. Sin embargo, sí se menciona que los antibióticos profilácticos de rutina no son beneficiosos y, por lo tanto, no se recomiendan.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 1), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 11), protocoloPrueba.pdf (Pág. 1), protocoloPrueba.pdf (Pág. 13), protocoloPrueba.pdf (Pág. 7)",
+        "timestamp": "2026-05-24T18:45:45.435Z"
+      },
+      {
+        "id": "d2f72d92-1af2-4faf-8da5-83306693f87f",
+        "role": "user",
+        "content": "de que tienes información",
+        "timestamp": "2026-05-24T19:01:12.599Z"
+      },
+      {
+        "id": "a38a9efe-ae06-4672-827a-ee7de41d9a70",
+        "role": "assistant",
+        "content": "De acuerdo a los documentos proporcionados, tengo información sobre los siguientes temas:\n\n*   **Dolor Abdominal:** Barreras y facilitadores en el diagnóstico y tratamiento, incluyendo disponibilidad de laboratorios, imágenes diagnósticas, atención de urgencias y salas de cirugía. Se mencionan factores que pueden dificultar la aplicación de guías de práctica clínica (GPC), como la complejidad de las mismas, la falta de acceso a recursos y la falta de aceptación.\n*   **Trombólisis Intravenosa:** Criterios y recomendaciones para la trombectomía mecánica en pacientes con accidente cerebrovascular isquémico, incluyendo los criterios DAWN y DEFUSE 3, así como consideraciones sobre edad, NIHSS y volumen de infarto.\n*   **Accidente Cerebrovascular (ACV):**  Recomendaciones sobre rehabilitación temprana con un equipo multidisciplinario, intensidad de la rehabilitación, evaluación de depresión post-ACV y uso de antidepresivos en pacientes con depresión. También se menciona la precaución con el uso de medias de compresión en pacientes con secuelas de ACV.\n*   **Profilaxis con heparina:** Se indica que la heparina subcutánea en dosis profiláctica no se ha establecido como beneficiosa y no se recomienda.\n*   **Información Preoperatoria para Cirugía Abdominal:** Se enfatiza la importancia de proporcionar información oral y escrita a los pacientes sobre el proceso quirúrgico y la estancia hospitalaria, buscando una comprensión integral.\n*   **Manejo del Dolor:** Se destaca la importancia de obtener información detallada sobre el dolor (inicio, duración, gravedad, calidad, factores que lo exacerban o alivian) para enfocar el diagnóstico diferencial. Se mencionan síntomas asociados como el estreñimiento (en obstrucción intestinal) y el dolor en el cuadrante inferior derecho (en apendicitis).\n*   **Convulsiones post-ACV:** Se recomienda tratar las convulsiones recurrentes de manera similar a otras condiciones neurológicas agudas, seleccionando medicamentos anticonvulsivantes según las características del paciente, y no se recomienda la profilaxis anticonvulsivante.\n*   **Uso de Resonancia Magnética:** Se considera razonable el uso de resonancia magnética en algunos pacientes con secuelas de evento isquémico para obtener información adicional que guíe el manejo.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 10), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 14), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 4), protocoloPrueba.pdf (Pág. 11)",
+        "timestamp": "2026-05-24T19:02:49.095Z"
+      },
+      {
+        "id": "c51ff9e6-e5da-4b1b-bd0a-61808dc0110a",
+        "role": "user",
+        "content": "Sabes cual fue mi primera pregunta?",
+        "timestamp": "2026-05-24T19:07:53.378Z"
+      },
+      {
+        "id": "e2943394-0df5-4262-8b66-2995a9c74b75",
+        "role": "assistant",
+        "content": "Tu primera pregunta fue: ¿Guia de antibioticos?\n\nReferencia: NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 12), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 18), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 29), protocoloPrueba.pdf (Pág. 17), protocoloPrueba.pdf (Pág. 8), protocoloPrueba.pdf (Pág. 9)",
+        "timestamp": "2026-05-24T19:09:18.308Z"
+      },
+      {
+        "id": "3f1e5c24-e28f-4478-bfc6-f8e2fe91839d",
+        "role": "user",
+        "content": "Tienes información de algiun tipo de antibiotico?",
+        "timestamp": "2026-05-24T19:47:29.288Z"
+      },
+      {
+        "id": "2a754707-75b3-47b1-a2dc-db8679def1c3",
+        "role": "assistant",
+        "content": "De acuerdo con el documento proporcionado, se indica que \"Los antibióticos profilácticos de rutina no son beneficiosos y, por lo tanto, no se recomiendan.\" (IC). \n\nNo dispongo de información sobre tipos específicos de antibióticos.\n\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 10), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 9), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 18), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 61), protocoloPrueba.pdf (Pág. 11), protocoloPrueba.pdf (Pág. 13)",
+        "timestamp": "2026-05-24T19:48:22.139Z"
+      },
+      {
+        "id": "1f04127d-9eaf-4a0a-a268-ba8402132c51",
+        "role": "user",
+        "content": "Tienes información de algiun tipo de antibiotico?",
+        "timestamp": "2026-05-24T20:04:02.081Z"
+      },
+      {
+        "id": "99ebc041-fc43-4088-a4f4-dec4aadf807e",
+        "role": "assistant",
+        "content": "De acuerdo con el documento proporcionado, se indica que \"Los antibióticos profilácticos de rutina no son beneficiosos y, por lo tanto, no se recomiendan.\" (IC). \n\nNo dispongo de información sobre tipos específicos de antibióticos.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 10), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 9), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 18), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 61), protocoloPrueba.pdf (Pág. 11), protocoloPrueba.pdf (Pág. 13)",
+        "timestamp": "2026-05-24T20:04:02.104Z"
+      }
+    ],
+    "pregunta": "¿Guia de antibioticos?",
+    "respuestaResumen": "De acuerdo con el documento proporcionado, se indica que \"Los antibióticos profilácticos de rutina no son beneficiosos y, por lo tanto, no se recomiendan.\" (IC). \n\nNo dispongo de información sobre tipos específicos de antibióticos.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 10), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 9), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 18), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 61), protocoloPrueba.pdf (Pág. 11), protocoloPrueba.pdf (Pág. 13)",
+    "tipo": "clínica",
+    "estado": "verificada",
+    "fuentes": [],
+    "servicio": "Medicina Interna",
+    "usuario": "Usuario",
+    "fecha": "24 de may de 2026",
+    "hora": "03:04 p. m.",
+    "createdAt": "2026-05-24T18:44:52.467Z",
+    "updatedAt": "2026-05-24T20:04:02.112Z"
+  },
+  {
+    "id": "5ddcafc0-b591-4f40-aeaf-7881d8b4701d",
+    "userEmail": "admin@sanrafael.med",
+    "title": "¿Dosis de Acetaminofen en adultos?",
+    "messages": [
+      {
+        "id": "7967f5e6-4bd0-49ba-aa79-6d50f39d8ce8",
+        "role": "user",
+        "content": "¿Dosis de Acetaminofen en adultos?",
+        "timestamp": "2026-05-24T18:22:07.739Z"
+      },
+      {
+        "id": "3ebc72f8-46c7-4b70-8872-7ab2a238852e",
+        "role": "assistant",
+        "content": "Lo siento, no dispongo de información sobre la dosis de Acetaminofen para adultos en los documentos proporcionados. Mi conocimiento se limita a la información contenida en esos documentos, que se centran principalmente en protocolos de tratamiento para condiciones específicas como accidentes cerebrovasculares y dolor abdominal, así como algunas recomendaciones generales. Para obtener información precisa sobre la dosis de Acetaminofen, te recomiendo consultar a un médico o farmacéutico.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 5), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 17), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 19), protocoloPrueba.pdf (Pág. 13), protocoloPrueba.pdf (Pág. 2)",
+        "timestamp": "2026-05-24T18:22:59.987Z"
+      }
+    ],
+    "pregunta": "¿Dosis de Acetaminofen en adultos?",
+    "respuestaResumen": "Lo siento, no dispongo de información sobre la dosis de Acetaminofen para adultos en los documentos proporcionados. Mi conocimiento se limita a la información contenida en esos documentos, que se centran principalmente en protocolos de tratamiento para condiciones específicas como accidentes cerebrovasculares y dolor abdominal, así como algunas recomendaciones generales. Para obtener información precisa sobre la dosis de Acetaminofen, te recomiendo consultar a un médico o farmacéutico.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 5), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 17), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 19), protocoloPrueba.pdf (Pág. 13), protocoloPrueba.pdf (Pág. 2)",
+    "tipo": "clínica",
+    "estado": "verificada",
+    "fuentes": [],
+    "servicio": "Medicina Interna",
+    "usuario": "Usuario",
+    "fecha": "24 de may de 2026",
+    "hora": "01:22 p. m.",
+    "createdAt": "2026-05-24T18:22:59.994Z",
+    "updatedAt": "2026-05-24T18:22:59.994Z"
+  },
   {
     "id": "1",
     "userEmail": "doctor@sanrafael.med",
@@ -7,7 +197,9 @@
     "respuestaResumen": "Se recomienda antibiótico temprano y cristaloides intravenosos.",
     "tipo": "clínica",
     "estado": "verificada",
-    "fuentes": ["protocolo-uci-2024.pdf"],
+    "fuentes": [
+      "protocolo-uci-2024.pdf"
+    ],
     "usuario": "Dr. Juan Sandoval",
     "servicio": "Medicina Interna",
     "fecha": "20 may 2026",

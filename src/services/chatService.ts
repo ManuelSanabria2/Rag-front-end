@@ -121,6 +121,86 @@ export function generateMessageId(): string {
 }
 
 // ============================================================
+// STREAMING
+// ============================================================
+
+const STREAM_URL = import.meta.env.VITE_API_BASE_URL
+  ? `${import.meta.env.VITE_API_BASE_URL}/api/v1/conversations/stream/`
+  : '/api/v1/conversations/stream/';
+
+export type StreamEvent =
+  | { type: 'chunk'; content: string }
+  | { type: 'done'; status_code: string; full_response: string }
+  | { type: 'error'; content: string };
+
+/**
+ * Envía una pregunta al endpoint de streaming y devuelve un async generator
+ * que emite eventos SSE conforme el LLM genera tokens.
+ */
+export async function* streamMessage(userMessage: string): AsyncGenerator<StreamEvent> {
+  const body = {
+    question: userMessage,
+    phone_number: SESSION_ID,
+    source: 'local',
+  };
+
+  let response: Response;
+  try {
+    response = await fetch(STREAM_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+  } catch {
+    throw new Error(
+      'No se pudo conectar con el servicio RAG. Verifica que el servidor esté corriendo en http://localhost:8000',
+    );
+  }
+
+  if (!response.ok) {
+    const errorText = await response.text().catch(() => 'Error desconocido');
+    throw new Error(`Error del servidor (${response.status}): ${errorText}`);
+  }
+
+  if (!response.body) {
+    throw new Error('El servidor no devolvió un cuerpo de respuesta para streaming.');
+  }
+
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+
+      // Los eventos SSE están separados por \n\n
+      const parts = buffer.split('\n\n');
+      buffer = parts.pop() ?? '';
+
+      for (const part of parts) {
+        const line = part.trim();
+        if (line.startsWith('data: ')) {
+          const json = line.slice(6).trim();
+          if (json) {
+            try {
+              yield JSON.parse(json) as StreamEvent;
+            } catch {
+              // ignorar JSON malformado
+            }
+          }
+        }
+      }
+    }
+  } finally {
+    reader.releaseLock();
+  }
+}
+
+// ============================================================
 // DOCUMENTOS
 // ============================================================
 

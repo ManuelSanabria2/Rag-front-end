@@ -20,6 +20,7 @@ import { createRecentSearch } from '../../../services/documentSearchService';
 import {
   generateMessageId,
   sendMessage,
+  streamMessage,
   type ChatMessage,
   type ChatSource,
 } from '../../../services/chatService';
@@ -41,6 +42,7 @@ export default function ChatModule() {
   const [historyError, setHistoryError] = useState('');
   const [deletingConversationId, setDeletingConversationId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [streamingMessageId, setStreamingMessageId] = useState<string | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -209,6 +211,9 @@ export default function ChatModule() {
       timestamp: new Date(),
     };
 
+    // Snapshot del estado actual para construir nextMessages al final
+    const baseMessages = messages;
+
     setMessages((prev) => [...prev, userMsg]);
     setInputText('');
     setIsLoading(true);
@@ -218,60 +223,89 @@ export default function ChatModule() {
       messagesBeforeSend: messages.length,
     });
 
+    const assistantMsgId = generateMessageId();
+    let accContent = '';
+    let streamStarted = false;
+
     try {
-      const response = await sendMessage(trimmed, [...messages, userMsg]);
+      for await (const event of streamMessage(trimmed)) {
+        if (event.type === 'chunk') {
+          accContent += event.content;
+          if (!streamStarted) {
+            streamStarted = true;
+            setIsLoading(false);
+            setStreamingMessageId(assistantMsgId);
+            setMessages((prev) => [
+              ...prev,
+              { id: assistantMsgId, role: 'assistant', content: accContent, timestamp: new Date() },
+            ]);
+          } else {
+            setMessages((prev) =>
+              prev.map((m) =>
+                m.id === assistantMsgId ? { ...m, content: accContent } : m
+              )
+            );
+          }
+        } else if (event.type === 'error') {
+          throw new Error(event.content);
+        }
+        // 'done' no requiere acción UI — el contenido ya fue acumulado
+      }
+
+      setStreamingMessageId(null);
+
+      trackAnalyticsEvent('chat_response_received', 'Respuesta generada por Claris IA', {
+        sourcesCount: 0,
+        answerLength: accContent.length,
+      });
 
       await createRecentSearch({
         query: trimmed,
         filters: ['chat-ia'],
-        resultsCount: response.sources?.length ?? 0,
+        resultsCount: 0,
       });
 
-      trackAnalyticsEvent('chat_response_received', 'Respuesta generada por Claris IA', {
-        sourcesCount: response.sources?.length ?? 0,
-        answerLength: response.content.length,
-      });
-
-      response.sources?.forEach((source) => {
-        trackAnalyticsEvent('rag_source_used', 'Fuente RAG consultada', {
-          document: source.document,
-          page: source.page,
-          confidence: source.confidence,
-        });
-      });
-
-      const assistantMsg: ChatMessage = {
-        id: generateMessageId(),
+      const finalAssistantMsg: ChatMessage = {
+        id: assistantMsgId,
         role: 'assistant',
-        content: response.content,
+        content: accContent,
         timestamp: new Date(),
-        sources: response.sources,
       };
 
-      const nextMessages = [...messages, userMsg, assistantMsg];
-      setMessages(nextMessages);
-      await persistConversation(nextMessages);
+      await persistConversation([...baseMessages, userMsg, finalAssistantMsg]);
     } catch (error) {
       trackAnalyticsEvent('chat_error', 'Error al consultar Claris IA', {
         message: error instanceof Error ? error.message : 'Error desconocido',
       });
 
-      const errorMsg: ChatMessage = {
-        id: generateMessageId(),
-        role: 'assistant',
-        content:
-          error instanceof Error
-            ? error.message
-            : 'Ocurrio un error inesperado. Intenta de nuevo.',
-        timestamp: new Date(),
-        isError: true,
-      };
+      const errorContent =
+        error instanceof Error ? error.message : 'Ocurrio un error inesperado. Intenta de nuevo.';
 
-      const nextMessages = [...messages, userMsg, errorMsg];
-      setMessages(nextMessages);
-      await persistConversation(nextMessages);
+      if (streamStarted) {
+        setMessages((prev) =>
+          prev.map((m) =>
+            m.id === assistantMsgId ? { ...m, content: errorContent, isError: true } : m
+          )
+        );
+        await persistConversation([
+          ...baseMessages,
+          userMsg,
+          { id: assistantMsgId, role: 'assistant', content: errorContent, timestamp: new Date(), isError: true },
+        ]);
+      } else {
+        const errorMsg: ChatMessage = {
+          id: generateMessageId(),
+          role: 'assistant',
+          content: errorContent,
+          timestamp: new Date(),
+          isError: true,
+        };
+        setMessages([...baseMessages, userMsg, errorMsg]);
+        await persistConversation([...baseMessages, userMsg, errorMsg]);
+      }
     } finally {
       setIsLoading(false);
+      setStreamingMessageId(null);
       inputRef.current?.focus();
     }
   };
@@ -344,9 +378,9 @@ export default function ChatModule() {
   };
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 bg-[#F8FAFC]">
+    <div className="flex-1 flex flex-col min-h-0 bg-[#F8FAFC] overflow-hidden">
       <header
-        className="px-4 sm:px-6 lg:px-8 py-4 lg:py-5 border-b bg-white flex-shrink-0"
+        className="px-3 sm:px-5 lg:px-8 py-3 lg:py-5 border-b bg-white flex-shrink-0"
         style={{ borderColor: 'rgba(0, 0, 0, 0.1)' }}
       >
         <div className="flex items-center justify-between gap-3">
@@ -407,124 +441,52 @@ export default function ChatModule() {
         </div>
       </header>
 
-      <div className="flex-1 min-h-0 overflow-hidden p-4 lg:p-6">
-        <div className="mx-auto grid h-full max-w-7xl grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_320px]">
-          <section className="min-h-0 rounded-2xl border border-[#E5E7EB] bg-white shadow-sm flex flex-col">
-            <div className="border-b border-[#E5E7EB] px-5 py-4">
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex min-w-0 items-center gap-3">
-                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-[#E0F7F6] text-[#00B8B3]">
-                    <Bot size={20} />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-[#111827]">
-                      Chat con IA clinica
-                    </p>
-                    <p className="text-xs text-[#6B7280]">
-                      Respuestas basadas en documentos indexados
-                    </p>
-                  </div>
-                </div>
+      {/* Área principal: en mobile apila aside arriba + section abajo; en lg+ lado a lado */}
+      <div className="flex-1 min-h-0 overflow-hidden p-2 sm:p-3 lg:p-4">
+        <div className="w-full grid h-full gap-2 sm:gap-3
+          [grid-template-rows:auto_minmax(0,1fr)] grid-cols-1
+          lg:[grid-template-rows:minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_280px]
+          xl:grid-cols-[minmax(0,1fr)_300px]">
 
-                <div className="hidden items-center gap-2 rounded-lg bg-[#F8FAFC] px-3 py-2 text-sm text-[#6B7280] sm:flex">
-                  <MessageSquare size={15} />
-                  {messages.length} mensaje{messages.length !== 1 ? 's' : ''}
-                </div>
-              </div>
-            </div>
-
-            <div className="min-h-0 flex-1 overflow-y-auto p-5">
-              <div className="mx-auto max-w-4xl space-y-5">
-                {messages.length === 0 && !isLoading && (
-                  <EmptyState setInputText={setInputText} inputRef={inputRef} />
-                )}
-
-                {messages.map((msg) => (
-                  <MessageBubble
-                    key={msg.id}
-                    msg={msg}
-                    formatTime={formatTime}
-                    onRetry={handleRetry}
-                  />
-                ))}
-
-                {isLoading && <LoadingMessage />}
-                <div ref={messagesEndRef} />
-              </div>
-            </div>
-
-            <div className="border-t border-[#E5E7EB] bg-white p-4">
-              <div className="mx-auto flex max-w-4xl gap-3">
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={inputText}
-                  onChange={(e) => setInputText(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  placeholder={isLoading ? 'Esperando...' : 'Escribe tu consulta clinica...'}
-                  disabled={isLoading}
-                  className="min-w-0 flex-1 rounded-xl border border-[#E5E7EB] bg-[#F8FAFC] px-4 py-3 text-[15px] shadow-sm transition-all focus:border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#2563EB] disabled:opacity-70"
-                />
-
-                <button
-                  onClick={handleSend}
-                  disabled={isLoading || !inputText.trim()}
-                  className="flex flex-shrink-0 items-center gap-2 rounded-xl px-5 py-3 text-[15px] font-semibold text-white shadow-sm transition-all disabled:cursor-not-allowed"
-                  style={{
-                    backgroundColor:
-                      isLoading || !inputText.trim() ? '#A0D4D2' : '#00B8B3',
-                  }}
-                >
-                  {isLoading ? (
-                    <Loader2 size={20} className="animate-spin" />
-                  ) : (
-                    <Send size={20} />
-                  )}
-                  <span className="hidden sm:inline">
-                    {isLoading ? 'Enviando...' : 'Enviar'}
-                  </span>
-                </button>
-              </div>
-            </div>
-          </section>
-
-          <aside className="min-h-0 rounded-2xl border border-[#E5E7EB] bg-white shadow-sm flex flex-col">
-            <div className="border-b border-[#E5E7EB] p-4">
-              <div className="mb-3 flex items-center justify-between gap-3">
+          {/* Panel historial — sube al top en mobile, lado derecho en lg+ */}
+          <aside className="order-1 lg:order-2 overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white shadow-sm flex flex-col lg:min-h-0">
+            <div className="border-b border-[#E5E7EB] px-3 py-2 lg:p-4 flex-shrink-0">
+              <div className="flex items-center justify-between gap-2">
                 <div>
                   <p className="text-sm font-semibold text-[#008A86]">Conversaciones</p>
-                  <p className="mt-0.5 text-xs text-[#6B7280]">
+                  <p className="hidden lg:block mt-0.5 text-xs text-[#6B7280]">
                     Historial del chat IA
                   </p>
                 </div>
                 <button
                   onClick={handleNewConversation}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#00B8B3] text-white shadow-sm transition hover:bg-[#008A86]"
+                  className="flex h-8 w-8 lg:h-9 lg:w-9 items-center justify-center rounded-lg bg-[#00B8B3] text-white shadow-sm transition hover:bg-[#008A86]"
                   title="Nueva conversacion"
                   aria-label="Nueva conversacion"
                 >
-                  <Plus size={17} />
+                  <Plus size={16} />
                 </button>
               </div>
             </div>
 
-            <div className="min-h-0 flex-1 overflow-y-auto p-3">
+            {/* Lista: scroll horizontal en mobile, vertical en lg+ */}
+            <div className="overflow-x-auto overflow-y-hidden lg:overflow-x-hidden lg:overflow-y-auto lg:flex-1 lg:min-h-0 p-2 lg:p-3">
               {historyError && (
-                <div className="mb-3 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-xs leading-5 text-red-600">
+                <div className="mb-2 rounded-xl border border-red-200 bg-red-50 px-2 py-1.5 text-xs leading-5 text-red-600 lg:mb-3 lg:px-3 lg:py-2">
                   {historyError}
                 </div>
               )}
 
               {historyLoading ? (
-                <div className="rounded-xl border border-dashed border-[#E5E7EB] p-4 text-sm text-[#717182]">
+                <div className="rounded-xl border border-dashed border-[#E5E7EB] p-2 text-xs text-[#717182] lg:p-4 lg:text-sm whitespace-nowrap">
                   Cargando historial...
                 </div>
               ) : conversations.length === 0 ? (
-                <div className="rounded-xl border border-dashed border-[#E5E7EB] p-4 text-sm text-[#717182]">
+                <div className="rounded-xl border border-dashed border-[#E5E7EB] p-2 text-xs text-[#717182] lg:p-4 lg:text-sm whitespace-nowrap">
                   Sin conversaciones guardadas.
                 </div>
               ) : (
-                <div className="space-y-2.5">
+                <div className="flex flex-row gap-2 lg:flex-col lg:space-y-2 lg:gap-0 min-w-max lg:min-w-0">
                   {conversations.map((conversation) => (
                     <div
                       key={conversation.id}
@@ -537,29 +499,29 @@ export default function ChatModule() {
                       }}
                       role="button"
                       tabIndex={0}
-                      className={`group rounded-xl border p-3 text-left shadow-sm transition-all ${
+                      className={`group w-[180px] lg:w-auto flex-shrink-0 lg:flex-shrink rounded-xl border p-2 lg:p-3 text-left shadow-sm transition-all ${
                         activeConversationId === conversation.id
                           ? 'border-[#00B8B3] bg-[#F0FCFB] shadow-[0_0_0_1px_rgba(0,184,179,0.08)]'
                           : 'border-[#E5E7EB] bg-white hover:border-[#00B8B3] hover:bg-[#F8FAFC]'
                       }`}
                       title={conversation.title || conversation.pregunta}
                     >
-                      <div className="mb-2 flex items-start justify-between gap-2">
+                      <div className="mb-1.5 flex items-start justify-between gap-1.5 lg:mb-2 lg:gap-2">
                         <div className="min-w-0">
-                          <div className="mb-1 flex items-center gap-2">
+                          <div className="mb-0.5 flex items-center gap-1.5 lg:mb-1 lg:gap-2">
                             <span
-                              className={`h-2 w-2 rounded-full ${
+                              className={`h-1.5 w-1.5 rounded-full flex-shrink-0 ${
                                 activeConversationId === conversation.id
                                   ? 'bg-[#00B8B3]'
                                   : 'bg-[#D1D5DB]'
                               }`}
                             />
-                            <span className="text-[11px] font-medium text-[#6B7280]">
+                            <span className="text-[10px] lg:text-[11px] font-medium text-[#6B7280] truncate">
                               {conversation.fecha}
                             </span>
                           </div>
                           <p
-                            className={`line-clamp-2 text-sm font-semibold ${
+                            className={`line-clamp-2 text-xs lg:text-sm font-semibold ${
                               activeConversationId === conversation.id
                                 ? 'text-[#008A86]'
                                 : 'text-[#111827]'
@@ -574,29 +536,29 @@ export default function ChatModule() {
                             handleDeleteConversation(conversation.id, event)
                           }
                           disabled={deletingConversationId === conversation.id}
-                          className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg text-[#9CA3AF] transition hover:bg-[#FEE2E2] hover:text-[#991B1B] disabled:cursor-not-allowed disabled:opacity-50"
+                          className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-lg text-[#9CA3AF] transition hover:bg-[#FEE2E2] hover:text-[#991B1B] disabled:cursor-not-allowed disabled:opacity-50"
                           title="Eliminar conversacion"
                           aria-label="Eliminar conversacion"
                         >
                           {deletingConversationId === conversation.id ? (
-                            <Loader2 size={14} className="animate-spin" />
+                            <Loader2 size={12} className="animate-spin" />
                           ) : (
-                            <Trash2 size={14} />
+                            <Trash2 size={12} />
                           )}
                         </button>
                       </div>
 
-                      <div className="flex items-center justify-between border-t border-[#E5E7EB] pt-2 text-xs">
+                      <div className="flex items-center justify-between border-t border-[#E5E7EB] pt-1.5 text-[10px] lg:text-xs">
                         <span
-                          className={`rounded-full px-2 py-1 font-medium ${
+                          className={`rounded-full px-1.5 py-0.5 font-medium lg:px-2 lg:py-1 ${
                             activeConversationId === conversation.id
                               ? 'bg-white text-[#008A86]'
                               : 'bg-[#F3F4F6] text-[#6B7280]'
                           }`}
                         >
-                          {conversation.messages?.length ?? 0} mensajes
+                          {conversation.messages?.length ?? 0} msg
                         </span>
-                        <span className="text-[#9CA3AF]">{conversation.hora}</span>
+                        <span className="text-[#9CA3AF] truncate ml-1">{conversation.hora}</span>
                       </div>
                     </div>
                   ))}
@@ -604,6 +566,87 @@ export default function ChatModule() {
               )}
             </div>
           </aside>
+
+          {/* Panel principal del chat */}
+          <section className="order-2 lg:order-1 min-h-0 rounded-2xl border border-[#E5E7EB] bg-white shadow-sm flex flex-col">
+            <div className="border-b border-[#E5E7EB] px-3 py-3 lg:px-5 lg:py-4 flex-shrink-0">
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex min-w-0 items-center gap-2 lg:gap-3">
+                  <div className="flex h-8 w-8 lg:h-10 lg:w-10 flex-shrink-0 items-center justify-center rounded-xl bg-[#E0F7F6] text-[#00B8B3]">
+                    <Bot size={18} />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-semibold text-[#111827]">
+                      Chat con IA clinica
+                    </p>
+                    <p className="hidden sm:block text-xs text-[#6B7280]">
+                      Respuestas basadas en documentos indexados
+                    </p>
+                  </div>
+                </div>
+
+                <div className="hidden items-center gap-2 rounded-lg bg-[#F8FAFC] px-3 py-2 text-sm text-[#6B7280] sm:flex flex-shrink-0">
+                  <MessageSquare size={15} />
+                  {messages.length} mensaje{messages.length !== 1 ? 's' : ''}
+                </div>
+              </div>
+            </div>
+
+            <div className="min-h-0 flex-1 overflow-y-auto p-3 sm:p-4 lg:p-5">
+              <div className="w-full space-y-4 sm:space-y-5">
+                {messages.length === 0 && !isLoading && (
+                  <EmptyState setInputText={setInputText} inputRef={inputRef} />
+                )}
+
+                {messages.map((msg) => (
+                  <MessageBubble
+                    key={msg.id}
+                    msg={msg}
+                    formatTime={formatTime}
+                    onRetry={handleRetry}
+                    isStreaming={msg.id === streamingMessageId}
+                  />
+                ))}
+
+                {isLoading && <LoadingMessage />}
+                <div ref={messagesEndRef} />
+              </div>
+            </div>
+
+            <div className="border-t border-[#E5E7EB] bg-white p-2 sm:p-3 lg:p-4 flex-shrink-0">
+              <div className="flex gap-2 sm:gap-3">
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={inputText}
+                  onChange={(e) => setInputText(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder={isLoading ? 'Esperando...' : 'Escribe tu consulta clinica...'}
+                  disabled={isLoading}
+                  className="min-w-0 flex-1 rounded-xl border border-[#E5E7EB] bg-[#F8FAFC] px-3 py-2.5 sm:px-4 sm:py-3 text-[14px] sm:text-[15px] shadow-sm transition-all focus:border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#2563EB] disabled:opacity-70"
+                />
+
+                <button
+                  onClick={handleSend}
+                  disabled={isLoading || !inputText.trim()}
+                  className="flex flex-shrink-0 items-center gap-1.5 sm:gap-2 rounded-xl px-3 sm:px-5 py-2.5 sm:py-3 text-[14px] sm:text-[15px] font-semibold text-white shadow-sm transition-all disabled:cursor-not-allowed"
+                  style={{
+                    backgroundColor:
+                      isLoading || !inputText.trim() ? '#A0D4D2' : '#00B8B3',
+                  }}
+                >
+                  {isLoading ? (
+                    <Loader2 size={18} className="animate-spin" />
+                  ) : (
+                    <Send size={18} />
+                  )}
+                  <span className="hidden sm:inline">
+                    {isLoading ? 'Enviando...' : 'Enviar'}
+                  </span>
+                </button>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </div>
@@ -618,21 +661,22 @@ function EmptyState({
   inputRef: React.RefObject<HTMLInputElement>;
 }) {
   return (
-    <div className="flex min-h-[420px] flex-col items-center justify-center text-center">
-      <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl border border-[#BDEBE9] bg-[#EAFBF9] text-[#00B8B3]">
-        <Bot size={36} />
+    <div className="flex min-h-[260px] sm:min-h-[360px] flex-col items-center justify-center text-center px-2">
+      <div className="mb-4 sm:mb-6 flex h-14 w-14 sm:h-20 sm:w-20 items-center justify-center rounded-2xl border border-[#BDEBE9] bg-[#EAFBF9] text-[#00B8B3]">
+        <Bot size={28} className="sm:hidden" />
+        <Bot size={36} className="hidden sm:block" />
       </div>
 
-      <h2 className="mb-2 text-2xl font-semibold text-[#2B3777]">
+      <h2 className="mb-2 text-xl sm:text-2xl font-semibold text-[#2B3777]">
         En que puedo ayudarte?
       </h2>
 
-      <p className="max-w-xl text-[15px] leading-7 text-[#6B7280]">
+      <p className="max-w-xl text-[14px] sm:text-[15px] leading-6 sm:leading-7 text-[#6B7280]">
         Escribe tu consulta clinica y buscare en los protocolos y documentos del
         hospital para darte una respuesta basada en evidencia.
       </p>
 
-      <div className="mt-8 flex flex-wrap justify-center gap-2">
+      <div className="mt-5 sm:mt-8 flex flex-wrap justify-center gap-2">
         {[
           'Dosis de Acetaminofen en adultos',
           'Protocolo de manejo UCI',
@@ -644,7 +688,7 @@ function EmptyState({
               setInputText(`¿${suggestion}?`);
               inputRef.current?.focus();
             }}
-            className="rounded-full border border-[#E5E7EB] bg-white px-4 py-2 text-sm font-medium text-[#3B2377] transition hover:border-[#2563EB] hover:text-[#2563EB] hover:shadow-sm"
+            className="rounded-full border border-[#E5E7EB] bg-white px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium text-[#3B2377] transition hover:border-[#2563EB] hover:text-[#2563EB] hover:shadow-sm"
           >
             ¿{suggestion}?
           </button>
@@ -658,10 +702,12 @@ function MessageBubble({
   msg,
   formatTime,
   onRetry,
+  isStreaming = false,
 }: {
   msg: ChatMessage;
   formatTime: (date: Date) => string;
   onRetry: () => void;
+  isStreaming?: boolean;
 }) {
   const isUser = msg.role === 'user';
 
@@ -680,7 +726,7 @@ function MessageBubble({
         )}
       </div>
 
-      <div className={`min-w-0 max-w-[82%] space-y-3 ${isUser ? 'order-1' : ''}`}>
+      <div className={`min-w-0 max-w-[92%] sm:max-w-[85%] space-y-2 sm:space-y-3 ${isUser ? 'order-1' : ''}`}>
         <div className={`flex items-center gap-2 ${isUser ? 'justify-end' : ''}`}>
           <span
             className="text-sm font-semibold"
@@ -717,6 +763,9 @@ function MessageBubble({
           >
             <p className="whitespace-pre-wrap text-[15px] leading-7 text-[#111827]">
               {msg.content}
+              {isStreaming && (
+                <span className="inline-block w-0.5 h-4 ml-0.5 align-middle bg-[#00B8B3] animate-pulse" />
+              )}
             </p>
           </div>
         )}

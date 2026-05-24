@@ -1,0 +1,122 @@
+[
+  {
+    "id": "f5579a86-791f-42e0-9c69-dfc3ad69a987",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Tienes información de algiun tipo de antibiotico?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "24 de may de 2026",
+    "hora": "03:04 p. m.",
+    "createdAt": "2026-05-24T20:04:02.100Z"
+  },
+  {
+    "id": "35078826-f8a1-4e7c-834d-be788ddad5e6",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Tienes información de algiun tipo de antibiotico?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "24 de may de 2026",
+    "hora": "02:48 p. m.",
+    "createdAt": "2026-05-24T19:48:22.135Z"
+  },
+  {
+    "id": "4f1a8954-4275-4d98-9214-77c9be31f696",
+    "userEmail": "admin@sanrafael.med",
+    "query": "de que estabamos hablando?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "24 de may de 2026",
+    "hora": "02:25 p. m.",
+    "createdAt": "2026-05-24T19:25:25.414Z"
+  },
+  {
+    "id": "eca75f32-ab14-438e-9a47-f14c2b76eba0",
+    "userEmail": "admin@sanrafael.med",
+    "query": "cual fue mi primera pregunta?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "24 de may de 2026",
+    "hora": "02:13 p. m.",
+    "createdAt": "2026-05-24T19:13:24.348Z"
+  },
+  {
+    "id": "3ae4bb5c-0927-4b74-a079-57b105cfbb6e",
+    "userEmail": "admin@sanrafael.med",
+    "query": "¿Cuales  son las CAUSAS QUIRURGICAS DE DOLOR ABDOMINAL?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "24 de may de 2026",
+    "hora": "02:11 p. m.",
+    "createdAt": "2026-05-24T19:11:36.605Z"
+  },
+  {
+    "id": "5f8f40d2-bf3d-4837-9e20-bd303516c790",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Dame cual es la lista de causas quirurgicas abdominales",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "24 de may de 2026",
+    "hora": "02:11 p. m.",
+    "createdAt": "2026-05-24T19:11:04.228Z"
+  },
+  {
+    "id": "a3d6e5b6-a86c-42d3-9662-f7d6f0383a06",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Sabes cual fue mi primera pregunta?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "24 de may de 2026",
+    "hora": "02:09 p. m.",
+    "createdAt": "2026-05-24T19:09:18.304Z"
+  },
+  {
+    "id": "db5ee7b9-f1ef-4a8a-a61d-0a3b3d204a71",
+    "userEmail": "admin@sanrafael.med",
+    "query": "de que tienes información",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "24 de may de 2026",
+    "hora": "02:02 p. m.",
+    "createdAt": "2026-05-24T19:02:49.091Z"
+  },
+  {
+    "id": "a54e6a6f-33e5-4e6c-b89c-60aaf45c993e",
+    "userEmail": "admin@sanrafael.med",
+    "query": "¿Guia de antibioticos?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "24 de may de 2026",
+    "hora": "01:45 p. m.",
+    "createdAt": "2026-05-24T18:45:45.432Z"
+  },
+  {
+    "id": "333ad2f2-d464-4f6a-ae69-6c801043d117",
+    "userEmail": "admin@sanrafael.med",
+    "query": "¿Dosis de Acetaminofen en adultos?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "24 de may de 2026",
+    "hora": "01:22 p. m.",
+    "createdAt": "2026-05-24T18:22:59.983Z"
+  }
+]
