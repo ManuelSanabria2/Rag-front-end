@@ -1,5 +1,29 @@
 [
   {
+    "id": "a724871c-96a7-4d3a-90c8-b6b27bc68d6f",
+    "userEmail": "admin@sanrafael.med",
+    "query": "¿Cuales  son las CAUSAS QUIRURGICAS DE DOLOR ABDOMINAL?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "25 de may de 2026",
+    "hora": "04:18 p. m.",
+    "createdAt": "2026-05-25T21:18:04.478Z"
+  },
+  {
+    "id": "bf724458-8c51-4782-b1bb-554b0efd3a5d",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Tienes informacion de antibioticos?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "25 de may de 2026",
+    "hora": "02:58 p. m.",
+    "createdAt": "2026-05-25T19:58:05.726Z"
+  },
+  {
     "id": "f5579a86-791f-42e0-9c69-dfc3ad69a987",
     "userEmail": "admin@sanrafael.med",
     "query": "Tienes información de algiun tipo de antibiotico?",

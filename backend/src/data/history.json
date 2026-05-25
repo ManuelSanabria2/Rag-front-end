@@ -1,5 +1,35 @@
 [
   {
+    "id": "e60feb8e-9aa3-471a-9186-140d06b22f09",
+    "userEmail": "admin@sanrafael.med",
+    "title": "¿Cuales  son las CAUSAS QUIRURGICAS DE DOLOR ABDOMINAL?",
+    "messages": [
+      {
+        "id": "7f4901ac-8af4-4fc5-862f-1e0f62ab5d68",
+        "role": "user",
+        "content": "¿Cuales  son las CAUSAS QUIRURGICAS DE DOLOR ABDOMINAL?",
+        "timestamp": "2026-05-25T21:16:58.626Z"
+      },
+      {
+        "id": "3cf81a3a-d05a-4bfe-bcf2-07d4b5c22c3b",
+        "role": "assistant",
+        "content": "De acuerdo con los documentos del Hospital San Rafael, las causas quirúrgicas de dolor abdominal son:\n\n*   **Apendicitis:** Se puede observar un aumento en los parámetros de laboratorio que indican inflamación, aunque no necesariamente en la fase inicial. Una historia prolongada puede estar asociada con un absceso periapendicular.\n*   **Obstrucción intestinal:** Puede presentarse con cicatrices quirúrgicas, hernias o posible malignidad. El dolor inicialmente puede ser ondulante y luego desarrollar estrangulamiento, lo cual indica la necesidad de cirugía.\n*   **Úlcera péptica perforada:** Se manifiesta con inicio agudo y peritonismo. Es un síntoma común de la enfermedad de úlcera péptica, y el dolor comienza en la parte superior del abdomen.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 1), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 10), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 12), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 7), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 8), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 9)",
+        "timestamp": "2026-05-25T21:18:04.481Z"
+      }
+    ],
+    "pregunta": "¿Cuales  son las CAUSAS QUIRURGICAS DE DOLOR ABDOMINAL?",
+    "respuestaResumen": "De acuerdo con los documentos del Hospital San Rafael, las causas quirúrgicas de dolor abdominal son:\n\n*   **Apendicitis:** Se puede observar un aumento en los parámetros de laboratorio que indican inflamación, aunque no necesariamente en la fase inicial. Una historia prolongada puede estar asociada con un absceso periapendicular.\n*   **Obstrucción intestinal:** Puede presentarse con cicatrices quirúrgicas, hernias o posible malignidad. El dolor inicialmente puede ser ondulante y luego desarrollar estrangulamiento, lo cual indica la necesidad de cirugía.\n*   **Úlcera péptica perforada:** Se manifiesta con inicio agudo y peritonismo. Es un síntoma común de la enfermedad de úlcera péptica, y el dolor comienza en la parte superior del abdomen.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 1), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 10), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 12), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 7), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 8), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 9)",
+    "tipo": "clínica",
+    "estado": "verificada",
+    "fuentes": [],
+    "servicio": "Medicina Interna",
+    "usuario": "Usuario",
+    "fecha": "25 de may de 2026",
+    "hora": "04:18 p. m.",
+    "createdAt": "2026-05-25T21:16:44.936Z",
+    "updatedAt": "2026-05-25T21:18:04.490Z"
+  },
+  {
     "id": "4f4bf0f8-fc21-485d-81bf-9fb290acbdde",
     "userEmail": "admin@sanrafael.med",
     "title": "Dame cual es la lista de causas quirurgicas abdominales",
@@ -176,19 +206,31 @@
         "role": "assistant",
         "content": "Lo siento, no dispongo de información sobre la dosis de Acetaminofen para adultos en los documentos proporcionados. Mi conocimiento se limita a la información contenida en esos documentos, que se centran principalmente en protocolos de tratamiento para condiciones específicas como accidentes cerebrovasculares y dolor abdominal, así como algunas recomendaciones generales. Para obtener información precisa sobre la dosis de Acetaminofen, te recomiendo consultar a un médico o farmacéutico.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 5), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 17), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 19), protocoloPrueba.pdf (Pág. 13), protocoloPrueba.pdf (Pág. 2)",
         "timestamp": "2026-05-24T18:22:59.987Z"
+      },
+      {
+        "id": "0a8b2a9e-7941-43e9-b977-8b1cb6acf0e5",
+        "role": "user",
+        "content": "Tienes informacion de antibioticos?",
+        "timestamp": "2026-05-25T19:57:19.178Z"
+      },
+      {
+        "id": "0dbb3c2d-8f0e-4fdc-8c22-631c36bc0090",
+        "role": "assistant",
+        "content": "De acuerdo con el documento \"protocoloPrueba.pdf\", los antibióticos profilácticos de rutina no son beneficiosos y, por lo tanto, no se recomiendan. (IC)\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 11), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 15), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 61), protocoloPrueba.pdf (Pág. 13), protocoloPrueba.pdf (Pág. 7)",
+        "timestamp": "2026-05-25T19:58:05.730Z"
       }
     ],
     "pregunta": "¿Dosis de Acetaminofen en adultos?",
-    "respuestaResumen": "Lo siento, no dispongo de información sobre la dosis de Acetaminofen para adultos en los documentos proporcionados. Mi conocimiento se limita a la información contenida en esos documentos, que se centran principalmente en protocolos de tratamiento para condiciones específicas como accidentes cerebrovasculares y dolor abdominal, así como algunas recomendaciones generales. Para obtener información precisa sobre la dosis de Acetaminofen, te recomiendo consultar a un médico o farmacéutico.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 5), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 17), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 19), protocoloPrueba.pdf (Pág. 13), protocoloPrueba.pdf (Pág. 2)",
+    "respuestaResumen": "De acuerdo con el documento \"protocoloPrueba.pdf\", los antibióticos profilácticos de rutina no son beneficiosos y, por lo tanto, no se recomiendan. (IC)\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 11), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 15), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 61), protocoloPrueba.pdf (Pág. 13), protocoloPrueba.pdf (Pág. 7)",
     "tipo": "clínica",
     "estado": "verificada",
     "fuentes": [],
     "servicio": "Medicina Interna",
     "usuario": "Usuario",
-    "fecha": "24 de may de 2026",
-    "hora": "01:22 p. m.",
+    "fecha": "25 de may de 2026",
+    "hora": "02:58 p. m.",
     "createdAt": "2026-05-24T18:22:59.994Z",
-    "updatedAt": "2026-05-24T18:22:59.994Z"
+    "updatedAt": "2026-05-25T19:58:05.740Z"
   },
   {
     "id": "1",
