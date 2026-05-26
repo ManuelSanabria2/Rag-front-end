@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import type { UserRole } from "../../../App";
 import {
   MessageSquare,
@@ -48,7 +48,7 @@ export default function DashboardScreen({
   const [deletingDoc, setDeletingDoc] = useState<string | null>(null);
   const [deleteError, setDeleteError] = useState('');
 
-  const { documents, loading: docsLoading, refresh: refreshDocs } = useDocuments(docsRefreshTrigger);
+  const { documents, loading: docsLoading, error: docsError, refresh: refreshDocs } = useDocuments(docsRefreshTrigger);
 
   // Los 3 más recientes para la barra lateral (ya vienen ordenados por fecha desc)
   const recentDocuments = documents.slice(0, 3);
@@ -241,12 +241,22 @@ export default function DashboardScreen({
               <button
                 onClick={refreshDocs}
                 disabled={docsLoading}
-                title="Actualizar lista de documentos"
+                title={docsError ? `Error: ${docsError}` : 'Actualizar lista de documentos'}
                 className="p-1 rounded hover:bg-white/10 transition-colors disabled:opacity-40"
               >
-                <RotateCcw size={13} className={`text-white/50 ${docsLoading ? 'animate-spin' : ''}`} />
+                <RotateCcw
+                  size={13}
+                  className={`${docsLoading ? 'animate-spin text-white/50' : docsError ? 'text-red-400' : 'text-white/50'}`}
+                />
               </button>
             </div>
+
+            {docsError && (
+              <div className="mx-4 mb-2 flex items-center gap-1.5 rounded-lg bg-red-500/20 px-3 py-2 text-[11px] text-red-300">
+                <AlertTriangle size={12} />
+                Sin conexión al servidor RAG
+              </div>
+            )}
 
             {deleteError && (
               <div className="mx-4 mb-2 flex items-center gap-1.5 rounded-lg bg-red-500/20 px-3 py-2 text-[11px] text-red-300">
@@ -330,7 +340,7 @@ export default function DashboardScreen({
               </div>
               <div className="min-w-0">
                 <p className="text-sm font-semibold truncate">
-                  {role === 'admin' ? 'Admin Hospital' : 'Dr. Juan Sandoval'}
+                  {role === 'admin' ? 'Administrador' : 'Dr. Juan Sandoval'}
                 </p>
                 <p className="text-xs text-white/70 truncate">
                   {role === 'admin' ? 'Administrador' : 'Medicina Interna'}

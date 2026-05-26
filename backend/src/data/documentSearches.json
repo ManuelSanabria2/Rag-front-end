@@ -1,5 +1,533 @@
 [
   {
+    "id": "c273fb31-4b7b-44fa-86cf-697b790dc0d3",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Tengo una paciente femenina, con dolor abominal, agudo, subito, en hipogastrio, asociado a metreorragia leve, inestabilidad hemodinamica leve sospecho embarazo ectopico. ¿Segun la GPC que debo solicitar o cuál es el algoritmo de diagnostico y manejo en urgencias?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "04:05 p. m.",
+    "createdAt": "2026-05-26T21:05:31.194Z"
+  },
+  {
+    "id": "40e7e838-a3f1-42f8-ac51-a9b622f4202a",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Tengo una paciente femenina, con dolor abominal, agudo, subito, en hipogastrio, asociado a metreorragia leve, inestabilidad hemodinamica leve sospecho embarazo ectopico. ¿Segun la GPC que debo solicitar o cuál es el algoritmo de diagnostico y manejo en urgencias?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "04:05 p. m.",
+    "createdAt": "2026-05-26T21:05:05.038Z"
+  },
+  {
+    "id": "15f13423-14dc-44bf-8d87-ed090e76b652",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Dentro de los antecendentes personales viene consumiendo warfarina 5mg diarios",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "02:50 p. m.",
+    "createdAt": "2026-05-26T19:50:42.327Z"
+  },
+  {
+    "id": "9f2b538d-13bc-446f-8208-abe6cd28fd3e",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Dame el algoritmo diagnostico para el diagnositco de neumonia adulto, sagun la gpc",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "02:33 p. m.",
+    "createdAt": "2026-05-26T19:33:52.486Z"
+  },
+  {
+    "id": "0eba61c2-a503-43ff-99a6-7d0ea6a39034",
+    "userEmail": "admin@sanrafael.med",
+    "query": "La paciente aporta nuevos sintomas como coluria y acolia, y al examen fisico encuentro signo de murphy positivo, dime segun la GPC de patologia biliar que debo hacer para diagnosticar, clasificar y derivar o no a acto quirurgico",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "02:29 p. m.",
+    "createdAt": "2026-05-26T19:29:00.191Z"
+  },
+  {
+    "id": "a593def0-c5a5-4189-bced-740c43d42e2e",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Tengo una paciente femenina, con dolor abominal, agudo, subito, en hipogastrio, asociado a metreorragia leve, inestabilidad hemodinamica leve sospecho embarazo ectopico. ¿Segun la GPC que debo solicitar o cuál es el algoritmo de diagnostico y manejo en urgencias?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "02:22 p. m.",
+    "createdAt": "2026-05-26T19:22:04.304Z"
+  },
+  {
+    "id": "03412fd8-6160-4cf6-b26c-0133dadd4cfc",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Hablame sobre las ecografias, son utiles?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "02:08 p. m.",
+    "createdAt": "2026-05-26T19:08:59.264Z"
+  },
+  {
+    "id": "69cdac51-cb30-4eba-a9e3-27d247ded3c1",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Tienes algo sobre evaluacion de emergencias y tratamientos",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "02:03 p. m.",
+    "createdAt": "2026-05-26T19:03:46.280Z"
+  },
+  {
+    "id": "85e1c554-2559-478d-98e9-fde48ac067db",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Tienes una guia sobre Uso de medicamentos y cuidados profilácticos?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "01:57 p. m.",
+    "createdAt": "2026-05-26T18:57:50.424Z"
+  },
+  {
+    "id": "f5969509-8d4d-4762-a42a-b3ebddc1b921",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Tienes información sobre Impacto del uso de opioides y crisis de sobredosis",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "01:53 p. m.",
+    "createdAt": "2026-05-26T18:53:07.135Z"
+  },
+  {
+    "id": "64dfed0e-548e-4e24-8edc-1d7a824edf7c",
+    "userEmail": "admin@sanrafael.med",
+    "query": "¿cuál fue el primer tema que consulté?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "11:38 a. m.",
+    "createdAt": "2026-05-26T16:38:12.419Z"
+  },
+  {
+    "id": "04f47be4-c03b-45a3-b2ae-c151eae8eaa8",
+    "userEmail": "admin@sanrafael.med",
+    "query": "tienes el historial del chat?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "11:10 a. m.",
+    "createdAt": "2026-05-26T16:10:23.461Z"
+  },
+  {
+    "id": "2ba7d41d-9ff7-444a-be30-04fde8645aab",
+    "userEmail": "admin@sanrafael.med",
+    "query": "cual fue mi primera pregunta de todo el chat",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "11:06 a. m.",
+    "createdAt": "2026-05-26T16:06:45.959Z"
+  },
+  {
+    "id": "47637868-75b4-4352-bd1e-effc2efdd417",
+    "userEmail": "admin@sanrafael.med",
+    "query": "de que se trata lo que estamos hablando en el chat",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "11:04 a. m.",
+    "createdAt": "2026-05-26T16:04:11.968Z"
+  },
+  {
+    "id": "da502ee1-2cf8-479e-af3c-1726ebe3f418",
+    "userEmail": "admin@sanrafael.med",
+    "query": "cual fue mi pregunta anterior",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "11:00 a. m.",
+    "createdAt": "2026-05-26T16:00:56.192Z"
+  },
+  {
+    "id": "1e8a3c0a-f8c9-4ffb-92fc-5e49529865b1",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Estoy consultando sobre dosis de acetaminofén en adultos. Recuerda que mi duda es sobre dosis segura.",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "10:58 a. m.",
+    "createdAt": "2026-05-26T15:58:43.425Z"
+  },
+  {
+    "id": "5a73df64-5c5d-429d-9a69-2f71a75d07a0",
+    "userEmail": "admin@sanrafael.med",
+    "query": "cual fue mi anterior mensaje",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "10:45 a. m.",
+    "createdAt": "2026-05-26T15:45:18.915Z"
+  },
+  {
+    "id": "c6b458da-65f0-4b0a-89f3-8b53b4ca6440",
+    "userEmail": "admin@sanrafael.med",
+    "query": "dime un procedimiento para el dolor abdominal intenso",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "10:40 a. m.",
+    "createdAt": "2026-05-26T15:40:35.520Z"
+  },
+  {
+    "id": "7eecf081-652d-4f18-bd87-df0456f4d1c9",
+    "userEmail": "admin@sanrafael.med",
+    "query": "cual fue mi pregunta anterior?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "10:36 a. m.",
+    "createdAt": "2026-05-26T15:36:56.995Z"
+  },
+  {
+    "id": "dd49fcfb-8419-4bee-8516-b68b01cc4738",
+    "userEmail": "admin@sanrafael.med",
+    "query": "la radiacion de las tomografias puede aumentar el riesgo de cnacer_",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "10:35 a. m.",
+    "createdAt": "2026-05-26T15:35:01.973Z"
+  },
+  {
+    "id": "a87f6f3f-392f-4faf-b7e3-2ff6d2cf74ff",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Tienes información sobre antibioticos?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "10:05 a. m.",
+    "createdAt": "2026-05-26T15:05:21.395Z"
+  },
+  {
+    "id": "067fd092-666c-4805-a693-067be0be015a",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Existe algun riesgo al hacer una tomografia ?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "09:30 a. m.",
+    "createdAt": "2026-05-26T14:30:18.239Z"
+  },
+  {
+    "id": "74a400b5-36f1-40cc-b02d-7c93a3d9e8c4",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Tienes información sobre el uso de analgecicos en dolor abdominal en urgencias?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "09:23 a. m.",
+    "createdAt": "2026-05-26T14:23:19.058Z"
+  },
+  {
+    "id": "98f9fa34-d367-4856-86a6-a680c8d5a49c",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Vale ahora necesito que busques información relacionada con evaluaciones de salud mental y me hables de la evaluación de screening para depresión y ansiedad",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "09:20 a. m.",
+    "createdAt": "2026-05-26T14:20:11.361Z"
+  },
+  {
+    "id": "aacf5d5b-1640-433d-9bb9-74f2ee94903e",
+    "userEmail": "admin@sanrafael.med",
+    "query": "En promedio, cuantos adultos sufren de dolor crónico a diario?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "09:12 a. m.",
+    "createdAt": "2026-05-26T14:12:57.342Z"
+  },
+  {
+    "id": "da281bf2-576e-4340-966b-9006708d82c4",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Tienes alguna información sobre las mejores practicas sobre el manejo de dolor en estados unidos?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "08:57 a. m.",
+    "createdAt": "2026-05-26T13:57:23.974Z"
+  },
+  {
+    "id": "2c81437d-a1ca-4b62-8005-bc6fb3a3fbf3",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Tienes información sobre USACS?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "08:51 a. m.",
+    "createdAt": "2026-05-26T13:51:05.568Z"
+  },
+  {
+    "id": "4f2de841-3baf-452b-9a35-d5477af2e16a",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Cuantos documentos tienes cargados?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "08:48 a. m.",
+    "createdAt": "2026-05-26T13:48:03.253Z"
+  },
+  {
+    "id": "bb4024ab-a613-4f5a-9be7-a0c79a4dabf9",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Cuantos documentos tienes cargados?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "08:47 a. m.",
+    "createdAt": "2026-05-26T13:47:49.997Z"
+  },
+  {
+    "id": "9f526a3d-ccf7-4b2d-9928-8d10b0139518",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Listom cargue nueva información dime ahora de que información tienes?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "08:45 a. m.",
+    "createdAt": "2026-05-26T13:45:58.155Z"
+  },
+  {
+    "id": "61195190-ecd1-4946-9b42-65457f12da62",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Hola, de que tienes información?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "26 de may de 2026",
+    "hora": "08:04 a. m.",
+    "createdAt": "2026-05-26T13:04:48.292Z"
+  },
+  {
+    "id": "f1e75b12-a5ac-4ac3-b550-a07b73da4242",
+    "userEmail": "admin@sanrafael.med",
+    "query": "de que estamos hablando y cual fue la primera pregunta",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "25 de may de 2026",
+    "hora": "06:50 p. m.",
+    "createdAt": "2026-05-25T23:50:46.789Z"
+  },
+  {
+    "id": "8ff9194a-748a-44a8-8083-8aa131371e9a",
+    "userEmail": "admin@sanrafael.med",
+    "query": "dime entonces que procedimientos existen para el dolor abdominal agudo",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "25 de may de 2026",
+    "hora": "06:48 p. m.",
+    "createdAt": "2026-05-25T23:48:24.737Z"
+  },
+  {
+    "id": "457a60e1-b3b8-4036-a1fb-01dff5c256cf",
+    "userEmail": "admin@sanrafael.med",
+    "query": "que procedimientos existen para la gastroenteritis",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "25 de may de 2026",
+    "hora": "06:45 p. m.",
+    "createdAt": "2026-05-25T23:45:12.668Z"
+  },
+  {
+    "id": "421f2276-397d-4096-9f03-ad9b55a04540",
+    "userEmail": "admin@sanrafael.med",
+    "query": "cual fue la priimera pregunta de la conversacion",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "25 de may de 2026",
+    "hora": "06:31 p. m.",
+    "createdAt": "2026-05-25T23:31:15.964Z"
+  },
+  {
+    "id": "9373e631-a1df-46d5-b735-22f07175e6aa",
+    "userEmail": "admin@sanrafael.med",
+    "query": "de que estabamos hablando",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "25 de may de 2026",
+    "hora": "06:28 p. m.",
+    "createdAt": "2026-05-25T23:28:23.170Z"
+  },
+  {
+    "id": "2bbf4855-bd1e-4040-a7ab-50cb7a9911aa",
+    "userEmail": "admin@sanrafael.med",
+    "query": "cual fue mi ultima pregunta?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "25 de may de 2026",
+    "hora": "06:27 p. m.",
+    "createdAt": "2026-05-25T23:27:54.308Z"
+  },
+  {
+    "id": "71aae3f5-2c02-4d20-a6a3-f3e4ebdaa936",
+    "userEmail": "admin@sanrafael.med",
+    "query": "que procesos pueden servir para la gastroenteritis",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "25 de may de 2026",
+    "hora": "06:23 p. m.",
+    "createdAt": "2026-05-25T23:23:39.330Z"
+  },
+  {
+    "id": "7a110979-3658-4438-a9e2-a984deca83b0",
+    "userEmail": "admin@sanrafael.med",
+    "query": "de que tienes informacion",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "25 de may de 2026",
+    "hora": "06:21 p. m.",
+    "createdAt": "2026-05-25T23:21:31.959Z"
+  },
+  {
+    "id": "9f564d07-6647-459e-8cb2-ce84431a2ef0",
+    "userEmail": "admin@sanrafael.med",
+    "query": "¿Guia de antibioticos?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "25 de may de 2026",
+    "hora": "06:18 p. m.",
+    "createdAt": "2026-05-25T23:18:54.383Z"
+  },
+  {
+    "id": "4002780b-6941-4e8d-a6c2-0fd2f5ca8da0",
+    "userEmail": "admin@sanrafael.med",
+    "query": "de que estabamos hablando",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "25 de may de 2026",
+    "hora": "06:17 p. m.",
+    "createdAt": "2026-05-25T23:17:31.539Z"
+  },
+  {
+    "id": "22bbff71-37b3-4ce9-bae9-6f5153586338",
+    "userEmail": "admin@sanrafael.med",
+    "query": "¿Cuales  son las CAUSAS QUIRURGICAS DE DOLOR ABDOMINAL?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "25 de may de 2026",
+    "hora": "05:28 p. m.",
+    "createdAt": "2026-05-25T22:28:37.148Z"
+  },
+  {
+    "id": "32206ae8-3cc3-4ddd-9c88-80a2aac164ee",
+    "userEmail": "admin@sanrafael.med",
+    "query": "¿Cuales  son las CAUSAS QUIRURGICAS DE DOLOR ABDOMINAL?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "25 de may de 2026",
+    "hora": "04:42 p. m.",
+    "createdAt": "2026-05-25T21:42:58.369Z"
+  },
+  {
+    "id": "6d6f91fd-2895-4522-8081-915d28b7f432",
+    "userEmail": "admin@sanrafael.med",
+    "query": "¿Cuales  son las CAUSAS QUIRURGICAS DE DOLOR ABDOMINAL?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "25 de may de 2026",
+    "hora": "04:40 p. m.",
+    "createdAt": "2026-05-25T21:40:31.164Z"
+  },
+  {
     "id": "a724871c-96a7-4d3a-90c8-b6b27bc68d6f",
     "userEmail": "admin@sanrafael.med",
     "query": "¿Cuales  son las CAUSAS QUIRURGICAS DE DOLOR ABDOMINAL?",

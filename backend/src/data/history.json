@@ -1,99 +1,267 @@
 [
   {
-    "id": "e60feb8e-9aa3-471a-9186-140d06b22f09",
+    "id": "a6e303c0-89da-4059-9fbb-e36ef313679f",
     "userEmail": "admin@sanrafael.med",
-    "title": "¿Cuales  son las CAUSAS QUIRURGICAS DE DOLOR ABDOMINAL?",
+    "title": "Tengo una paciente femenina, con dolor abominal, agudo,...",
     "messages": [
       {
-        "id": "7f4901ac-8af4-4fc5-862f-1e0f62ab5d68",
+        "id": "5ec0dcfd-7b69-478f-b8b7-a5055294b9e8",
         "role": "user",
-        "content": "¿Cuales  son las CAUSAS QUIRURGICAS DE DOLOR ABDOMINAL?",
-        "timestamp": "2026-05-25T21:16:58.626Z"
+        "content": "Tengo una paciente femenina, con dolor abominal, agudo, subito, en hipogastrio, asociado a metreorragia leve, inestabilidad hemodinamica leve sospecho embarazo ectopico. ¿Segun la GPC que debo solicitar o cuál es el algoritmo de diagnostico y manejo en urgencias?",
+        "timestamp": "2026-05-26T21:05:31.175Z"
       },
       {
-        "id": "3cf81a3a-d05a-4bfe-bcf2-07d4b5c22c3b",
+        "id": "147c1e5c-733b-47fe-9f9f-bd64743cf10d",
         "role": "assistant",
-        "content": "De acuerdo con los documentos del Hospital San Rafael, las causas quirúrgicas de dolor abdominal son:\n\n*   **Apendicitis:** Se puede observar un aumento en los parámetros de laboratorio que indican inflamación, aunque no necesariamente en la fase inicial. Una historia prolongada puede estar asociada con un absceso periapendicular.\n*   **Obstrucción intestinal:** Puede presentarse con cicatrices quirúrgicas, hernias o posible malignidad. El dolor inicialmente puede ser ondulante y luego desarrollar estrangulamiento, lo cual indica la necesidad de cirugía.\n*   **Úlcera péptica perforada:** Se manifiesta con inicio agudo y peritonismo. Es un síntoma común de la enfermedad de úlcera péptica, y el dolor comienza en la parte superior del abdomen.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 1), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 10), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 12), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 7), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 8), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 9)",
-        "timestamp": "2026-05-25T21:18:04.481Z"
+        "content": "De acuerdo a la Guía de Práctica Clínica que tengo disponible, aquí te presento el algoritmo de diagnóstico y manejo para tu paciente, considerando la sospecha de embarazo ectópico:\n\n**1. Pruebas Inmediatas:**\n\n*   **Prueba de embarazo en orina:** Es fundamental para confirmar o descartar el embarazo. La GPC indica que esta prueba es importante para reducir el diagnóstico diferencial y determinar si estudios de imagen son apropiados.\n*   **Contenido sanguíneo completo:** Para evaluar la posible pérdida de sangre y detectar signos de infección.\n*   **Química hepática:**  Aunque no es la prioridad inicial, es útil tenerla a mano para evaluar la función hepática.\n*   **Amilasa y lipasa:** Para descartar pancreatitis, especialmente si hay dolor epigástrico.\n*   **Análisis de orina:** Para descartar infección urinaria, que puede ser una causa de dolor abdominal en mujeres.\n*   **Prueba de clamidia y gonorrea:**  Considerando que la paciente tiene dolor abdominal y sangrado, es importante descartar infecciones de transmisión sexual.\n\n**2. Estudios de Imagen:**\n\n*   **Ecografía transvaginal:** Es el estudio de imagen de elección para sospecha de embarazo ectópico. La GPC indica que tiene una sensibilidad del 95% para detectar embarazo ectópico en pacientes con prueba de embarazo positiva y hallazgos ecográficos anormales. Además, es útil para diagnosticar otras patologías ginecológicas.\n\n**3. Consideraciones Adicionales:**\n\n*   **Inestabilidad hemodinámica leve:**  Debido a la posible pérdida de sangre, es importante monitorizar de cerca los signos vitales de la paciente y considerar hidratación si es necesario.\n*   **Población Especial:** La paciente es una mujer en edad reproductiva, por lo que es crucial considerar la posibilidad de embarazo y actuar en consecuencia.\n\n**Manejo:**\n\n*   El manejo dependerá de los resultados de las pruebas y la ecografía. Si se confirma el embarazo ectópico, se deberá considerar el manejo médico (metotrexato) o quirúrgico, según la estabilidad de la paciente y las características del embarazo.\n*   Si hay signos de inestabilidad hemodinámica o peritonitis, se debe considerar una intervención quirúrgica urgente.\n\n**Importante:**\n\n*   La GPC enfatiza que la ecografía transvaginal es crucial para confirmar o descartar embarazo ectópico.\n*   Si la situación no está clara después de la ecografía, se puede considerar una tomografía computarizada (TC) de la cavidad abdominal.\n*   Debido a la posibilidad de complicaciones graves, es fundamental una evaluación rápida y un manejo adecuado.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 5), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 6), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 7), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 8)",
+        "timestamp": "2026-05-26T21:05:31.201Z"
       }
     ],
-    "pregunta": "¿Cuales  son las CAUSAS QUIRURGICAS DE DOLOR ABDOMINAL?",
-    "respuestaResumen": "De acuerdo con los documentos del Hospital San Rafael, las causas quirúrgicas de dolor abdominal son:\n\n*   **Apendicitis:** Se puede observar un aumento en los parámetros de laboratorio que indican inflamación, aunque no necesariamente en la fase inicial. Una historia prolongada puede estar asociada con un absceso periapendicular.\n*   **Obstrucción intestinal:** Puede presentarse con cicatrices quirúrgicas, hernias o posible malignidad. El dolor inicialmente puede ser ondulante y luego desarrollar estrangulamiento, lo cual indica la necesidad de cirugía.\n*   **Úlcera péptica perforada:** Se manifiesta con inicio agudo y peritonismo. Es un síntoma común de la enfermedad de úlcera péptica, y el dolor comienza en la parte superior del abdomen.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 1), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 10), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 12), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 7), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 8), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pag. 9)",
+    "pregunta": "Tengo una paciente femenina, con dolor abominal, agudo, subito, en hipogastrio, asociado a metreorragia leve, inestabilidad hemodinamica leve sospecho embarazo ectopico. ¿Segun la GPC que debo solicitar o cuál es el algoritmo de diagnostico y manejo en urgencias?",
+    "respuestaResumen": "De acuerdo a la Guía de Práctica Clínica que tengo disponible, aquí te presento el algoritmo de diagnóstico y manejo para tu paciente, considerando la sospecha de embarazo ectópico:\n\n**1. Pruebas Inmediatas:**\n\n*   **Prueba de embarazo en orina:** Es fundamental para confirmar o descartar el embarazo. La GPC indica que esta prueba es importante para reducir el diagnóstico diferencial y determinar si estudios de imagen son apropiados.\n*   **Contenido sanguíneo completo:** Para evaluar la posible pérdida de sangre y detectar signos de infección.\n*   **Química hepática:**  Aunque no es la prioridad inicial, es útil tenerla a mano para evaluar la función hepática.\n*   **Amilasa y lipasa:** Para descartar pancreatitis, especialmente si hay dolor epigástrico.\n*   **Análisis de orina:** Para descartar infección urinaria, que puede ser una causa de dolor abdominal en mujeres.\n*   **Prueba de clamidia y gonorrea:**  Considerando que la paciente tiene dolor abdominal y sangrado, es importante descartar infecciones de transmisión sexual.\n\n**2. Estudios de Imagen:**\n\n*   **Ecografía transvaginal:** Es el estudio de imagen de elección para sospecha de embarazo ectópico. La GPC indica que tiene una sensibilidad del 95% para detectar embarazo ectópico en pacientes con prueba de embarazo positiva y hallazgos ecográficos anormales. Además, es útil para diagnosticar otras patologías ginecológicas.\n\n**3. Consideraciones Adicionales:**\n\n*   **Inestabilidad hemodinámica leve:**  Debido a la posible pérdida de sangre, es importante monitorizar de cerca los signos vitales de la paciente y considerar hidratación si es necesario.\n*   **Población Especial:** La paciente es una mujer en edad reproductiva, por lo que es crucial considerar la posibilidad de embarazo y actuar en consecuencia.\n\n**Manejo:**\n\n*   El manejo dependerá de los resultados de las pruebas y la ecografía. Si se confirma el embarazo ectópico, se deberá considerar el manejo médico (metotrexato) o quirúrgico, según la estabilidad de la paciente y las características del embarazo.\n*   Si hay signos de inestabilidad hemodinámica o peritonitis, se debe considerar una intervención quirúrgica urgente.\n\n**Importante:**\n\n*   La GPC enfatiza que la ecografía transvaginal es crucial para confirmar o descartar embarazo ectópico.\n*   Si la situación no está clara después de la ecografía, se puede considerar una tomografía computarizada (TC) de la cavidad abdominal.\n*   Debido a la posibilidad de complicaciones graves, es fundamental una evaluación rápida y un manejo adecuado.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 5), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 6), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 7), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 8)",
     "tipo": "clínica",
     "estado": "verificada",
     "fuentes": [],
     "servicio": "Medicina Interna",
     "usuario": "Usuario",
-    "fecha": "25 de may de 2026",
-    "hora": "04:18 p. m.",
-    "createdAt": "2026-05-25T21:16:44.936Z",
-    "updatedAt": "2026-05-25T21:18:04.490Z"
+    "fecha": "26 de may de 2026",
+    "hora": "04:05 p. m.",
+    "createdAt": "2026-05-26T21:05:27.229Z",
+    "updatedAt": "2026-05-26T21:05:31.207Z"
   },
   {
-    "id": "4f4bf0f8-fc21-485d-81bf-9fb290acbdde",
+    "id": "7dd29a44-7559-40f2-9cb9-7e17ea36a516",
     "userEmail": "admin@sanrafael.med",
-    "title": "Dame cual es la lista de causas quirurgicas abdominales",
+    "title": "Tengo una paciente femenina, con dolor abominal, agudo,...",
     "messages": [
       {
-        "id": "ef461eac-ac84-4097-9612-38a2b798c68f",
+        "id": "89768de5-403b-4408-9943-6e613f925712",
         "role": "user",
-        "content": "Dame cual es la lista de causas quirurgicas abdominales",
-        "timestamp": "2026-05-24T19:09:57.695Z"
+        "content": "Tengo una paciente femenina, con dolor abominal, agudo, subito, en hipogastrio, asociado a metreorragia leve, inestabilidad hemodinamica leve sospecho embarazo ectopico. ¿Segun la GPC que debo solicitar o cuál es el algoritmo de diagnostico y manejo en urgencias?",
+        "timestamp": "2026-05-26T19:19:47.202Z"
       },
       {
-        "id": "925bf689-63d9-4d20-913a-12ef5121df54",
+        "id": "3b2ac241-9657-4d3f-85e1-423b7ef84eb9",
         "role": "assistant",
-        "content": "Lo siento, no tengo información sobre causas *quirúrgicas* abdominales en los documentos proporcionados. La información disponible se centra en causas no quirúrgicas y en el manejo general del dolor abdominal, incluyendo indicaciones para estudios de imagen y consideraciones para pacientes específicos (mujeres, adultos mayores).\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 6), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 7), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 8), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 9)",
-        "timestamp": "2026-05-24T19:11:04.233Z"
+        "content": "De acuerdo a la Guía de Práctica Clínica que tengo disponible, aquí te presento el algoritmo de diagnóstico y manejo para tu paciente, considerando la sospecha de embarazo ectópico:\n\n**1. Pruebas Inmediatas:**\n\n*   **Prueba de embarazo en orina:** Es fundamental para confirmar o descartar el embarazo. La GPC indica que esta prueba es importante para reducir el diagnóstico diferencial y determinar si estudios de imagen son apropiados.\n*   **Contenido sanguíneo completo:** Para evaluar la posible pérdida de sangre y detectar signos de infección.\n*   **Química hepática:**  Aunque no es la prioridad inicial, es útil tenerla a mano para evaluar la función hepática.\n*   **Amilasa y lipasa:** Para descartar pancreatitis, especialmente si hay dolor epigástrico.\n*   **Análisis de orina:** Para descartar infección urinaria, que puede ser una causa de dolor abdominal en mujeres.\n*   **Prueba de clamidia y gonorrea:**  Considerando que la paciente tiene dolor abdominal y sangrado, es importante descartar infecciones de transmisión sexual.\n\n**2. Estudios de Imagen:**\n\n*   **Ecografía transvaginal:** Es el estudio de imagen de elección para sospecha de embarazo ectópico. La GPC indica que tiene una sensibilidad del 95% para detectar embarazo ectópico en pacientes con prueba de embarazo positiva y hallazgos ecográficos anormales. Además, es útil para diagnosticar otras patologías ginecológicas.\n\n**3. Consideraciones Adicionales:**\n\n*   **Inestabilidad hemodinámica leve:**  Debido a la posible pérdida de sangre, es importante monitorizar de cerca los signos vitales de la paciente y considerar hidratación si es necesario.\n*   **Población Especial:** La paciente es una mujer en edad reproductiva, por lo que es crucial considerar la posibilidad de embarazo y actuar en consecuencia.\n\n**Manejo:**\n\n*   El manejo dependerá de los resultados de las pruebas y la ecografía. Si se confirma el embarazo ectópico, se deberá considerar el manejo médico (metotrexato) o quirúrgico, según la estabilidad de la paciente y las características del embarazo.\n*   Si hay signos de inestabilidad hemodinámica o peritonitis, se debe considerar una intervención quirúrgica urgente.\n\n**Importante:**\n\n*   La GPC enfatiza que la ecografía transvaginal es crucial para confirmar o descartar embarazo ectópico.\n*   Si la situación no está clara después de la ecografía, se puede considerar una tomografía computarizada (TC) de la cavidad abdominal.\n*   Debido a la posibilidad de complicaciones graves, es fundamental una evaluación rápida y un manejo adecuado.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 5), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 6), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 7), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 8)",
+        "timestamp": "2026-05-26T19:20:48.007Z"
       },
       {
-        "id": "1c8d53a5-3332-480b-9d8f-a8e02ad1f049",
+        "id": "86c36144-f8dd-4edc-9527-3dd3246946ee",
         "role": "user",
-        "content": "¿Cuales  son las CAUSAS QUIRURGICAS DE DOLOR ABDOMINAL?",
-        "timestamp": "2026-05-24T19:11:36.580Z"
+        "content": "La paciente aporta nuevos sintomas como coluria y acolia, y al examen fisico encuentro signo de murphy positivo, dime segun la GPC de patologia biliar que debo hacer para diagnosticar, clasificar y derivar o no a acto quirurgico",
+        "timestamp": "2026-05-26T19:25:43.943Z"
       },
       {
-        "id": "ea9182f5-b5bd-4078-8773-d015a9d96c1f",
+        "id": "893da366-2726-4d18-a814-96aa53991f39",
         "role": "assistant",
-        "content": "De acuerdo con la información proporcionada, las causas quirúrgicas de dolor abdominal incluyen: \n\n*   **Apendicitis:** Se asocia con inflamación, absceso periapendicular y una historia prolongada de la afección.\n*   **Obstrucción intestinal:** Puede ser causada por cicatrices quirúrgicas, hernias o malignidad. Inicialmente el dolor es ondulante y puede desarrollar estrangulamiento.\n*   **Úlcera péptica perforada:** Se manifiesta con inicio agudo, peritonismo y dolor que comienza en la parte superior del abdomen.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 1), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 7), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 8), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 9)",
-        "timestamp": "2026-05-24T19:11:36.610Z"
+        "content": "De acuerdo a la información disponible en la GPC, la aparición de coluria, acolia y un signo de Murphy positivo en una paciente con dolor abdominal sugiere fuertemente una patología biliar, posiblemente asociada a obstrucción. Aquí te presento el abordaje diagnóstico, clasificación y consideraciones sobre la derivación a acto quirúrgico, según la GPC:\n\n**1. Diagnóstico:**\n\n*   **Confirmación de la obstrucción biliar:** La coluria (orina oscura) y la acolia (ausencia de bilirrubina en las heces) son signos muy sugestivos de obstrucción biliar.\n*   **Pruebas de laboratorio:**\n    *   **Química hepática:** Es esencial para evaluar la función hepática y el grado de obstrucción. Se espera encontrar elevación de bilirrubina (directa e indirecta), fosfatasa alcalina y gamma-glutamil transferasa (GGT).\n    *   **Amilasa y lipasa:** Para descartar pancreatitis, que puede coexistir con la obstrucción biliar.\n*   **Estudios de imagen:**\n    *   **Ultrasonido abdominal:** Es el estudio inicial de elección. Puede identificar cálculos biliares, dilatación de los conductos biliares y, en algunos casos, el sitio de obstrucción.\n    *   **TAC abdominal con medio de contraste intravenoso:** Si el ultrasonido no es concluyente o se necesita más información sobre la anatomía biliar y estructuras adyacentes, se recomienda TAC.\n    *   **Colangiopancreatografía retrógrada endoscópica (CPRE):** Aunque no es un estudio de diagnóstico inicial, puede ser terapéutica si se identifica una obstrucción que requiere intervención.\n\n**2. Clasificación:**\n\nLa GPC no proporciona una clasificación específica para las patologías biliares, pero la gravedad de la situación se puede clasificar según:\n\n*   **Grado de obstrucción:** Leve, moderada o severa, según los niveles de bilirrubina y la dilatación de los conductos biliares.\n*   **Presencia de complicaciones:** Colangitis (infección de los conductos biliares), pancreatitis, peritonitis.\n*   **Estado del paciente:** Estabilidad hemodinámica, presencia de comorbilidades.\n\n**3. Derivación a Acto Quirúrgico:**\n\nLa GPC no establece criterios específicos para la derivación a acto quirúrgico, pero la siguiente información es relevante:\n\n*   **Colangitis aguda:** Requiere intervención urgente, ya sea por drenaje endoscópico (CPRE) o quirúrgico.\n*   **Obstrucción completa:** Si la obstrucción es completa y no se puede resolver con medidas endoscópicas, se requiere cirugía.\n*   **Signo de Murphy positivo:** Sugiere inflamación de la vesícula biliar, lo que puede indicar colecistitis aguda. Si hay signos de peritonitis o inestabilidad hemodinámica, se requiere cirugía urgente.\n*   **Comorbilidades:** La presencia de comorbilidades puede influir en la decisión de derivación a cirugía, considerando los riesgos y beneficios de la intervención.\n\n**En el caso específico de tu paciente:**\n\n*   La coluria, acolia y el signo de Murphy positivo sugieren una obstrucción biliar probablemente causada por cálculos biliares.\n*   Es crucial realizar un ultrasonido abdominal para confirmar la presencia de cálculos y evaluar la dilatación de los conductos biliares.\n*   Si el ultrasonido es concluyente y hay signos de colangitis o obstrucción completa, se debe considerar la derivación a cirugía o a un especialista en endoscopia para realizar una CPRE.\n*   Si el ultrasonido no es concluyente, se debe realizar un TAC abdominal con medio de contraste intravenoso para obtener más información.\n\n**Importante:**\n\n*   La GPC enfatiza la importancia de la evaluación clínica y los estudios de imagen para el diagnóstico y manejo de las patologías biliares.\n*   La derivación a acto quirúrgico debe basarse en la gravedad de la situación, la presencia de complicaciones y el estado general del paciente.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 6)\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 5), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 6), CG-GPC.EXT-06 guidelines-care-in-the-emergency (1).pdf (Pag. 4)",
+        "timestamp": "2026-05-26T19:26:55.568Z"
       },
       {
-        "id": "eeeaef90-f256-4cc7-9fbe-c99c407e57d2",
+        "id": "d3438f46-d581-4207-b19c-3b05b736ab65",
         "role": "user",
-        "content": "cual fue mi primera pregunta?",
-        "timestamp": "2026-05-24T19:11:59.755Z"
+        "content": "Dame el algoritmo diagnostico para el diagnositco de neumonia adulto, sagun la gpc",
+        "timestamp": "2026-05-26T19:30:11.241Z"
       },
       {
-        "id": "57592eea-4ef0-46fd-ba00-c805d4ab4361",
+        "id": "48c866da-202e-4f23-9853-d5ea1e8d997a",
         "role": "assistant",
-        "content": "Tu primera pregunta fue: 'Dame cual es la lista de causas quirurgicas abdominales'\n\nReferencia: NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 12), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 18), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 29), protocoloPrueba.pdf (Pág. 17), protocoloPrueba.pdf (Pág. 8), protocoloPrueba.pdf (Pág. 9)",
-        "timestamp": "2026-05-24T19:13:24.350Z"
+        "content": "De acuerdo a la Guía de Práctica Clínica (GPC) para el diagnóstico y manejo de neumonía adquirida en la comunidad en adultos, el algoritmo diagnóstico se basa en la evaluación clínica y la realización de pruebas complementarias según la sospecha de gravedad. A continuación, te presento el algoritmo simplificado:\n\n**1. Evaluación Clínica Inicial:**\n\n*   **Historia Clínica:** Recopilar información sobre síntomas respiratorios (tos, disnea, dolor torácico), fiebre, expectoración, comorbilidades, vacunación antigripal y antineumocócica, y uso de antibióticos previos.\n*   **Examen Físico:** Evaluar la frecuencia respiratoria, saturación de oxígeno, temperatura, auscultación pulmonar (presencia de crepitantes, roncus), y signos de consolidación (timpanismo a la percusión).\n\n**2. Valoración de la Gravedad:**\n\n*   **Utilizar un sistema de puntuación de gravedad:** La GPC recomienda el sistema CRB-65 o el CURB-65 para estratificar el riesgo de complicaciones y mortalidad.\n    *   **CRB-65:** Confusión, Respiración rápida, Presión arterial baja, Edad ≥65 años.\n    *   **CURB-65:** Confusión, Urea >7 mmol/L, Respiración rápida, Presión arterial baja, Edad ≥65 años.\n*   **Considerar factores de riesgo adicionales:** Comorbilidades (EPOC, insuficiencia cardíaca, diabetes), inmunosupresión, edad avanzada, y estado funcional previo.\n\n**3. Pruebas Complementarias (según la sospecha de gravedad):**\n\n*   **Radiografía de tórax:** Es la prueba de imagen inicial obligatoria para confirmar el diagnóstico de neumonía y evaluar la extensión de la afectación pulmonar.\n*   **Hemograma:** Para evaluar la presencia de leucocitosis y descartar otras causas de síntomas.\n*   **Gasometría arterial:** En pacientes con disnea o hipoxemia para evaluar el intercambio gaseoso.\n*   **Oximetría de pulso:** Para monitorizar la saturación de oxígeno.\n*   **Cultivo de esputo:** Se recomienda en pacientes con expectoración purulenta y/o sospecha de etiología específica (ej., *Pseudomonas aeruginosa*).\n*   **Pruebas de detección de virus respiratorios:** (Influenza, COVID-19, VRS) Se deben considerar en brotes epidémicos o en pacientes con factores de riesgo.\n*   **Tomografía computarizada (TC) de tórax:** Se reserva para casos de diagnóstico incierto, sospecha de complicaciones (derrame pleural, absceso pulmonar), o respuesta inadecuada al tratamiento inicial.\n\n**4. Diagnóstico Diferencial:**\n\n*   Considerar otras patologías que pueden simular neumonía, como:\n    *   Bronquitis aguda\n    *   Insuficiencia cardíaca congestiva\n    *   Embolia pulmonar\n    *   Neoplasias pulmonares\n    *   Atelectasia\n\n**Algoritmo Simplificado:**\n\n1.  **Evaluación Clínica Inicial** (Historia y Examen Físico)\n2.  **Valoración de la Gravedad** (CRB-65 o CURB-65)\n    *   **Bajo Riesgo:** Radiografía de tórax, hemograma.\n    *   **Riesgo Intermedio:** Radiografía de tórax, hemograma, considerar gasometría arterial.\n    *   **Alto Riesgo:** Radiografía de tórax, hemograma, gasometría arterial, considerar cultivo de esputo y pruebas virales.\n3.  **Interpretación de Resultados** y **Diagnóstico Diferencial**\n4.  **Tratamiento** (según la gravedad y la etiología sospechada)\n\n**Consideraciones Adicionales:**\n\n*   La GPC enfatiza la importancia de la evaluación clínica y la individualización del tratamiento.\n*   El uso de pruebas complementarias debe ser guiado por la sospecha clínica y la estratificación del riesgo.\n*   La respuesta al tratamiento debe ser monitorizada y ajustada según sea necesario.\n\n**Importante:** Este es un resumen simplificado del algoritmo diagnóstico. La GPC completa proporciona información más detallada sobre los criterios de inclusión, exclusión, y las recomendaciones específicas para cada situación clínica.\n\nReferencia: CG-GPC.EXT-03 Anexo-4-neumonia-adulto-2023 (1).pdf (Pag. 6-8)\n\nReferencia: NEUCX-GPC.EXT-28 Anexo-4-gpc-acv-isquemico-2023.pdf (Pag. 1), NEUCX-GPC.EXT-28 Anexo-4-gpc-acv-isquemico-2023.pdf (Pag. 2), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pag. 1), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pag. 2)",
+        "timestamp": "2026-05-26T19:31:38.618Z"
       },
       {
-        "id": "87ed4ef7-789d-44c4-9d20-7c2823b5a900",
+        "id": "daf7065c-ddde-432b-b95b-2651327012a9",
         "role": "user",
-        "content": "de que estabamos hablando?",
-        "timestamp": "2026-05-24T19:24:20.350Z"
+        "content": "Dentro de los antecendentes personales viene consumiendo warfarina 5mg diarios",
+        "timestamp": "2026-05-26T19:48:38.786Z"
       },
       {
-        "id": "872a4754-c719-4b1d-a4fd-3ed5faffece8",
+        "id": "a3c40b30-1eaf-4ffd-b3f7-ae4c269fdc2d",
         "role": "assistant",
-        "content": "Como soy un asistente médico basado en documentos proporcionados, no tengo memoria de conversaciones previas. Por favor, proporciona el contexto o la pregunta para poder ayudarte.\n\nReferencia: NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 12), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 15), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 29), protocoloPrueba.pdf (Pág. 13), protocoloPrueba.pdf (Pág. 8)",
-        "timestamp": "2026-05-24T19:25:25.416Z"
+        "content": "De acuerdo. La información adicional que proporcionas, \"Dentro de los antecedentes personales viene consumiendo warfarina 5mg diarios\", es crucial para el manejo del paciente. \n\nEsto implica que el paciente está anticoagulado con warfarina, un medicamento que requiere un monitoreo cuidadoso del INR (International Normalized Ratio) para asegurar que la anticoagulación sea efectiva pero no excesiva.\n\n**Implicaciones importantes a considerar:**\n\n*   **Riesgo de Hemorragia:** La warfarina aumenta el riesgo de hemorragia, lo que es especialmente importante en el contexto de un evento cerebrovascular agudo (como un ictus).\n*   **Interacción con Tratamientos:** La warfarina puede interactuar con otros medicamentos que se administren al paciente, tanto aumentando o disminuyendo su efecto.\n*   **INR:** Es fundamental conocer el INR actual del paciente antes de tomar cualquier decisión terapéutica.\n*   **Reversión de la Anticoagulación:** En caso de necesidad de revertir la anticoagulación (por ejemplo, si hay una hemorragia), se debe tener a mano el protocolo adecuado (vitamina K, concentrado de factores).\n*   **Justificación de la Warfarina:** Es importante conocer la razón por la que el paciente está tomando warfarina (ej. fibrilación auricular, trombosis venosa profunda, embolia pulmonar) para evaluar si es necesario continuar o suspender el tratamiento.\n\nEsta información debe ser tomada en cuenta al evaluar el caso y planificar el tratamiento del paciente.\n\nReferencia: NEUCX-GPC.EXT-28 Early Management of Acute Ischemic Stroke.pdf (Pag. 70), NEUCX-GPC.EXT-28 Early Management of Acute Ischemic Stroke.pdf (Pag. 71)",
+        "timestamp": "2026-05-26T19:50:42.330Z"
+      },
+      {
+        "id": "7044b92a-5a99-4ef3-9189-f5fcb742e483",
+        "role": "user",
+        "content": "Tengo una paciente femenina, con dolor abominal, agudo, subito, en hipogastrio, asociado a metreorragia leve, inestabilidad hemodinamica leve sospecho embarazo ectopico. ¿Segun la GPC que debo solicitar o cuál es el algoritmo de diagnostico y manejo en urgencias?",
+        "timestamp": "2026-05-26T21:05:04.960Z"
+      },
+      {
+        "id": "dcf5a43c-a881-4aa3-9e9e-2ae94f45d373",
+        "role": "assistant",
+        "content": "De acuerdo a la Guía de Práctica Clínica que tengo disponible, aquí te presento el algoritmo de diagnóstico y manejo para tu paciente, considerando la sospecha de embarazo ectópico:\n\n**1. Pruebas Inmediatas:**\n\n*   **Prueba de embarazo en orina:** Es fundamental para confirmar o descartar el embarazo. La GPC indica que esta prueba es importante para reducir el diagnóstico diferencial y determinar si estudios de imagen son apropiados.\n*   **Contenido sanguíneo completo:** Para evaluar la posible pérdida de sangre y detectar signos de infección.\n*   **Química hepática:**  Aunque no es la prioridad inicial, es útil tenerla a mano para evaluar la función hepática.\n*   **Amilasa y lipasa:** Para descartar pancreatitis, especialmente si hay dolor epigástrico.\n*   **Análisis de orina:** Para descartar infección urinaria, que puede ser una causa de dolor abdominal en mujeres.\n*   **Prueba de clamidia y gonorrea:**  Considerando que la paciente tiene dolor abdominal y sangrado, es importante descartar infecciones de transmisión sexual.\n\n**2. Estudios de Imagen:**\n\n*   **Ecografía transvaginal:** Es el estudio de imagen de elección para sospecha de embarazo ectópico. La GPC indica que tiene una sensibilidad del 95% para detectar embarazo ectópico en pacientes con prueba de embarazo positiva y hallazgos ecográficos anormales. Además, es útil para diagnosticar otras patologías ginecológicas.\n\n**3. Consideraciones Adicionales:**\n\n*   **Inestabilidad hemodinámica leve:**  Debido a la posible pérdida de sangre, es importante monitorizar de cerca los signos vitales de la paciente y considerar hidratación si es necesario.\n*   **Población Especial:** La paciente es una mujer en edad reproductiva, por lo que es crucial considerar la posibilidad de embarazo y actuar en consecuencia.\n\n**Manejo:**\n\n*   El manejo dependerá de los resultados de las pruebas y la ecografía. Si se confirma el embarazo ectópico, se deberá considerar el manejo médico (metotrexato) o quirúrgico, según la estabilidad de la paciente y las características del embarazo.\n*   Si hay signos de inestabilidad hemodinámica o peritonitis, se debe considerar una intervención quirúrgica urgente.\n\n**Importante:**\n\n*   La GPC enfatiza que la ecografía transvaginal es crucial para confirmar o descartar embarazo ectópico.\n*   Si la situación no está clara después de la ecografía, se puede considerar una tomografía computarizada (TC) de la cavidad abdominal.\n*   Debido a la posibilidad de complicaciones graves, es fundamental una evaluación rápida y un manejo adecuado.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 5), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 6), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 7), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 8)",
+        "timestamp": "2026-05-26T21:05:05.047Z"
       }
     ],
-    "pregunta": "Dame cual es la lista de causas quirurgicas abdominales",
-    "respuestaResumen": "Como soy un asistente médico basado en documentos proporcionados, no tengo memoria de conversaciones previas. Por favor, proporciona el contexto o la pregunta para poder ayudarte.\n\nReferencia: NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 12), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 15), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 29), protocoloPrueba.pdf (Pág. 13), protocoloPrueba.pdf (Pág. 8)",
+    "pregunta": "Tengo una paciente femenina, con dolor abominal, agudo, subito, en hipogastrio, asociado a metreorragia leve, inestabilidad hemodinamica leve sospecho embarazo ectopico. ¿Segun la GPC que debo solicitar o cuál es el algoritmo de diagnostico y manejo en urgencias?",
+    "respuestaResumen": "De acuerdo a la Guía de Práctica Clínica que tengo disponible, aquí te presento el algoritmo de diagnóstico y manejo para tu paciente, considerando la sospecha de embarazo ectópico:\n\n**1. Pruebas Inmediatas:**\n\n*   **Prueba de embarazo en orina:** Es fundamental para confirmar o descartar el embarazo. La GPC indica que esta prueba es importante para reducir el diagnóstico diferencial y determinar si estudios de imagen son apropiados.\n*   **Contenido sanguíneo completo:** Para evaluar la posible pérdida de sangre y detectar signos de infección.\n*   **Química hepática:**  Aunque no es la prioridad inicial, es útil tenerla a mano para evaluar la función hepática.\n*   **Amilasa y lipasa:** Para descartar pancreatitis, especialmente si hay dolor epigástrico.\n*   **Análisis de orina:** Para descartar infección urinaria, que puede ser una causa de dolor abdominal en mujeres.\n*   **Prueba de clamidia y gonorrea:**  Considerando que la paciente tiene dolor abdominal y sangrado, es importante descartar infecciones de transmisión sexual.\n\n**2. Estudios de Imagen:**\n\n*   **Ecografía transvaginal:** Es el estudio de imagen de elección para sospecha de embarazo ectópico. La GPC indica que tiene una sensibilidad del 95% para detectar embarazo ectópico en pacientes con prueba de embarazo positiva y hallazgos ecográficos anormales. Además, es útil para diagnosticar otras patologías ginecológicas.\n\n**3. Consideraciones Adicionales:**\n\n*   **Inestabilidad hemodinámica leve:**  Debido a la posible pérdida de sangre, es importante monitorizar de cerca los signos vitales de la paciente y considerar hidratación si es necesario.\n*   **Población Especial:** La paciente es una mujer en edad reproductiva, por lo que es crucial considerar la posibilidad de embarazo y actuar en consecuencia.\n\n**Manejo:**\n\n*   El manejo dependerá de los resultados de las pruebas y la ecografía. Si se confirma el embarazo ectópico, se deberá considerar el manejo médico (metotrexato) o quirúrgico, según la estabilidad de la paciente y las características del embarazo.\n*   Si hay signos de inestabilidad hemodinámica o peritonitis, se debe considerar una intervención quirúrgica urgente.\n\n**Importante:**\n\n*   La GPC enfatiza que la ecografía transvaginal es crucial para confirmar o descartar embarazo ectópico.\n*   Si la situación no está clara después de la ecografía, se puede considerar una tomografía computarizada (TC) de la cavidad abdominal.\n*   Debido a la posibilidad de complicaciones graves, es fundamental una evaluación rápida y un manejo adecuado.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 5), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 6), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 7), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 8)",
     "tipo": "clínica",
     "estado": "verificada",
     "fuentes": [],
     "servicio": "Medicina Interna",
     "usuario": "Usuario",
-    "fecha": "24 de may de 2026",
-    "hora": "02:25 p. m.",
-    "createdAt": "2026-05-24T19:09:38.874Z",
-    "updatedAt": "2026-05-24T19:25:25.423Z"
+    "fecha": "26 de may de 2026",
+    "hora": "04:05 p. m.",
+    "createdAt": "2026-05-26T19:15:25.126Z",
+    "updatedAt": "2026-05-26T21:05:05.058Z"
+  },
+  {
+    "id": "4cdbc5a1-f27b-4cf2-98f2-33c317ccfb94",
+    "userEmail": "admin@sanrafael.med",
+    "title": "Tienes información sobre Impacto del uso de opioides y ...",
+    "messages": [
+      {
+        "id": "4d5f95af-d14a-43c2-9dea-d4def33f40b3",
+        "role": "user",
+        "content": "Tienes información sobre Impacto del uso de opioides y crisis de sobredosis",
+        "timestamp": "2026-05-26T18:49:28.153Z"
+      },
+      {
+        "id": "4368ef80-1403-40f5-8c99-8df00a357e04",
+        "role": "assistant",
+        "content": "Sí, tengo mucha información sobre el impacto del uso de opioides y las crisis de sobredosis. Aquí te presento un resumen detallado, dividido en categorías para facilitar la comprensión:\n\n**1. El Problema: Uso de Opioides y Crisis de Sobredosis**\n\n*   **Aumento del Uso:** El uso de opioides, tanto recetados como ilícitos, ha aumentado significativamente en las últimas décadas. Esto ha llevado a una epidemia de sobredosis y muertes relacionadas con opioides.\n*   **Opioides Recetados:** Inicialmente, se promovió el uso de opioides para el manejo del dolor, lo que resultó en una prescripción excesiva. Esto llevó a la dependencia y al abuso.\n*   **Opioides Ilícitos:** El aumento de la disponibilidad de opioides ilícitos, como el fentanilo, ha exacerbado la crisis. El fentanilo es significativamente más potente que la morfina y es a menudo mezclado con otras drogas sin el conocimiento del usuario, aumentando el riesgo de sobredosis.\n*   **Crisis de Sobredosis:** Las sobredosis de opioides son una de las principales causas de muerte por lesiones en los Estados Unidos y en muchos otros países.\n\n**2. Impacto en la Salud Pública**\n\n*   **Muertes:** Las sobredosis de opioides han causado un número alarmante de muertes. Las cifras varían según el país y el año, pero la tendencia general es de aumento.\n*   **Enfermedades:** El uso de opioides puede llevar a diversas complicaciones de salud, incluyendo:\n    *   Dependencia y adicción\n    *   Problemas respiratorios\n    *   Daño hepático\n    *   Problemas gastrointestinales\n    *   Trastornos hormonales\n*   **Costos Económicos:** La crisis de opioides tiene un impacto económico significativo, incluyendo:\n    *   Costos de atención médica\n    *   Pérdida de productividad\n    *   Costos de aplicación de la ley\n    *   Costos de rehabilitación\n\n**3. Factores de Riesgo**\n\n*   **Historial de Abuso de Sustancias:** Las personas con un historial de abuso de sustancias tienen un mayor riesgo de desarrollar dependencia a los opioides.\n*   **Condiciones de Salud Mental:** La depresión, la ansiedad y otros trastornos de salud mental pueden aumentar el riesgo de abuso de opioides.\n*   **Dolor Crónico:** Las personas con dolor crónico pueden ser más propensas a usar opioides de forma prolongada, lo que aumenta el riesgo de dependencia.\n*   **Acceso a Opioides:** La disponibilidad de opioides, tanto recetados como ilícitos, es un factor de riesgo importante.\n*   **Factores Sociales y Económicos:** La pobreza, la falta de acceso a la atención médica y otros factores sociales y económicos pueden aumentar el riesgo de abuso de opioides.\n\n**4. Consecuencias Sociales**\n\n*   **Familias:** La crisis de opioides ha devastado a muchas familias, causando sufrimiento emocional, financiero y social.\n*   **Comunidades:** El aumento del crimen, la delincuencia y la inestabilidad social están relacionados con la crisis de opioides.\n*   **Sistema de Salud:** El sistema de salud está sobrecargado por la necesidad de tratar a personas con adicción a opioides y por las consecuencias de las sobredosis.\n\n**5. Respuestas y Soluciones**\n\n*   **Prevención:**\n    *   Educación pública sobre los riesgos del uso de opioides\n    *   Programas de prevención del abuso de sustancias\n    *   Restricciones a la prescripción de opioides\n*   **Tratamiento:**\n    *   Terapia conductual\n    *   Medicamentos para tratar la adicción\n    *   Programas de rehabilitación\n*   **Reducción de Daños:**\n    *   Distribución de naloxona (un medicamento que puede revertir una sobredosis de opioides)\n    *   Programas de intercambio de agujas\n    *   Sitios de consumo supervisado\n*   **Aplicación de la Ley:**\n    *   Combatir el tráfico de opioides ilícitos\n    *   Responsabilizar a los proveedores de opioides que contribuyen a la crisis\n\n**6. Datos y Estadísticas (Ejemplos)**\n\n*   **Estados Unidos:** En 2021, hubo más de 107,000 muertes por sobredosis de drogas en los Estados Unidos, la mayoría de las cuales estuvieron relacionadas con opioides y fentanilo.\n*   **Global:** La Organización de las Naciones Unidas estima que millones de personas en todo el mundo sufren de dependencia de opioides.\n*\n\nReferencia: CG-GPC.EXT-06 PAIN BEST PRACTICES INTER-AGENCY TASK FORCE REPORT (1).pdf (Pag. 104), CG-GPC.EXT-06 PAIN BEST PRACTICES INTER-AGENCY TASK FORCE REPORT (1).pdf (Pag. 94), CG-GPC.EXT-06 PAIN BEST PRACTICES INTER-AGENCY TASK FORCE REPORT (1).pdf (Pag. 95)",
+        "timestamp": "2026-05-26T18:50:52.501Z"
+      },
+      {
+        "id": "1492320e-87bc-4b1a-9b5a-e0a2987a5085",
+        "role": "user",
+        "content": "Tienes una guia sobre Uso de medicamentos y cuidados profilácticos?",
+        "timestamp": "2026-05-26T18:55:42.570Z"
+      },
+      {
+        "id": "76fc62ee-0424-4b03-afda-748b0f82fcec",
+        "role": "assistant",
+        "content": "De acuerdo a los documentos proporcionados, existen guías y recursos relacionados con el uso de medicamentos y cuidados profilácticos en el manejo del dolor y la prevención de complicaciones asociadas a opioides.\n\n**Uso de Medicamentos:**\n\n*   **VA/DoD Clinical Practice Guidelines:** Se ofrecen recomendaciones basadas en evidencia para el manejo de la terapia con opioides en condiciones de dolor crónico.\n*   **SAMHSA Treatment Improvement Protocol 63:** Este protocolo discute el uso de medicamentos como metadona, naltrexona y buprenorfina para tratar el Trastorno por Uso de Opioides (TUD), así como otras estrategias y servicios necesarios para apoyar la recuperación.\n*   **MATx Mobile App:** Es una aplicación móvil de SAMHSA que apoya a los clínicos que brindan tratamiento con medicamentos asistidos para el TUD.\n*   **FDA Blueprint:** Existe una educación para proveedores de atención médica involucrados en el tratamiento y monitoreo de pacientes con dolor, relacionada con el Opioid Analgesic Risk Evaluation and Mitigation Strategy.\n*   **FDA identifica daño:** La FDA ha identificado daños reportados por la descontinuación abrupta de medicamentos opioides y requiere cambios en la etiqueta para guiar a los prescriptores sobre una reducción gradual e individualizada.\n\n**Cuidados Profilácticos:**\n\n*   **CDC Guideline for Prescribing Opioids for Chronic Pain:** La CDC proporciona recomendaciones integrales para los médicos de atención primaria que prescriben opioides para el dolor crónico.\n*   **SAMHSA SAFE-T Risk Card:** Describe un proceso de evaluación y triage de cinco pasos para la evaluación del riesgo de suicidio.\n*   **VA/DoD Clinical Practice Guideline Suicide Prevention Pocket Guide:** Proporciona un resumen de los algoritmos y tablas de práctica clínica para la prevención del suicidio.\n*   **CMS Roadmap: Fighting the Opioid Crisis:** Describe las áreas de enfoque clave y el camino a seguir para abordar la crisis de opioides.\n\nEs importante tener en cuenta que estos documentos ofrecen información general y recursos adicionales. Para obtener una guía específica y detallada sobre el uso de medicamentos y cuidados profilácticos, se recomienda consultar las fuentes originales y buscar la orientación de un profesional de la salud.\n\nReferencia: CG-GPC.EXT-06 PAIN BEST PRACTICES INTER-AGENCY TASK FORCE REPORT (1).pdf (Pag. 114), CG-GPC.EXT-06 PAIN BEST PRACTICES INTER-AGENCY TASK FORCE REPORT (1).pdf (Pag. 115), CG-GPC.EXT-06 PAIN BEST PRACTICES INTER-AGENCY TASK FORCE REPORT (1).pdf (Pag. 82), CG-GPC.EXT-06 PAIN BEST PRACTICES INTER-AGENCY TASK FORCE REPORT (1).pdf (Pag. 83)",
+        "timestamp": "2026-05-26T18:56:47.810Z"
+      },
+      {
+        "id": "f348576b-6211-4bbb-9e3e-a9ad7005f4ad",
+        "role": "user",
+        "content": "Tienes algo sobre evaluacion de emergencias y tratamientos",
+        "timestamp": "2026-05-26T19:00:13.867Z"
+      },
+      {
+        "id": "992df63f-b0d6-4e55-a1a3-5b0ad62d492f",
+        "role": "assistant",
+        "content": "Sí, los documentos proporcionan información sobre la evaluación en emergencias y los tratamientos iniciales para pacientes con accidente cerebrovascular isquémico. A continuación, te resumo los puntos clave:\n\n**Evaluación en Urgencias:**\n\n*   **Escala NIHSS:** Se recomienda utilizar la Escala de Accidentes Cerebrovasculares del Instituto Nacional de Salud (NIHSS) como herramienta preferida para la evaluación de accidentes cerebrovasculares.\n*   **Estudios de Imagen:** Al llegar al hospital, los pacientes con sospecha de accidente cerebrovascular deben someterse a estudios de imágenes cerebrales de emergencia antes de determinar el tratamiento específico.\n*   **Rapidez en la Imagen:** El equipo debe completar los estudios de imágenes lo más rápido posible para identificar candidatos a trombectomía mecánica, fibrinólisis intravenosa o ambas.\n*   **Descarte de Hemorragia:** Antes de administrar terapia de fibrinolisis intravenosa, se debe realizar una tomografía computarizada sin contraste o una resonancia magnética para descartar una hemorragia intracraneal.\n*   **Angiografía:** En algunos casos, se recomienda la angiografía por tomografía computarizada o resonancia magnética para evaluar los vasos sanguíneos.\n*   **Resonancia Magnética:** En pacientes con tiempo de inicio desconocido (como en accidentes cerebrovasculares del despertar) o inicio de síntomas poco claro, se puede considerar una resonancia magnética primero para identificar lesiones específicas.\n\n**Tratamientos:**\n\n*   **Trombolisis Intravenosa:** La administración de alteplasa IV debe comenzar lo antes posible después de determinar la elegibilidad del paciente. No se debe demorar la administración esperando mejoría de los síntomas.\n*   **Ventanas de Tiempo para Trombolisis:**\n    *   Pacientes con inicio de síntomas de menos de 3 horas desde el último estado normal conocido.\n    *   Pacientes que se presentan dentro de la ventana de 3 a 4.5 horas.\n    *   En ciertos casos, se puede considerar la trombolisis en una ventana extendida (hasta 24 horas) bajo criterios específicos.\n*   **Trombectomía Mecánica:** Se considera para pacientes seleccionados, especialmente aquellos con oclusión de grandes vasos sanguíneos.\n*   **Cuidados de Soporte:** Además de los tratamientos específicos, se deben proporcionar cuidados de soporte generales para estabilizar al paciente.\n\n**Consideraciones Adicionales:**\n\n*   Los documentos hacen referencia a guías de la AHA (American Heart Association) y la CDC (Centers for Disease Control and Prevention) para el manejo del accidente cerebrovascular.\n*   Se enfatiza la importancia de un sistema de atención al accidente cerebrovascular bien coordinado, tanto en la prehospitalaria como en la hospitalaria.\n\nReferencia: CG-GPC.EXT-07 Stroke Best Practices.pdf (Páginas 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 1\n\nReferencia: NEUCX-GPC.EXT-28 Anexo-4-gpc-acv-isquemico-2023.pdf (Pag. 2), NEUCX-GPC.EXT-28 Anexo-4-gpc-acv-isquemico-2023.pdf (Pag. 3), NEUCX-GPC.EXT-28 Early Management of Acute Ischemic Stroke.pdf (Pag. 2)",
+        "timestamp": "2026-05-26T19:01:28.408Z"
+      },
+      {
+        "id": "6bcaadc9-517a-48ec-9d44-12fabb1c02c9",
+        "role": "user",
+        "content": "Hablame sobre las ecografias, son utiles?",
+        "timestamp": "2026-05-26T19:06:16.151Z"
+      },
+      {
+        "id": "1cbd33b3-7412-48e7-bd6c-02ac11f96ea3",
+        "role": "assistant",
+        "content": "De acuerdo con los documentos proporcionados, las ecografías (también llamadas ultrasonidos) tienen un papel importante en la evaluación y manejo de diversas condiciones, aunque su utilidad varía según la situación clínica. Aquí te resumo lo que se menciona:\n\n**Utilidad General:**\n\n*   **Evaluación del Dolor Abdominal:** La ecografía abdominal o transvaginal se recomienda para evaluar el dolor en el cuadrante inferior izquierdo en mujeres en edad fértil y en pacientes embarazadas con dolor en el cuadrante inferior derecho del abdomen.\n*   **Embarazo Ectópico:** La ecografía es crucial para diagnosticar un embarazo ectópico. Se menciona que puede ser útil, pero también se indica que puede haber limitaciones en la detección temprana.\n*   **Causas Ginecológicas:** En mujeres en edad fértil, la ecografía es importante para descartar causas ginecológicas de dolor abdominal.\n*   **Alternativa a la TC:** En algunos casos, la ecografía puede ser una alternativa a la tomografía computarizada (TC), especialmente cuando se busca evitar la exposición a la radiación, como en mujeres embarazadas.\n*   **Detección de Anomalías:** La ecografía puede detectar aire libre debajo del diafragma, lo que indica una perforación del tracto gastrointestinal, y calcificaciones anormales (cálculos biliares, cálculos renales, apendicolitos).\n*   **Evaluación de la Obstrucción Intestinal:** La ecografía puede ayudar a diagnosticar la obstrucción intestinal, aunque la radiografía simple también puede ser útil.\n\n**Limitaciones y Consideraciones:**\n\n*   **Dependencia del Operador:** Se menciona que la ecografía es dependiente del operador, lo que significa que la calidad de la imagen y la interpretación pueden variar según la experiencia del técnico o médico que la realiza.\n*   **Disponibilidad de Recursos:** La ecografía requiere equipo especializado y personal capacitado, lo que puede limitar su disponibilidad en algunos entornos.\n*   **Complemento a la TC:** En algunos casos, la ecografía puede ser complementaria a la TC, especialmente cuando la TC es más precisa o proporciona información adicional.\n*   **Recomendación de Radiólogos:** Se sugiere que la ecografía se realice bajo la recomendación de un radiólogo para optimizar su uso y evitar resultados falsos positivos.\n\n**En resumen, las ecografías son herramientas útiles en la evaluación de diversas condiciones, pero tienen limitaciones y deben interpretarse en el contexto clínico del paciente.**\n\nReferencia: CG-GPC.EXT-07 Stroke Best Practices.pdf (Páginas 16), NEUCX-GPC.EXT-28 Anexo-4-gpc-acv-isquemico-2023.pdf (Pag. 2)\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 6), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 7), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 8), CG-GPC.EXT-06 guidelines-care-in-the-emergency (1).pdf (Pag. 16)",
+        "timestamp": "2026-05-26T19:08:59.266Z"
+      }
+    ],
+    "pregunta": "Tienes información sobre Impacto del uso de opioides y crisis de sobredosis",
+    "respuestaResumen": "De acuerdo con los documentos proporcionados, las ecografías (también llamadas ultrasonidos) tienen un papel importante en la evaluación y manejo de diversas condiciones, aunque su utilidad varía según la situación clínica. Aquí te resumo lo que se menciona:\n\n**Utilidad General:**\n\n*   **Evaluación del Dolor Abdominal:** La ecografía abdominal o transvaginal se recomienda para evaluar el dolor en el cuadrante inferior izquierdo en mujeres en edad fértil y en pacientes embarazadas con dolor en el cuadrante inferior derecho del abdomen.\n*   **Embarazo Ectópico:** La ecografía es crucial para diagnosticar un embarazo ectópico. Se menciona que puede ser útil, pero también se indica que puede haber limitaciones en la detección temprana.\n*   **Causas Ginecológicas:** En mujeres en edad fértil, la ecografía es importante para descartar causas ginecológicas de dolor abdominal.\n*   **Alternativa a la TC:** En algunos casos, la ecografía puede ser una alternativa a la tomografía computarizada (TC), especialmente cuando se busca evitar la exposición a la radiación, como en mujeres embarazadas.\n*   **Detección de Anomalías:** La ecografía puede detectar aire libre debajo del diafragma, lo que indica una perforación del tracto gastrointestinal, y calcificaciones anormales (cálculos biliares, cálculos renales, apendicolitos).\n*   **Evaluación de la Obstrucción Intestinal:** La ecografía puede ayudar a diagnosticar la obstrucción intestinal, aunque la radiografía simple también puede ser útil.\n\n**Limitaciones y Consideraciones:**\n\n*   **Dependencia del Operador:** Se menciona que la ecografía es dependiente del operador, lo que significa que la calidad de la imagen y la interpretación pueden variar según la experiencia del técnico o médico que la realiza.\n*   **Disponibilidad de Recursos:** La ecografía requiere equipo especializado y personal capacitado, lo que puede limitar su disponibilidad en algunos entornos.\n*   **Complemento a la TC:** En algunos casos, la ecografía puede ser complementaria a la TC, especialmente cuando la TC es más precisa o proporciona información adicional.\n*   **Recomendación de Radiólogos:** Se sugiere que la ecografía se realice bajo la recomendación de un radiólogo para optimizar su uso y evitar resultados falsos positivos.\n\n**En resumen, las ecografías son herramientas útiles en la evaluación de diversas condiciones, pero tienen limitaciones y deben interpretarse en el contexto clínico del paciente.**\n\nReferencia: CG-GPC.EXT-07 Stroke Best Practices.pdf (Páginas 16), NEUCX-GPC.EXT-28 Anexo-4-gpc-acv-isquemico-2023.pdf (Pag. 2)\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 6), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 7), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023 (1).pdf (Pag. 8), CG-GPC.EXT-06 guidelines-care-in-the-emergency (1).pdf (Pag. 16)",
+    "tipo": "clínica",
+    "estado": "verificada",
+    "fuentes": [],
+    "servicio": "Medicina Interna",
+    "usuario": "Usuario",
+    "fecha": "26 de may de 2026",
+    "hora": "02:08 p. m.",
+    "createdAt": "2026-05-26T18:48:42.949Z",
+    "updatedAt": "2026-05-26T19:08:59.275Z"
+  },
+  {
+    "id": "f171edbc-6a49-4b66-836e-21ec818601ea",
+    "userEmail": "admin@sanrafael.med",
+    "title": "Estoy consultando sobre dosis de acetaminofén en adulto...",
+    "messages": [
+      {
+        "id": "e82a4d16-1740-4448-ae18-e7d942f8bb31",
+        "role": "user",
+        "content": "Estoy consultando sobre dosis de acetaminofén en adultos. Recuerda que mi duda es sobre dosis segura.",
+        "timestamp": "2026-05-26T15:57:10.093Z"
+      },
+      {
+        "id": "5f0fde7c-3f10-432e-baa3-5e370e75f5e0",
+        "role": "assistant",
+        "content": "De acuerdo. Según los documentos disponibles, se menciona información sobre el uso de acetaminofén (paracetamol) en adultos en el contexto de manejo del dolor abdominal en el departamento de urgencias.\n\nSe indica que el acetaminofén puede ser una opción para el manejo del dolor, pero existen criterios de exclusión importantes antes de su administración, incluyendo:\n\n*   Prior reacción adversa a acetaminofén.\n*   Presencia de insuficiencia renal, hepática o cardíaca.\n*   Alteración del estado mental (GCS < 15).\n*   Incapacidad para cooperar en el estudio.\n\nAdemás, se especifica que no se debe administrar acetaminofén a pacientes que hayan tomado analgésicos en las últimas 6 horas.\n\n**Es crucial destacar que esta información se limita al contexto específico de manejo del dolor abdominal en urgencias y no proporciona una guía general sobre la dosis segura de acetaminofén en adultos para otras condiciones.**\n\nPara obtener información precisa sobre la dosis segura de acetaminofén para su situación específica, le recomiendo consultar con un médico o farmacéutico. Ellos podrán evaluar su historial médico y brindarle una orientación adecuada.\n\nReferencia: CG-GPC.EXT-06 guidelines-care-in-the-emergency (1).pdf (Pag. 24), NEUCX-GPC.EXT-28 Anexo-4-gpc-acv-isquemico-2023.pdf (Pag. 2), NEUCX-GPC.EXT-28 Anexo-4-gpc-acv-isquemico-2023.pdf (Pag. 3)",
+        "timestamp": "2026-05-26T15:58:43.429Z"
+      },
+      {
+        "id": "74d279f4-9558-400f-869d-7ffa6ef5e57e",
+        "role": "user",
+        "content": "cual fue mi pregunta anterior",
+        "timestamp": "2026-05-26T15:59:51.494Z"
+      },
+      {
+        "id": "d0bd4e06-c2ae-4c25-9139-91c6e60e80a0",
+        "role": "assistant",
+        "content": "Tu pregunta anterior fue: \"¿Cuál fue mi pregunta anterior?\"\n\nReferencia: CG-GPC.EXT-06 PAIN BEST PRACTICES INTER-AGENCY TASK FORCE REPORT (1).pdf (Pag. 25), CG-GPC.EXT-06 PAIN BEST PRACTICES INTER-AGENCY TASK FORCE REPORT (1).pdf (Pag. 26), CG-GPC.EXT-06 guidelines-care-in-the-emergency (1).pdf (Pag. 8)",
+        "timestamp": "2026-05-26T16:00:54.426Z"
+      },
+      {
+        "id": "2d94464a-1a4c-491d-9769-4341f1748c41",
+        "role": "user",
+        "content": "de que se trata lo que estamos hablando en el chat",
+        "timestamp": "2026-05-26T16:02:48.348Z"
+      },
+      {
+        "id": "76e0bff2-a3d2-4752-9751-d1fad34c7fff",
+        "role": "assistant",
+        "content": "Estamos hablando sobre el manejo del dolor y el uso de medicamentos, específicamente acetaminofén (paracetamol), basándonos en documentos del Hospital San Rafael.\n\nInicialmente, preguntaste sobre la dosis segura de acetaminofén para adultos. Debido a que la información disponible se centra en el manejo del dolor abdominal en urgencias, la respuesta se limitó a ese contexto y te recomendé consultar a un médico o farmacéutico para obtener información más específica.\n\nLuego, preguntaste \"¿Cuál fue mi pregunta anterior?\" y te respondí que era precisamente esa pregunta.\n\nEn resumen, la conversación ha girado en torno a tu consulta sobre acetaminofén y la información limitada disponible en los documentos proporcionados.\n\nReferencia: CG-GPC.EXT-06 PAIN BEST PRACTICES INTER-AGENCY TASK FORCE REPORT (1).pdf (Pag. 21), CG-GPC.EXT-06 PAIN BEST PRACTICES INTER-AGENCY TASK FORCE REPORT (1).pdf (Pag. 61), CG-GPC.EXT-06 PAIN BEST PRACTICES INTER-AGENCY TASK FORCE REPORT (1).pdf (Pag. 62)",
+        "timestamp": "2026-05-26T16:03:52.659Z"
+      },
+      {
+        "id": "0bafa157-0bf8-4e2d-8a61-c69abf7a14f7",
+        "role": "user",
+        "content": "cual fue mi primera pregunta de todo el chat",
+        "timestamp": "2026-05-26T16:05:16.337Z"
+      },
+      {
+        "id": "8666cd7e-9df9-4b6d-aa87-82040ca08ba5",
+        "role": "assistant",
+        "content": "Tu primera pregunta fue: \"¿Eres un asistente medico experto del Hospital San Rafael?\"\n\nReferencia: NEUCX-GPC.EXT-28 Early Management of Acute Ischemic Stroke.pdf (Pag. 12), NEUCX-GPC.EXT-28 Early Management of Acute Ischemic Stroke.pdf (Pag. 13), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pag. 29), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pag. 30)",
+        "timestamp": "2026-05-26T16:06:43.561Z"
+      },
+      {
+        "id": "2cea804e-9367-4083-9639-0af255108cda",
+        "role": "user",
+        "content": "tienes el historial del chat?",
+        "timestamp": "2026-05-26T16:07:59.034Z"
+      },
+      {
+        "id": "02e01a20-5615-4aff-800e-e1e500fab4bb",
+        "role": "assistant",
+        "content": "Como modelo de lenguaje, no tengo un historial de chat persistente. Cada interacción es independiente. La información que hemos intercambiado se mantiene solo durante la sesión actual. Una vez que finalizamos la conversación, esa información se elimina.\n\nPor lo tanto, no puedo acceder a un historial completo de nuestro chat anterior.\n\nReferencia: CG-GPC.EXT-06 guidelines-care-in-the-emergency (1).pdf (Pag. 8), CG-GPC.EXT-06 guidelines-care-in-the-emergency (1).pdf (Pag. 9)",
+        "timestamp": "2026-05-26T16:10:14.783Z"
+      },
+      {
+        "id": "f29384ad-0581-465f-9ab0-422c6baee01a",
+        "role": "user",
+        "content": "¿cuál fue el primer tema que consulté?",
+        "timestamp": "2026-05-26T16:36:34.984Z"
+      },
+      {
+        "id": "b638d93c-37ad-43bf-b772-dc36613fcf26",
+        "role": "assistant",
+        "content": "El primer tema que consultaste fue sobre dosis de acetaminofén en adultos, preguntando específicamente sobre dosis segura.\n\nReferencia: CG-GPC.EXT-06 guidelines-care-in-the-emergency (1).pdf (Pag. 10), CG-GPC.EXT-06 guidelines-care-in-the-emergency (1).pdf (Pag. 11)\n\nReferencia: CG-GPC.EXT-06 PAIN BEST PRACTICES INTER-AGENCY TASK FORCE REPORT (1).pdf (Pag. 25), CG-GPC.EXT-06 guidelines-care-in-the-emergency (1).pdf (Pag. 18), CG-GPC.EXT-06 guidelines-care-in-the-emergency (1).pdf (Pag. 19)",
+        "timestamp": "2026-05-26T16:38:12.425Z"
+      }
+    ],
+    "pregunta": "Estoy consultando sobre dosis de acetaminofén en adultos. Recuerda que mi duda es sobre dosis segura.",
+    "respuestaResumen": "El primer tema que consultaste fue sobre dosis de acetaminofén en adultos, preguntando específicamente sobre dosis segura.\n\nReferencia: CG-GPC.EXT-06 guidelines-care-in-the-emergency (1).pdf (Pag. 10), CG-GPC.EXT-06 guidelines-care-in-the-emergency (1).pdf (Pag. 11)\n\nReferencia: CG-GPC.EXT-06 PAIN BEST PRACTICES INTER-AGENCY TASK FORCE REPORT (1).pdf (Pag. 25), CG-GPC.EXT-06 guidelines-care-in-the-emergency (1).pdf (Pag. 18), CG-GPC.EXT-06 guidelines-care-in-the-emergency (1).pdf (Pag. 19)",
+    "tipo": "clínica",
+    "estado": "verificada",
+    "fuentes": [],
+    "servicio": "Medicina Interna",
+    "usuario": "Usuario",
+    "fecha": "26 de may de 2026",
+    "hora": "11:38 a. m.",
+    "createdAt": "2026-05-26T15:58:43.436Z",
+    "updatedAt": "2026-05-26T16:38:12.431Z"
   },
   {
     "id": "a181bf17-30eb-4758-86cb-5569ad327463",
@@ -111,126 +279,6 @@
     "hora": "02:07 p. m.",
     "createdAt": "2026-05-24T19:07:08.468Z",
     "updatedAt": "2026-05-24T19:07:08.468Z"
-  },
-  {
-    "id": "c5c95298-2e10-477f-84e1-c2fd8a3393ef",
-    "userEmail": "admin@sanrafael.med",
-    "title": "¿Guia de antibioticos?",
-    "messages": [
-      {
-        "id": "7af1d10d-3307-45bc-a5a7-57ba66f1f737",
-        "role": "user",
-        "content": "¿Guia de antibioticos?",
-        "timestamp": "2026-05-24T18:45:04.056Z"
-      },
-      {
-        "id": "9d60c953-7054-4582-87ee-030dcf287da5",
-        "role": "assistant",
-        "content": "No dispongo de información específica sobre guías de antibióticos en los documentos proporcionados. Sin embargo, sí se menciona que los antibióticos profilácticos de rutina no son beneficiosos y, por lo tanto, no se recomiendan.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 1), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 11), protocoloPrueba.pdf (Pág. 1), protocoloPrueba.pdf (Pág. 13), protocoloPrueba.pdf (Pág. 7)",
-        "timestamp": "2026-05-24T18:45:45.435Z"
-      },
-      {
-        "id": "d2f72d92-1af2-4faf-8da5-83306693f87f",
-        "role": "user",
-        "content": "de que tienes información",
-        "timestamp": "2026-05-24T19:01:12.599Z"
-      },
-      {
-        "id": "a38a9efe-ae06-4672-827a-ee7de41d9a70",
-        "role": "assistant",
-        "content": "De acuerdo a los documentos proporcionados, tengo información sobre los siguientes temas:\n\n*   **Dolor Abdominal:** Barreras y facilitadores en el diagnóstico y tratamiento, incluyendo disponibilidad de laboratorios, imágenes diagnósticas, atención de urgencias y salas de cirugía. Se mencionan factores que pueden dificultar la aplicación de guías de práctica clínica (GPC), como la complejidad de las mismas, la falta de acceso a recursos y la falta de aceptación.\n*   **Trombólisis Intravenosa:** Criterios y recomendaciones para la trombectomía mecánica en pacientes con accidente cerebrovascular isquémico, incluyendo los criterios DAWN y DEFUSE 3, así como consideraciones sobre edad, NIHSS y volumen de infarto.\n*   **Accidente Cerebrovascular (ACV):**  Recomendaciones sobre rehabilitación temprana con un equipo multidisciplinario, intensidad de la rehabilitación, evaluación de depresión post-ACV y uso de antidepresivos en pacientes con depresión. También se menciona la precaución con el uso de medias de compresión en pacientes con secuelas de ACV.\n*   **Profilaxis con heparina:** Se indica que la heparina subcutánea en dosis profiláctica no se ha establecido como beneficiosa y no se recomienda.\n*   **Información Preoperatoria para Cirugía Abdominal:** Se enfatiza la importancia de proporcionar información oral y escrita a los pacientes sobre el proceso quirúrgico y la estancia hospitalaria, buscando una comprensión integral.\n*   **Manejo del Dolor:** Se destaca la importancia de obtener información detallada sobre el dolor (inicio, duración, gravedad, calidad, factores que lo exacerban o alivian) para enfocar el diagnóstico diferencial. Se mencionan síntomas asociados como el estreñimiento (en obstrucción intestinal) y el dolor en el cuadrante inferior derecho (en apendicitis).\n*   **Convulsiones post-ACV:** Se recomienda tratar las convulsiones recurrentes de manera similar a otras condiciones neurológicas agudas, seleccionando medicamentos anticonvulsivantes según las características del paciente, y no se recomienda la profilaxis anticonvulsivante.\n*   **Uso de Resonancia Magnética:** Se considera razonable el uso de resonancia magnética en algunos pacientes con secuelas de evento isquémico para obtener información adicional que guíe el manejo.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 10), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 14), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 4), protocoloPrueba.pdf (Pág. 11)",
-        "timestamp": "2026-05-24T19:02:49.095Z"
-      },
-      {
-        "id": "c51ff9e6-e5da-4b1b-bd0a-61808dc0110a",
-        "role": "user",
-        "content": "Sabes cual fue mi primera pregunta?",
-        "timestamp": "2026-05-24T19:07:53.378Z"
-      },
-      {
-        "id": "e2943394-0df5-4262-8b66-2995a9c74b75",
-        "role": "assistant",
-        "content": "Tu primera pregunta fue: ¿Guia de antibioticos?\n\nReferencia: NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 12), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 18), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 29), protocoloPrueba.pdf (Pág. 17), protocoloPrueba.pdf (Pág. 8), protocoloPrueba.pdf (Pág. 9)",
-        "timestamp": "2026-05-24T19:09:18.308Z"
-      },
-      {
-        "id": "3f1e5c24-e28f-4478-bfc6-f8e2fe91839d",
-        "role": "user",
-        "content": "Tienes información de algiun tipo de antibiotico?",
-        "timestamp": "2026-05-24T19:47:29.288Z"
-      },
-      {
-        "id": "2a754707-75b3-47b1-a2dc-db8679def1c3",
-        "role": "assistant",
-        "content": "De acuerdo con el documento proporcionado, se indica que \"Los antibióticos profilácticos de rutina no son beneficiosos y, por lo tanto, no se recomiendan.\" (IC). \n\nNo dispongo de información sobre tipos específicos de antibióticos.\n\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 10), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 9), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 18), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 61), protocoloPrueba.pdf (Pág. 11), protocoloPrueba.pdf (Pág. 13)",
-        "timestamp": "2026-05-24T19:48:22.139Z"
-      },
-      {
-        "id": "1f04127d-9eaf-4a0a-a268-ba8402132c51",
-        "role": "user",
-        "content": "Tienes información de algiun tipo de antibiotico?",
-        "timestamp": "2026-05-24T20:04:02.081Z"
-      },
-      {
-        "id": "99ebc041-fc43-4088-a4f4-dec4aadf807e",
-        "role": "assistant",
-        "content": "De acuerdo con el documento proporcionado, se indica que \"Los antibióticos profilácticos de rutina no son beneficiosos y, por lo tanto, no se recomiendan.\" (IC). \n\nNo dispongo de información sobre tipos específicos de antibióticos.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 10), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 9), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 18), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 61), protocoloPrueba.pdf (Pág. 11), protocoloPrueba.pdf (Pág. 13)",
-        "timestamp": "2026-05-24T20:04:02.104Z"
-      }
-    ],
-    "pregunta": "¿Guia de antibioticos?",
-    "respuestaResumen": "De acuerdo con el documento proporcionado, se indica que \"Los antibióticos profilácticos de rutina no son beneficiosos y, por lo tanto, no se recomiendan.\" (IC). \n\nNo dispongo de información sobre tipos específicos de antibióticos.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 10), CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 9), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 18), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 61), protocoloPrueba.pdf (Pág. 11), protocoloPrueba.pdf (Pág. 13)",
-    "tipo": "clínica",
-    "estado": "verificada",
-    "fuentes": [],
-    "servicio": "Medicina Interna",
-    "usuario": "Usuario",
-    "fecha": "24 de may de 2026",
-    "hora": "03:04 p. m.",
-    "createdAt": "2026-05-24T18:44:52.467Z",
-    "updatedAt": "2026-05-24T20:04:02.112Z"
-  },
-  {
-    "id": "5ddcafc0-b591-4f40-aeaf-7881d8b4701d",
-    "userEmail": "admin@sanrafael.med",
-    "title": "¿Dosis de Acetaminofen en adultos?",
-    "messages": [
-      {
-        "id": "7967f5e6-4bd0-49ba-aa79-6d50f39d8ce8",
-        "role": "user",
-        "content": "¿Dosis de Acetaminofen en adultos?",
-        "timestamp": "2026-05-24T18:22:07.739Z"
-      },
-      {
-        "id": "3ebc72f8-46c7-4b70-8872-7ab2a238852e",
-        "role": "assistant",
-        "content": "Lo siento, no dispongo de información sobre la dosis de Acetaminofen para adultos en los documentos proporcionados. Mi conocimiento se limita a la información contenida en esos documentos, que se centran principalmente en protocolos de tratamiento para condiciones específicas como accidentes cerebrovasculares y dolor abdominal, así como algunas recomendaciones generales. Para obtener información precisa sobre la dosis de Acetaminofen, te recomiendo consultar a un médico o farmacéutico.\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 5), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 17), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 19), protocoloPrueba.pdf (Pág. 13), protocoloPrueba.pdf (Pág. 2)",
-        "timestamp": "2026-05-24T18:22:59.987Z"
-      },
-      {
-        "id": "0a8b2a9e-7941-43e9-b977-8b1cb6acf0e5",
-        "role": "user",
-        "content": "Tienes informacion de antibioticos?",
-        "timestamp": "2026-05-25T19:57:19.178Z"
-      },
-      {
-        "id": "0dbb3c2d-8f0e-4fdc-8c22-631c36bc0090",
-        "role": "assistant",
-        "content": "De acuerdo con el documento \"protocoloPrueba.pdf\", los antibióticos profilácticos de rutina no son beneficiosos y, por lo tanto, no se recomiendan. (IC)\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 11), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 15), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 61), protocoloPrueba.pdf (Pág. 13), protocoloPrueba.pdf (Pág. 7)",
-        "timestamp": "2026-05-25T19:58:05.730Z"
-      }
-    ],
-    "pregunta": "¿Dosis de Acetaminofen en adultos?",
-    "respuestaResumen": "De acuerdo con el documento \"protocoloPrueba.pdf\", los antibióticos profilácticos de rutina no son beneficiosos y, por lo tanto, no se recomiendan. (IC)\n\nReferencia: CG-GPC.EXT-06 Anexo-4-dolor-abdominal-2023.pdf (Pág. 11), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 15), NEUCX-GPC.EXT-28 intravenous thrombolysis.pdf (Pág. 61), protocoloPrueba.pdf (Pág. 13), protocoloPrueba.pdf (Pág. 7)",
-    "tipo": "clínica",
-    "estado": "verificada",
-    "fuentes": [],
-    "servicio": "Medicina Interna",
-    "usuario": "Usuario",
-    "fecha": "25 de may de 2026",
-    "hora": "02:58 p. m.",
-    "createdAt": "2026-05-24T18:22:59.994Z",
-    "updatedAt": "2026-05-25T19:58:05.740Z"
   },
   {
     "id": "1",

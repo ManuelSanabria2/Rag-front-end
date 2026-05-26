@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { Trash2, CheckCircle2, XCircle, DatabaseZap, Info } from 'lucide-react';
 import {
   AlertDialog,
@@ -41,18 +41,15 @@ export default function ClearCacheModule() {
     });
 
   return (
-    <div className="flex-1 overflow-y-auto p-6" style={{ backgroundColor: '#F7F7F7' }}>
+    <div className="flex-1 overflow-y-auto bg-[#F8FAFC] p-6 lg:p-8">
       <div className="max-w-2xl mx-auto space-y-6">
 
         {/* Header */}
         <div>
-          <h1
-            className="text-2xl font-bold mb-1"
-            style={{ color: '#3B2377', fontFamily: "'DM Sans', sans-serif" }}
-          >
+          <h1 className="mt-1 text-2xl font-bold text-[#111827]">
             Gestión de Caché
           </h1>
-          <p className="text-sm" style={{ color: '#717182' }}>
+          <p className="mt-1 text-sm text-[#6B7280]">
             Administra el caché de respuestas del sistema RAG
           </p>
         </div>
@@ -155,3 +152,4 @@ export default function ClearCacheModule() {
     </div>
   );
 }
+

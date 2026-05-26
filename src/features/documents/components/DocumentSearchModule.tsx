@@ -1,4 +1,4 @@
-// src/features/documents/components/DocumentSearchModule.tsx
+﻿// src/features/documents/components/DocumentSearchModule.tsx
 
 import { useState } from "react";
 import type { ReactNode } from "react";
@@ -79,21 +79,21 @@ export default function DocumentSearchModule() {
     });
 
   return (
-    <main className="min-h-screen bg-[#F8FAFC] p-8">
+    <main className="flex-1 overflow-y-auto bg-[#F8FAFC] p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
 
         {/* Encabezado */}
         <section className="bg-white border border-[#E5E7EB] rounded-2xl p-6 mb-6 shadow-sm">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <p className="text-sm font-medium text-[#2563EB]">
+              <p className="text-sm font-semibold text-[#2563EB]">
                 Hospital San Rafael 
               </p>
               <h1 className="text-2xl font-bold text-[#111827] mt-1">
-                Búsqueda de documentos
+                Busqueda de documentos
               </h1>
               <p className="text-sm text-[#6B7280] mt-1">
-                Encuentra protocolos, guías y manuales clínicos del hospital.
+                Encuentra protocolos, guias y manuales clínicos del hospital.
               </p>
             </div>
             <div className="flex items-center gap-2 text-sm text-[#6B7280]">
@@ -103,7 +103,7 @@ export default function DocumentSearchModule() {
           </div>
         </section>
 
-        {/* Barra de búsqueda y filtros */}
+        {/* Barra de bussqueda y filtros */}
         <section className="bg-white border border-[#E5E7EB] rounded-2xl p-5 mb-6 shadow-sm">
           <div className="flex gap-3 mb-4">
             <div className="relative flex-1">

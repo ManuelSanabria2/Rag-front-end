@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+﻿import { useMemo, useState } from "react";
 import {
   BookOpen,
   Search,
@@ -68,17 +68,17 @@ export default function ProtocolsModule() {
   }), [documents]);
 
   return (
-    <main className="min-h-screen bg-[#F8FAFC] p-8">
+    <main className="flex-1 overflow-y-auto bg-[#F8FAFC] p-6 lg:p-8">
       <div className="mx-auto max-w-7xl">
 
         {/* Encabezado */}
         <section className="mb-6 rounded-2xl border border-[#E5E7EB] bg-white p-6 shadow-sm">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <p className="text-sm font-medium text-[#2563EB]">Hospital San Rafael</p>
-              <h1 className="mt-1 text-2xl font-bold text-[#111827]">Protocolos y guías</h1>
+              <p className="text-sm font-semibold text-[#2563EB]">Hospital San Rafael</p>
+              <h1 className="mt-1 text-2xl font-bold text-[#111827]">Protocolos y guias</h1>
               <p className="mt-1 text-sm text-[#6B7280]">
-                Biblioteca clínica institucional indexada en el sistema RAG.
+                Biblioteca clinica institucional indexada en el sistema RAG.
               </p>
             </div>
             <div className="flex items-center gap-2 text-sm text-[#6B7280]">
@@ -266,3 +266,4 @@ function ProtocolCard({ doc }: { doc: RagDocument }) {
     </div>
   );
 }
+

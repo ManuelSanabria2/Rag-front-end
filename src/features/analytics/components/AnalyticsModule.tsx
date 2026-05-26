@@ -1,4 +1,4 @@
-import { useRef } from "react";
+﻿import { useRef } from "react";
 import jsPDF from "jspdf";
 import {
   Download,
@@ -77,7 +77,7 @@ export default function AnalyticsModule() {
     pdf.text("Panel inteligente del sistema RAG", 15, 12);
 
     pdf.setFontSize(24);
-    pdf.text("Reporte Analytics IA", 15, 25);
+    pdf.text("Reporte Analíticas IA", 15, 25);
 
     pdf.setFontSize(9);
     pdf.text(
@@ -210,7 +210,7 @@ export default function AnalyticsModule() {
   };
 
   return (
-    <main className="min-h-screen overflow-y-auto bg-[#F8FAFC] p-6 lg:p-8">
+    <main className="flex-1 overflow-y-auto bg-[#F8FAFC] p-6 lg:p-8">
       <div ref={reportRef} className="mx-auto w-[1200px] rounded-2xl bg-white p-8 shadow-sm">
         <section className="mb-6 rounded-2xl border border-[#E5E7EB] bg-white p-6 shadow-sm">
           <div className="flex items-center justify-between gap-5">
@@ -218,7 +218,7 @@ export default function AnalyticsModule() {
               <p className="text-sm font-semibold text-[#2563EB]">
                 Panel inteligente del sistema RAG
               </p>
-              <h1 className="mt-1 text-4xl font-bold text-[#111827]">Analytics</h1>
+              <h1 className="mt-1 text-2xl font-bold text-[#111827]">Analíticas</h1>
               <p className="mt-2 max-w-3xl text-sm text-[#6B7280]">
                 Métricas de uso del chat IA, documentos analizados, protocolos
                 consultados, adherencia clínica y actividad reciente.
@@ -280,9 +280,9 @@ export default function AnalyticsModule() {
             </ResponsiveContainer>
 
             <div className="flex justify-center gap-4 text-sm text-[#6B7280]">
-              <span>🟢 Cumple</span>
-              <span>🟡 Parcial</span>
-              <span>🔴 No cumple</span>
+              <span>ðŸŸ¢ Cumple</span>
+              <span>ðŸŸ¡ Parcial</span>
+              <span>ðŸ”´ No cumple</span>
             </div>
           </Card>
 

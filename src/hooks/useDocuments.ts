@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { fetchDocuments, RagDocument } from '../services/chatService';
+import { fetchDocuments, invalidateDocumentsCache, RagDocument } from '../services/chatService';
 
 export function useDocuments(refreshTrigger?: number) {
   const [documents, setDocuments] = useState<RagDocument[]>([]);
@@ -13,6 +13,11 @@ export function useDocuments(refreshTrigger?: number) {
       const docs = await fetchDocuments(force);
       setDocuments(docs);
     } catch (err) {
+      // Si el force-refresh falla, limpiar sessionStorage para que el próximo
+      // reload de página no muestre datos obsoletos
+      if (force) {
+        invalidateDocumentsCache();
+      }
       setError(err instanceof Error ? err.message : 'Error al cargar documentos');
       setDocuments([]);
     } finally {

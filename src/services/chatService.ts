@@ -1,31 +1,26 @@
-/**
+﻿/**
  * chatService.ts — Conexión con el API RAG del Hospital San Rafael
  *
- * Endpoint: POST /api/v1/conversations/
+ * Endpoint principal: POST /api/v1/conversations/stream/  (SSE streaming)
+ * Endpoint fallback:  POST /api/v1/conversations/         (JSON clásico)
  *
- * El backend (FastAPI + LangChain) gestiona el historial de conversación
- * de forma interna, identificando cada sesión por el campo `phone_number`.
- * Por eso no necesitamos reenviar el historial desde el frontend.
- *
- * En desarrollo el proxy de Vite redirige /api → http://localhost:8000,
- * evitando problemas de CORS. En producción configura VITE_API_BASE_URL.
+ * Cada pestaña del navegador genera un UUID único (SESSION_UUID) que
+ * identifica la sesión en el SingletonStore del RAG. Además, el historial
+ * de la conversación activa se envía en cada request para que el RAG
+ * tenga contexto correcto incluso tras recargas o al seleccionar una
+ * conversación antigua desde el panel de historial.
  */
 
-/**
- * URL base del API RAG.
- * - Sin VITE_API_BASE_URL → usa proxy de Vite (desarrollo, sin CORS)
- * - Con VITE_API_BASE_URL=https://tu-servidor.com → apunta a producción
- */
 const API_URL = import.meta.env.VITE_API_BASE_URL
   ? `${import.meta.env.VITE_API_BASE_URL}/api/v1/conversations/`
   : '/api/v1/conversations/';
 
-/**
- * Identificador único de sesión por pestaña del navegador.
- * Actúa como el `phone_number` que el backend usa para mantener el
- * historial de conversación en su SingletonStore.
- */
-const SESSION_ID: string =
+const STREAM_URL = import.meta.env.VITE_API_BASE_URL
+  ? `${import.meta.env.VITE_API_BASE_URL}/api/v1/conversations/stream/`
+  : '/api/v1/conversations/stream/';
+
+/** UUID único por pestaña — identifica la sesión en el SingletonStore del RAG */
+const SESSION_UUID: string =
   typeof crypto !== 'undefined' && crypto.randomUUID
     ? crypto.randomUUID()
     : `session-${Date.now()}-${Math.random().toString(36).slice(2)}`;
@@ -55,78 +50,30 @@ export interface ChatSource {
 
 /** Forma exacta de la respuesta de OutputResponse del backend */
 interface RagApiResponse {
-  phone_number: string;
+  session_id: string;
   query: string;
   response: string;
   status_code: string; // "1000" = respondido con contexto | "1001" = sin información
 }
 
-// ============================================================
-// FUNCIÓN PRINCIPAL
-// ============================================================
-
-/**
- * Envía una pregunta al servicio RAG y devuelve la respuesta del asistente.
- *
- * El backend administra el historial de la conversación internamente usando
- * SESSION_ID como identificador, así que `conversationHistory` se mantiene
- * en la firma por compatibilidad con ChatModule pero no se envía al servidor.
- */
-export async function sendMessage(
-  userMessage: string,
-  _conversationHistory: ChatMessage[] = []
-): Promise<{ content: string; sources?: ChatSource[] }> {
-
-  // Cuerpo que espera el modelo Query del backend
-  const body = {
-    question: userMessage,
-    phone_number: SESSION_ID,
-    source: 'local',
-  };
-
-  let response: Response;
-  try {
-    response = await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    });
-  } catch {
-    throw new Error(
-      'No se pudo conectar con el servicio RAG. Verifica que el servidor esté corriendo en http://localhost:8000'
-    );
-  }
-
-  if (!response.ok) {
-    const errorText = await response.text().catch(() => 'Error desconocido');
-    throw new Error(`Error del servidor (${response.status}): ${errorText}`);
-  }
-
-  const data: RagApiResponse = await response.json();
-
-  // status_code "1001" significa que el backend no encontró información
-  // en los documentos indexados. La respuesta ya incluye un mensaje
-  // explicativo generado por el LLM, así que la mostramos tal cual.
-  return { content: data.response };
+/** Mensaje condensado que se envía como historial al RAG */
+interface RagHistoryMessage {
+  role: 'user' | 'assistant';
+  content: string;
 }
 
-/**
- * Genera un ID único para cada mensaje del chat.
- */
-export function generateMessageId(): string {
-  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
-    return crypto.randomUUID();
-  }
-  return `msg-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+/** Construye el historial a partir de los mensajes actuales.
+ *  Filtra errores y limita a los últimos 20 mensajes (10 intercambios). */
+function buildHistory(messages: ChatMessage[]): RagHistoryMessage[] {
+  return messages
+    .filter((m) => !m.isError)
+    .slice(-20)
+    .map((m) => ({ role: m.role, content: m.content }));
 }
 
 // ============================================================
-// STREAMING
+// STREAMING (función principal usada por handleSend)
 // ============================================================
-
-const STREAM_URL = import.meta.env.VITE_API_BASE_URL
-  ? `${import.meta.env.VITE_API_BASE_URL}/api/v1/conversations/stream/`
-  : '/api/v1/conversations/stream/';
 
 export type StreamEvent =
   | { type: 'chunk'; content: string }
@@ -134,14 +81,24 @@ export type StreamEvent =
   | { type: 'error'; content: string };
 
 /**
- * Envía una pregunta al endpoint de streaming y devuelve un async generator
- * que emite eventos SSE conforme el LLM genera tokens.
+ * Envía una pregunta al endpoint SSE y devuelve un async generator
+ * que emite eventos conforme el LLM genera tokens.
+ * El historial de la conversación activa se incluye en el body para
+ * que el RAG mantenga el contexto aunque el servidor se haya reiniciado
+ * o se haya seleccionado una conversación antigua.
  */
-export async function* streamMessage(userMessage: string): AsyncGenerator<StreamEvent> {
+export async function* streamMessage(
+  userMessage: string,
+  conversationHistory: ChatMessage[] = [],
+  sessionId?: string,
+): AsyncGenerator<StreamEvent> {
+  const filteredHistory = buildHistory(conversationHistory);
   const body = {
     question: userMessage,
-    phone_number: SESSION_ID,
+    session_id: sessionId ?? SESSION_UUID,
     source: 'local',
+    history: filteredHistory,
+    conversation_history: filteredHistory,
   };
 
   let response: Response;
@@ -201,6 +158,60 @@ export async function* streamMessage(userMessage: string): AsyncGenerator<Stream
 }
 
 // ============================================================
+// SEND CLÁSICO (usado por handleRetry)
+// ============================================================
+
+/**
+ * Envía una pregunta al endpoint JSON (sin streaming) y devuelve la respuesta.
+ * Incluye el historial para que el RAG tenga contexto en reintentos.
+ */
+export async function sendMessage(
+  userMessage: string,
+  conversationHistory: ChatMessage[] = [],
+  sessionId?: string,
+): Promise<{ content: string; sources?: ChatSource[] }> {
+  const filteredHistory = buildHistory(conversationHistory);
+  const body = {
+    question: userMessage,
+    session_id: sessionId ?? SESSION_UUID,
+    source: 'local',
+    history: filteredHistory,
+    conversation_history: filteredHistory,
+  };
+
+  let response: Response;
+  try {
+    response = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+  } catch {
+    throw new Error(
+      'No se pudo conectar con el servicio RAG. Verifica que el servidor esté corriendo en http://localhost:8000',
+    );
+  }
+
+  if (!response.ok) {
+    const errorText = await response.text().catch(() => 'Error desconocido');
+    throw new Error(`Error del servidor (${response.status}): ${errorText}`);
+  }
+
+  const data: RagApiResponse = await response.json();
+  return { content: data.response };
+}
+
+/**
+ * Genera un ID único para cada mensaje del chat.
+ */
+export function generateMessageId(): string {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  return `msg-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+}
+
+// ============================================================
 // DOCUMENTOS
 // ============================================================
 
@@ -230,7 +241,6 @@ export function invalidateDocumentsCache(): void {
 
 /**
  * Devuelve la URL para abrir o descargar un PDF desde el servicio RAG.
- * El proxy de Vite redirige /api → localhost:8000 en desarrollo.
  */
 export function getDocumentViewUrl(filename: string): string {
   return `${DOCS_BASE_URL}/api/v1/rag/documents/${encodeURIComponent(filename)}`;
@@ -267,7 +277,6 @@ export async function fetchDocuments(forceRefresh = false): Promise<RagDocument[
 
 /**
  * Sube uno o más archivos PDF al servicio RAG.
- * El backend los guarda en data_local/ e inicia la indexación en background.
  */
 export async function uploadDocuments(files: File[]): Promise<UploadResult> {
   const formData = new FormData();
@@ -288,9 +297,7 @@ export async function uploadDocuments(files: File[]): Promise<UploadResult> {
     throw new Error((data as { detail?: string }).detail || `Error del servidor (${response.status})`);
   }
 
-  // Invalida el cache para que la próxima consulta traiga la lista actualizada
   invalidateDocumentsCache();
-
   return data as UploadResult;
 }
 
@@ -343,7 +350,6 @@ const CACHE_URL = import.meta.env.VITE_API_BASE_URL
 
 /**
  * Llama al endpoint DELETE /api/v1/rag/clear_cache/ del servicio RAG.
- * Limpia tanto el caché en memoria como el persistente en ChromaDB.
  */
 export async function clearCache(source: string = 'local'): Promise<{ success: boolean; message: string }> {
   let response: Response;
@@ -367,3 +373,4 @@ export async function clearCache(source: string = 'local'): Promise<{ success: b
     message: (data as { message?: string }).message ?? 'Caché limpiado correctamente.',
   };
 }
+

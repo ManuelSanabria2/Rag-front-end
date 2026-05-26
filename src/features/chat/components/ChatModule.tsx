@@ -1,4 +1,4 @@
-// src/features/chat/components/ChatModule.tsx
+﻿// src/features/chat/components/ChatModule.tsx
 
 import { useEffect, useRef, useState } from 'react';
 import type { KeyboardEvent, MouseEvent } from 'react';
@@ -232,7 +232,7 @@ export default function ChatModule({ docsCount }: ChatModuleProps) {
     let streamStarted = false;
 
     try {
-      for await (const event of streamMessage(trimmed)) {
+      for await (const event of streamMessage(trimmed, baseMessages, activeConversationId ?? undefined)) {
         if (event.type === 'chunk') {
           accContent += event.content;
           if (!streamStarted) {
@@ -258,7 +258,7 @@ export default function ChatModule({ docsCount }: ChatModuleProps) {
 
       setStreamingMessageId(null);
 
-      trackAnalyticsEvent('chat_response_received', 'Respuesta generada por Clāris IA', {
+      trackAnalyticsEvent('chat_response_received', 'Respuesta generada por ClÄris IA', {
         sourcesCount: 0,
         answerLength: accContent.length,
       });
@@ -326,7 +326,7 @@ export default function ChatModule({ docsCount }: ChatModuleProps) {
 
     try {
       const historyWithoutError = messages.filter((m) => !m.isError);
-      const response = await sendMessage(lastUserMsg.content, historyWithoutError);
+      const response = await sendMessage(lastUserMsg.content, historyWithoutError, activeConversationId ?? undefined);
 
       await createRecentSearch({
         query: lastUserMsg.content,
@@ -436,7 +436,7 @@ export default function ChatModule({ docsCount }: ChatModuleProps) {
                   color: '#717182',
                 }}
               >
-                {docsCount ?? 0} docs
+                {docsCount ?? 0} pdfs
               </span>
             </div>
           </div>
@@ -558,7 +558,7 @@ export default function ChatModule({ docsCount }: ChatModuleProps) {
                               : 'bg-[#F3F4F6] text-[#6B7280]'
                           }`}
                         >
-                          {conversation.messages?.length ?? 0} msg
+                          {conversation.messages?.length ?? 0} msj
                         </span>
                         <span className="text-[#9CA3AF] truncate ml-1">{conversation.hora}</span>
                       </div>
@@ -579,7 +579,7 @@ export default function ChatModule({ docsCount }: ChatModuleProps) {
                   </div>
                   <div className="min-w-0">
                     <p className="truncate text-sm font-semibold text-[#111827]">
-                      Chat con IA clinica
+                      Chat con IA clínica
                     </p>
                     <p className="hidden sm:block text-xs text-[#6B7280]">
                       Respuestas basadas en documentos indexados
@@ -623,7 +623,7 @@ export default function ChatModule({ docsCount }: ChatModuleProps) {
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  placeholder={isLoading ? 'Esperando...' : 'Escribe tu consulta clinica...'}
+                  placeholder={isLoading ? 'Esperando...' : 'Escribe tu consulta clínica...'}
                   disabled={isLoading}
                   className="min-w-0 flex-1 rounded-xl border border-[#E5E7EB] bg-[#F8FAFC] px-3 py-2.5 sm:px-4 sm:py-3 text-[14px] sm:text-[15px] shadow-sm transition-all focus:border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#2563EB] disabled:opacity-70"
                 />
@@ -670,19 +670,19 @@ function EmptyState({
       </div>
 
       <h2 className="mb-2 text-xl sm:text-2xl font-semibold text-[#2B3777]">
-        En que puedo ayudarte?
+        ¿En qué puedo ayudarte?
       </h2>
 
       <p className="max-w-xl text-[14px] sm:text-[15px] leading-6 sm:leading-7 text-[#6B7280]">
-        Escribe tu consulta clinica y buscare en los protocolos y documentos del
+        Escribe tu consulta clínica y buscaré en los protocolos y documentos del
         hospital para darte una respuesta basada en evidencia.
       </p>
 
       <div className="mt-5 sm:mt-8 flex flex-wrap justify-center gap-2">
         {[
-          'Dosis de Acetaminofen en adultos',
+          'Dosis de Acetaminofén en adultos',
           'Protocolo de manejo UCI',
-          'Guia de antibioticos',
+          'Guía de antibióticos',
         ].map((suggestion) => (
           <button
             key={suggestion}
@@ -734,7 +734,7 @@ function MessageBubble({
             className="text-sm font-semibold"
             style={{ color: isUser ? '#3B2377' : '#00B8B3' }}
           >
-            {isUser ? 'Tu' : 'Claris IA'}
+            {isUser ? 'Tú' : 'Claris IA'}
           </span>
           <span className="text-xs text-[#9CA3AF]">{formatTime(msg.timestamp)}</span>
         </div>
@@ -821,3 +821,4 @@ function LoadingMessage() {
     </div>
   );
 }
+

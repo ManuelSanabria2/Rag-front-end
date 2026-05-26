@@ -1,4 +1,4 @@
-// src/features/favorites/components/FavoritesModule.tsx
+﻿// src/features/favorites/components/FavoritesModule.tsx
 
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -116,7 +116,7 @@ export default function FavoritesModule() {
   };
 
   return (
-    <main className="h-screen overflow-y-auto bg-[#F8FAFC] p-6 lg:p-8">
+    <main className="flex-1 overflow-y-auto bg-[#F8FAFC] p-6 lg:p-8">
       <div className="mx-auto max-w-7xl">
         <section className="mb-6 rounded-2xl border border-[#E5E7EB] bg-white p-6 shadow-sm">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -125,7 +125,7 @@ export default function FavoritesModule() {
                 Biblioteca personal del usuario
               </p>
 
-              <h1 className="mt-1 text-3xl font-bold text-[#111827]">
+              <h1 className="mt-1 text-2xl font-bold text-[#111827]">
                 Favoritos
               </h1>
 
@@ -313,7 +313,7 @@ function FavoritoCard({
   return (
     <div
       onClick={onSelect}
-      className={`cursor-pointer rounded-2xl border p-4 transition-all ${
+      className={`cursor-pointer rounded-2xl border p-5 transition-all ${
         activo
           ? "border-[#2563EB] bg-[#EFF6FF]"
           : "border-[#E5E7EB] bg-white hover:border-[#2563EB]"

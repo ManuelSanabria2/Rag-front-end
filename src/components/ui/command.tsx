@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import * as React from "react";
 import { Command as CommandPrimitive } from "cmdk";
@@ -31,7 +31,7 @@ function Command({
 
 function CommandDialog({
   title = "Command Palette",
-  description = "Search for a command to run...",
+  description = "Buscar un comando...",
   children,
   ...props
 }: React.ComponentProps<typeof Dialog> & {
