@@ -1,5 +1,77 @@
 [
   {
+    "id": "d5a3426a-8e44-4b65-8257-b6e3a17a300f",
+    "userEmail": "admin@sanrafael.med",
+    "query": "CUALES SON LAS CAUSAS QUIRURGICAS DE DOLOR ABDOMINAL",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "27 de may de 2026",
+    "hora": "05:46 p. m.",
+    "createdAt": "2026-05-27T22:46:59.746Z"
+  },
+  {
+    "id": "62343d5f-57c0-49b9-b663-a91572325e52",
+    "userEmail": "admin@sanrafael.med",
+    "query": "CUALES SON LAS CAUSAS QUIRURGICAS DE DOLOR ABDOMINAL",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "27 de may de 2026",
+    "hora": "05:39 p. m.",
+    "createdAt": "2026-05-27T22:39:34.651Z"
+  },
+  {
+    "id": "35509a9b-e29e-4a19-bf7e-c15800153a15",
+    "userEmail": "admin@sanrafael.med",
+    "query": "que informacion tienes?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "27 de may de 2026",
+    "hora": "05:35 p. m.",
+    "createdAt": "2026-05-27T22:35:08.191Z"
+  },
+  {
+    "id": "90ef42ac-7bcd-46b1-827e-6abe33722ada",
+    "userEmail": "admin@sanrafael.med",
+    "query": "que informacion tienes?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "27 de may de 2026",
+    "hora": "05:28 p. m.",
+    "createdAt": "2026-05-27T22:28:52.921Z"
+  },
+  {
+    "id": "d0b50787-4c0b-40be-a7c7-31df477c6eb2",
+    "userEmail": "admin@sanrafael.med",
+    "query": "que informacion tienes?",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "27 de may de 2026",
+    "hora": "05:20 p. m.",
+    "createdAt": "2026-05-27T22:20:22.975Z"
+  },
+  {
+    "id": "5be4add0-a1bc-4e48-a87c-318936161116",
+    "userEmail": "admin@sanrafael.med",
+    "query": "Sobre que tienes informacion",
+    "filters": [
+      "chat-ia"
+    ],
+    "resultsCount": 0,
+    "fecha": "27 de may de 2026",
+    "hora": "04:41 p. m.",
+    "createdAt": "2026-05-27T21:41:42.098Z"
+  },
+  {
     "id": "c273fb31-4b7b-44fa-86cf-697b790dc0d3",
     "userEmail": "admin@sanrafael.med",
     "query": "Tengo una paciente femenina, con dolor abominal, agudo, subito, en hipogastrio, asociado a metreorragia leve, inestabilidad hemodinamica leve sospecho embarazo ectopico. ¿Segun la GPC que debo solicitar o cuál es el algoritmo de diagnostico y manejo en urgencias?",
